@@ -12,5 +12,11 @@
   "documentationUrl": "https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp",
   "configStructure": {
     "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["https://claude.ai/api/mcp/auth_callback"]
+    }
   }
 }

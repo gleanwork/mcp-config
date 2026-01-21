@@ -31,5 +31,15 @@
       "argsProperty": "args",
       "envProperty": "env"
     }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": [
+        "cursor://anysphere.cursor-mcp/oauth/callback",
+        "cursor://anysphere.cursor-mcp/*/callback",
+        "cursor://anysphere.cursor-retrieval/oauth/*/callback"
+      ]
+    }
   }
 }

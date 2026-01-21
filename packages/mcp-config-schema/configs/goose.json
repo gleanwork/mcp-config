@@ -25,5 +25,11 @@
       "argsProperty": "args",
       "envProperty": "envs"
     }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://localhost:*/oauth_callback"]
+    }
   }
 }

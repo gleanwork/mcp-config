@@ -141,6 +141,21 @@ function getPlatformsDisplay(client: MCPClientConfig): string {
   return 'All platforms';
 }
 
+function getAuthSupportDisplay(client: MCPClientConfig): string {
+  const supportedAuth = client.supportedAuth || [];
+  if (supportedAuth.length === 0) {
+    return 'None';
+  }
+  const parts: string[] = [];
+  if (supportedAuth.includes('token')) {
+    parts.push('Token');
+  }
+  if (supportedAuth.includes('oauth:dcr')) {
+    parts.push('OAuth DCR');
+  }
+  return parts.join(', ');
+}
+
 // =============================================================================
 // Document Generators
 // =============================================================================
@@ -150,6 +165,7 @@ function generateQuickReference(): string {
     'Client',
     'Configuration',
     'Connection Type',
+    'Auth Support',
     'Requires mcp-remote?',
     'Platforms',
   ];
@@ -157,6 +173,7 @@ function generateQuickReference(): string {
   const rows = clients.map((client) => {
     const configuration = client.userConfigurable ? 'User-configurable' : 'Managed';
     const connectionType = getConnectionType(client);
+    const authSupport = getAuthSupportDisplay(client);
     const requiresRemote = client.userConfigurable
       ? !client.transports?.includes('http')
         ? 'Yes (for HTTP)'
@@ -164,7 +181,14 @@ function generateQuickReference(): string {
       : 'No';
     const platforms = getPlatformsDisplay(client);
 
-    return [`**${client.displayName}**`, configuration, connectionType, requiresRemote, platforms];
+    return [
+      `**${client.displayName}**`,
+      configuration,
+      connectionType,
+      authSupport,
+      requiresRemote,
+      platforms,
+    ];
   });
 
   return table(headers, rows);
@@ -212,6 +236,20 @@ function generateClientSection(client: MCPClientConfig): string {
 
   if (client.protocolHandler?.protocol) {
     info.push(`**One-Click Protocol**: \`${client.protocolHandler.protocol}\``);
+  }
+
+  if (client.supportedAuth && client.supportedAuth.length > 0) {
+    info.push(`**Auth Support**: ${getAuthSupportDisplay(client)}`);
+    if (client.oauth?.dcr?.redirect_uri_patterns) {
+      const patterns = client.oauth.dcr.redirect_uri_patterns;
+      if (patterns.length === 1) {
+        info.push(`**OAuth Redirect**: \`${patterns[0]}\``);
+      } else {
+        info.push(`**OAuth Redirects**: ${patterns.map((p) => `\`${p}\``).join(', ')}`);
+      }
+    }
+  } else if (client.supportedAuth?.length === 0) {
+    info.push('**Auth Support**: None (requires mcp-remote for HTTP auth)');
   }
 
   if (client.configFormat === 'yaml') {

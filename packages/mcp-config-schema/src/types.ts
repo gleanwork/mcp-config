@@ -25,6 +25,9 @@ import {
   GeminiStdioServerConfigSchema,
   GeminiServerConfigSchema,
   GeminiConfigSchema,
+  SupportedAuthSchema,
+  OAuthDcrSchema,
+  OAuthSchema,
 } from './schemas.js';
 
 /**
@@ -225,6 +228,9 @@ export type GeminiHttpServerConfig = z.infer<typeof GeminiHttpServerConfigSchema
 export type GeminiStdioServerConfig = z.infer<typeof GeminiStdioServerConfigSchema>;
 export type GeminiServerConfig = z.infer<typeof GeminiServerConfigSchema>;
 export type GeminiConfig = z.infer<typeof GeminiConfigSchema>;
+export type SupportedAuth = z.infer<typeof SupportedAuthSchema>;
+export type OAuthDcr = z.infer<typeof OAuthDcrSchema>;
+export type OAuth = z.infer<typeof OAuthSchema>;
 export interface ValidationResult {
   success: boolean;
   data?: unknown;
@@ -322,6 +328,9 @@ export {
   GeminiStdioServerConfigSchema,
   GeminiServerConfigSchema,
   GeminiConfigSchema,
+  SupportedAuthSchema,
+  OAuthDcrSchema,
+  OAuthSchema,
 } from './schemas.js';
 
 export {

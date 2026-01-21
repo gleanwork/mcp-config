@@ -24,5 +24,11 @@
       "argsProperty": "args",
       "envProperty": "env"
     }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://127.0.0.1:*"]
+    }
   }
 }

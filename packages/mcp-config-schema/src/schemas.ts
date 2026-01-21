@@ -19,6 +19,16 @@ export const ServerTypeSchema = z.enum(['http', 'stdio']);
 
 export const TransportSchema = z.enum(['stdio', 'http']);
 export const SupportedTransportsSchema = z.array(TransportSchema).min(1);
+
+export const SupportedAuthSchema = z.enum(['token', 'oauth:dcr']);
+
+export const OAuthDcrSchema = z.object({
+  redirect_uri_patterns: z.array(z.string()).min(1),
+});
+
+export const OAuthSchema = z.object({
+  dcr: OAuthDcrSchema.optional(),
+});
 export const HttpConfigStructureSchema = z.object({
   typeProperty: z.string().optional(),
   urlProperty: z.string(),
@@ -65,6 +75,8 @@ export const MCPClientConfigSchema = z.object({
     .optional(),
   configStructure: ConfigStructureSchema,
   securityNotes: z.string().optional(),
+  supportedAuth: z.array(SupportedAuthSchema),
+  oauth: OAuthSchema.optional(),
 });
 
 export const BuildOptionsSchema = z.object({
