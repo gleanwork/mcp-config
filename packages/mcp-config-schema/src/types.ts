@@ -231,6 +231,19 @@ export type GeminiConfig = z.infer<typeof GeminiConfigSchema>;
 export type SupportedAuth = z.infer<typeof SupportedAuthSchema>;
 export type OAuthDcr = z.infer<typeof OAuthDcrSchema>;
 export type OAuth = z.infer<typeof OAuthSchema>;
+
+/**
+ * Options for checking if a client needs mcp-remote.
+ * When auth is specified, checks if the client supports that auth method natively.
+ */
+export interface McpRemoteOptions {
+  /**
+   * The authentication method to check.
+   * If specified, returns true if the client needs mcp-remote for this auth method.
+   */
+  auth?: SupportedAuth;
+}
+
 export interface ValidationResult {
   success: boolean;
   data?: unknown;

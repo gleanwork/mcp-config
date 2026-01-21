@@ -5,6 +5,7 @@ import {
   RegistryOptions,
   ConfigForClient,
   safeValidateClientConfig,
+  McpRemoteOptions,
 } from './types.js';
 
 import {
@@ -174,15 +175,43 @@ export class MCPConfigRegistry {
 
   /**
    * Determines if a client needs mcp-remote to connect to HTTP servers.
+   *
+   * When called without options, checks if the client supports HTTP natively.
+   * When called with an auth option, checks if the client supports that auth method natively.
+   *
    * @param clientId - The client to check
-   * @returns true if the client needs mcp-remote for HTTP connections
+   * @param options - Optional auth method to check
+   * @returns true if the client needs mcp-remote for HTTP connections (or for the specified auth method)
+   *
+   * @example
+   * ```typescript
+   * // Basic transport check (existing behavior)
+   * registry.clientNeedsMcpRemote('cursor')        // false (has native HTTP)
+   * registry.clientNeedsMcpRemote('claude-desktop') // true (stdio only)
+   *
+   * // Auth-aware check
+   * registry.clientNeedsMcpRemote('cursor', { auth: 'oauth:dcr' })    // false (supports oauth:dcr)
+   * registry.clientNeedsMcpRemote('jetbrains', { auth: 'oauth:dcr' }) // true (no oauth:dcr support)
+   * ```
    */
-  clientNeedsMcpRemote(clientId: ClientId): boolean {
+  clientNeedsMcpRemote(clientId: ClientId, options?: McpRemoteOptions): boolean {
     const config = this.getConfig(clientId);
     if (!config) {
       throw new Error(`Unknown client: ${clientId}`);
     }
-    return !config.transports.includes('http');
+
+    // If client doesn't support HTTP natively, always needs mcp-remote
+    if (!config.transports.includes('http')) {
+      return true;
+    }
+
+    // If no auth specified, just check transport support (existing behavior)
+    if (!options?.auth) {
+      return false; // Has native HTTP
+    }
+
+    // Check if client supports the specified auth method
+    return !config.supportedAuth.includes(options.auth);
   }
 
   /**
