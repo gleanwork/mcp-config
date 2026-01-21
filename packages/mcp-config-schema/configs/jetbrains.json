@@ -23,5 +23,6 @@
       "argsProperty": "args",
       "envProperty": "env"
     }
-  }
+  },
+  "supportedAuth": ["token"]
 }

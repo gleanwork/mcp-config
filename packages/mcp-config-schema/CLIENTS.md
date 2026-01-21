@@ -4,20 +4,20 @@ This document provides a comprehensive overview of all supported MCP clients, th
 
 ## Quick Reference
 
-| Client | Configuration | Connection Type | Requires mcp-remote? | Platforms |
-|---|---|---|---|---|
-| **ChatGPT** | Managed | HTTP only | No | Web-based |
-| **Claude Code** | User-configurable | HTTP native | No | macOS, Linux, Windows |
-| **Claude for Desktop** | User-configurable | stdio only | Yes (for HTTP) | macOS, Windows, Linux |
-| **Claude for Teams/Enterprise** | Managed | HTTP only | No | Organization-managed |
-| **Codex** | User-configurable | HTTP native | No | macOS, Linux, Windows |
-| **Cursor** | User-configurable | HTTP native | No | macOS, Linux, Windows |
-| **Gemini CLI** | User-configurable | HTTP native | No | macOS, Linux, Windows |
-| **Goose** | User-configurable | HTTP native | No | macOS, Linux, Windows |
-| **JetBrains AI Assistant** | User-configurable | HTTP native | No | macOS, Linux, Windows |
-| **Junie (JetBrains)** | User-configurable | stdio only | Yes (for HTTP) | macOS, Linux, Windows |
-| **Visual Studio Code** | User-configurable | HTTP native | No | macOS, Linux, Windows |
-| **Windsurf** | User-configurable | HTTP native | No | macOS, Linux, Windows |
+| Client | Configuration | Connection Type | Auth Support | Requires mcp-remote? | Platforms |
+|---|---|---|---|---|---|
+| **ChatGPT** | Managed | HTTP only | Token, OAuth DCR | No | Web-based |
+| **Claude Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| **Claude for Desktop** | User-configurable | stdio only | None | Yes (for HTTP) | macOS, Windows, Linux |
+| **Claude for Teams/Enterprise** | Managed | HTTP only | Token, OAuth DCR | No | Organization-managed |
+| **Codex** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| **Cursor** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| **Gemini CLI** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| **Goose** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| **JetBrains AI Assistant** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
+| **Junie (JetBrains)** | User-configurable | stdio only | None | Yes (for HTTP) | macOS, Linux, Windows |
+| **Visual Studio Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| **Windsurf** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 
 ## Detailed Client Information
 
@@ -26,6 +26,8 @@ This document provides a comprehensive overview of all supported MCP clients, th
 - **Configuration**: Centrally managed
 - **Connection Type**: HTTP only (managed)
 - **Documentation**: [Link](https://platform.openai.com/docs/mcp#test-and-connect-your-mcp-server)
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirects**: `https://chatgpt.com/connector_platform_oauth_redirect`, `https://connectors.api.openai.com/connector/oauth_callback/ios_relay`
 - **Notes**: ChatGPT is web-based and requires configuring MCP servers through their web UI. No local configuration file support.
 
 <details>
@@ -46,6 +48,15 @@ This document provides a comprehensive overview of all supported MCP clients, th
   "documentationUrl": "https://platform.openai.com/docs/mcp#test-and-connect-your-mcp-server",
   "configStructure": {
     "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": [
+        "https://chatgpt.com/connector_platform_oauth_redirect",
+        "https://connectors.api.openai.com/connector/oauth_callback/ios_relay"
+      ]
+    }
   }
 }
 ```
@@ -60,6 +71,8 @@ This document provides a comprehensive overview of all supported MCP clients, th
 - **Connection Type**: Native HTTP support
 - **Documentation**: [Link](https://code.claude.com/docs/en/mcp)
 - **Supported Platforms**: macOS, Linux, Windows
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirect**: `http://localhost:*/callback`
 - **Configuration Paths**:
   - **macOS/Linux**: `$HOME/.claude.json`
   - **Windows**: `%USERPROFILE%\.claude.json`
@@ -95,6 +108,12 @@ This document provides a comprehensive overview of all supported MCP clients, th
       "commandProperty": "command",
       "argsProperty": "args",
       "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://localhost:*/callback"]
     }
   }
 }
@@ -149,6 +168,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 - **Connection Type**: stdio only (requires mcp-remote for HTTP servers)
 - **Documentation**: [Link](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp)
 - **Supported Platforms**: macOS, Windows, Linux
+- **Auth Support**: None (requires mcp-remote for HTTP auth)
 - **Notes**: Requires mcp-remote bridge for remote servers
 - **Configuration Paths**:
   - **macOS**: `$HOME/Library/Application Support/Claude/claude_desktop_config.json`
@@ -183,7 +203,8 @@ This document provides a comprehensive overview of all supported MCP clients, th
       "argsProperty": "args",
       "envProperty": "env"
     }
-  }
+  },
+  "supportedAuth": []
 }
 ```
 
@@ -240,6 +261,8 @@ This document provides a comprehensive overview of all supported MCP clients, th
 - **Configuration**: Centrally managed
 - **Connection Type**: HTTP only (managed)
 - **Documentation**: [Link](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp)
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirect**: `https://claude.ai/api/mcp/auth_callback`
 - **Notes**: MCP servers are centrally managed by admins. No local configuration support - servers must be configured at the organization level.
 
 <details>
@@ -260,6 +283,12 @@ This document provides a comprehensive overview of all supported MCP clients, th
   "documentationUrl": "https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp",
   "configStructure": {
     "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["https://claude.ai/api/mcp/auth_callback"]
+    }
   }
 }
 ```
@@ -274,6 +303,8 @@ This document provides a comprehensive overview of all supported MCP clients, th
 - **Connection Type**: Native HTTP support
 - **Documentation**: [Link](https://developers.openai.com/codex/mcp)
 - **Supported Platforms**: macOS, Linux, Windows
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirect**: `http://127.0.0.1:*`
 - **Configuration Paths**:
   - **macOS/Linux**: `$HOME/.codex/config.toml`
   - **Windows**: `%USERPROFILE%\.codex\config.toml`
@@ -307,6 +338,12 @@ This document provides a comprehensive overview of all supported MCP clients, th
       "commandProperty": "command",
       "argsProperty": "args",
       "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://127.0.0.1:*"]
     }
   }
 }
@@ -347,6 +384,8 @@ EXAMPLE_API_KEY = "your-api-key"
 - **Documentation**: [Link](https://cursor.com/docs/context/mcp)
 - **Supported Platforms**: macOS, Linux, Windows
 - **One-Click Protocol**: `cursor://`
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirects**: `cursor://anysphere.cursor-mcp/oauth/callback`, `cursor://anysphere.cursor-mcp/*/callback`, `cursor://anysphere.cursor-retrieval/oauth/*/callback`
 - **Configuration Paths**:
   - **macOS/Linux**: `$HOME/.cursor/mcp.json`
   - **Windows**: `%USERPROFILE%\.cursor\mcp.json`
@@ -387,6 +426,16 @@ EXAMPLE_API_KEY = "your-api-key"
       "commandProperty": "command",
       "argsProperty": "args",
       "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": [
+        "cursor://anysphere.cursor-mcp/oauth/callback",
+        "cursor://anysphere.cursor-mcp/*/callback",
+        "cursor://anysphere.cursor-retrieval/oauth/*/callback"
+      ]
     }
   }
 }
@@ -441,6 +490,8 @@ EXAMPLE_API_KEY = "your-api-key"
 - **Connection Type**: Native HTTP support
 - **Documentation**: [Link](https://geminicli.com/docs/tools/mcp-server/)
 - **Supported Platforms**: macOS, Linux, Windows
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirect**: `http://localhost:*/oauth/callback`
 - **Configuration Paths**:
   - **macOS/Linux**: `$HOME/.gemini/settings.json`
   - **Windows**: `%USERPROFILE%\.gemini\settings.json`
@@ -474,6 +525,12 @@ EXAMPLE_API_KEY = "your-api-key"
       "commandProperty": "command",
       "argsProperty": "args",
       "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://localhost:*/oauth/callback"]
     }
   }
 }
@@ -526,6 +583,8 @@ EXAMPLE_API_KEY = "your-api-key"
 - **Connection Type**: Native HTTP support
 - **Documentation**: [Link](https://github.com/block/goose)
 - **Supported Platforms**: macOS, Linux, Windows
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirect**: `http://localhost:*/oauth_callback`
 - **Configuration Format**: YAML
 - **Configuration Paths**:
   - **macOS/Linux**: `$HOME/.config/goose/config.yaml`
@@ -561,6 +620,12 @@ EXAMPLE_API_KEY = "your-api-key"
       "commandProperty": "cmd",
       "argsProperty": "args",
       "envProperty": "envs"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://localhost:*/oauth_callback"]
     }
   }
 }
@@ -620,6 +685,7 @@ extensions:
 - **Connection Type**: Native HTTP support
 - **Documentation**: [Link](https://www.jetbrains.com/help/ai-assistant/mcp.html)
 - **Supported Platforms**: macOS, Linux, Windows
+- **Auth Support**: Token
 
 <details>
 <summary><strong>Internal Configuration Schema</strong></summary>
@@ -650,7 +716,8 @@ extensions:
       "argsProperty": "args",
       "envProperty": "env"
     }
-  }
+  },
+  "supportedAuth": ["token"]
 }
 ```
 
@@ -703,6 +770,7 @@ extensions:
 - **Connection Type**: stdio only (requires mcp-remote for HTTP servers)
 - **Documentation**: [Link](https://www.jetbrains.com/help/junie/model-context-protocol-mcp.html)
 - **Supported Platforms**: macOS, Linux, Windows
+- **Auth Support**: None (requires mcp-remote for HTTP auth)
 - **Notes**: Requires mcp-remote bridge for remote servers
 - **Configuration Paths**:
   - **macOS/Linux**: `$HOME/.junie/mcp/mcp.json`
@@ -736,7 +804,8 @@ extensions:
       "argsProperty": "args",
       "envProperty": "env"
     }
-  }
+  },
+  "supportedAuth": []
 }
 ```
 
@@ -795,6 +864,8 @@ extensions:
 - **Documentation**: [Link](https://code.visualstudio.com/docs/copilot/customization/mcp-servers)
 - **Supported Platforms**: macOS, Linux, Windows
 - **One-Click Protocol**: `vscode:`
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirects**: `https://insiders.vscode.dev/redirect`, `https://vscode.dev/redirect`, `http://localhost:*`, `http://localhost:*/`, `http://127.0.0.1:*`, `http://127.0.0.1:*/`, `http://127.0.0.1`, `http://localhost`, `http://127.0.0.1/`, `http://localhost/`
 - **Configuration Paths**:
   - **macOS**: `$HOME/Library/Application Support/Code/User/mcp.json`
   - **Linux**: `$HOME/.config/Code/User/mcp.json`
@@ -836,6 +907,23 @@ extensions:
       "commandProperty": "command",
       "argsProperty": "args",
       "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": [
+        "https://insiders.vscode.dev/redirect",
+        "https://vscode.dev/redirect",
+        "http://localhost:*",
+        "http://localhost:*/",
+        "http://127.0.0.1:*",
+        "http://127.0.0.1:*/",
+        "http://127.0.0.1",
+        "http://localhost",
+        "http://127.0.0.1/",
+        "http://localhost/"
+      ]
     }
   }
 }
@@ -890,6 +978,8 @@ extensions:
 - **Connection Type**: Native HTTP support
 - **Documentation**: [Link](https://docs.windsurf.com/windsurf/cascade/mcp)
 - **Supported Platforms**: macOS, Linux, Windows
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirect**: `http://127.0.0.1:*/auth/callback`
 - **Configuration Paths**:
   - **macOS/Linux**: `$HOME/.codeium/windsurf/mcp_config.json`
   - **Windows**: `%USERPROFILE%\.codeium\windsurf\mcp_config.json`
@@ -924,6 +1014,12 @@ extensions:
       "commandProperty": "command",
       "argsProperty": "args",
       "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://127.0.0.1:*/auth/callback"]
     }
   }
 }

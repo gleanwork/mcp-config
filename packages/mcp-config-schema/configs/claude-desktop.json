@@ -22,5 +22,6 @@
       "argsProperty": "args",
       "envProperty": "env"
     }
-  }
+  },
+  "supportedAuth": []
 }

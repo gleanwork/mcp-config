@@ -12,5 +12,14 @@
   "documentationUrl": "https://platform.openai.com/docs/mcp#test-and-connect-your-mcp-server",
   "configStructure": {
     "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": [
+        "https://chatgpt.com/connector_platform_oauth_redirect",
+        "https://connectors.api.openai.com/connector/oauth_callback/ios_relay"
+      ]
+    }
   }
 }
