@@ -151,4 +151,33 @@ describe('MCPConfigRegistry', () => {
       expect(() => registry.clientSupportsStdio(invalidClient)).toThrow('Unknown client');
     });
   });
+
+  describe('clientNeedsMcpRemote with auth option', () => {
+    it('returns false for client with native oauth:dcr support', () => {
+      expect(registry.clientNeedsMcpRemote('cursor', { auth: 'oauth:dcr' })).toBe(false);
+    });
+
+    it('returns false for client with native token support', () => {
+      expect(registry.clientNeedsMcpRemote('cursor', { auth: 'token' })).toBe(false);
+      expect(registry.clientNeedsMcpRemote('jetbrains', { auth: 'token' })).toBe(false);
+    });
+
+    it('returns true for client without oauth:dcr support', () => {
+      expect(registry.clientNeedsMcpRemote('jetbrains', { auth: 'oauth:dcr' })).toBe(true);
+    });
+
+    it('returns true for stdio-only client with any auth', () => {
+      expect(registry.clientNeedsMcpRemote('claude-desktop', { auth: 'token' })).toBe(true);
+      expect(registry.clientNeedsMcpRemote('claude-desktop', { auth: 'oauth:dcr' })).toBe(true);
+      expect(registry.clientNeedsMcpRemote('junie', { auth: 'token' })).toBe(true);
+      expect(registry.clientNeedsMcpRemote('junie', { auth: 'oauth:dcr' })).toBe(true);
+    });
+
+    it('maintains backwards compatibility without options', () => {
+      expect(registry.clientNeedsMcpRemote('cursor')).toBe(false);
+      expect(registry.clientNeedsMcpRemote('claude-desktop')).toBe(true);
+      expect(registry.clientNeedsMcpRemote('vscode')).toBe(false);
+      expect(registry.clientNeedsMcpRemote('junie')).toBe(true);
+    });
+  });
 });
