@@ -1,0 +1,38 @@
+{
+  "id": "cursor-agent",
+  "name": "cursor-agent",
+  "displayName": "Cursor Agent",
+  "description": "Cursor Agent CLI",
+  "userConfigurable": true,
+  "documentationUrl": "https://cursor.com/docs/context/mcp",
+  "transports": ["stdio", "http"],
+  "supportedPlatforms": ["darwin", "linux", "win32"],
+  "configFormat": "json",
+  "configPath": {
+    "darwin": "$HOME/.cursor/mcp.json",
+    "linux": "$HOME/.cursor/mcp.json",
+    "win32": "%USERPROFILE%\\.cursor\\mcp.json"
+  },
+  "configStructure": {
+    "serversPropertyName": "mcpServers",
+    "httpPropertyMapping": {
+      "typeProperty": "type",
+      "urlProperty": "url",
+      "headersProperty": "headers"
+    },
+    "stdioPropertyMapping": {
+      "typeProperty": "type",
+      "commandProperty": "command",
+      "argsProperty": "args",
+      "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": [
+        "http://127.0.0.1:*/callback"
+      ]
+    }
+  }
+}

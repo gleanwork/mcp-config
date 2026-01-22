@@ -6,6 +6,7 @@ export const ClientIdSchema = z.enum([
   'claude-desktop',
   'claude-teams-enterprise',
   'cursor',
+  'cursor-agent',
   'goose',
   'windsurf',
   'chatgpt',

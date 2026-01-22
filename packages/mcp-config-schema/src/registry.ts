@@ -24,6 +24,7 @@ import claudeDesktopConfig from '../configs/claude-desktop.json';
 import claudeTeamsEnterpriseConfig from '../configs/claude-teams-enterprise.json';
 import codexConfig from '../configs/codex.json';
 import cursorConfig from '../configs/cursor.json';
+import cursorAgentConfig from '../configs/cursor-agent.json';
 import gooseConfig from '../configs/goose.json';
 import vscodeConfig from '../configs/vscode.json';
 import windsurfConfig from '../configs/windsurf.json';
@@ -37,6 +38,7 @@ const allConfigs = [
   claudeTeamsEnterpriseConfig,
   codexConfig,
   cursorConfig,
+  cursorAgentConfig,
   gooseConfig,
   vscodeConfig,
   windsurfConfig,
