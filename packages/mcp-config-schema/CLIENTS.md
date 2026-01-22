@@ -12,6 +12,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 | **Claude for Teams/Enterprise** | Managed | HTTP only | Token, OAuth DCR | No | Organization-managed |
 | **Codex** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **Cursor** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| **Cursor Agent** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **Gemini CLI** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **Goose** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **JetBrains AI Assistant** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
@@ -463,6 +464,105 @@ EXAMPLE_API_KEY = "your-api-key"
 <summary><strong>stdio Configuration</strong></summary>
 
 ```json snippet=examples/configs/stdio/cursor.json
+{
+  "mcpServers": {
+    "example": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@example/mcp-server"
+      ],
+      "type": "stdio",
+      "env": {
+        "EXAMPLE_API_KEY": "your-api-key"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+---
+
+### Cursor Agent
+
+- **Configuration**: User-configurable
+- **Connection Type**: Native HTTP support
+- **Documentation**: [Link](https://cursor.com/docs/context/mcp)
+- **Supported Platforms**: macOS, Linux, Windows
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirect**: `http://127.0.0.1:*/callback`
+- **Configuration Paths**:
+  - **macOS/Linux**: `$HOME/.cursor/mcp.json`
+  - **Windows**: `%USERPROFILE%\.cursor\mcp.json`
+
+<details>
+<summary><strong>Internal Configuration Schema</strong></summary>
+
+```json snippet=configs/cursor-agent.json
+{
+  "id": "cursor-agent",
+  "name": "cursor-agent",
+  "displayName": "Cursor Agent",
+  "description": "Cursor Agent CLI",
+  "userConfigurable": true,
+  "documentationUrl": "https://cursor.com/docs/context/mcp",
+  "transports": ["stdio", "http"],
+  "supportedPlatforms": ["darwin", "linux", "win32"],
+  "configFormat": "json",
+  "configPath": {
+    "darwin": "$HOME/.cursor/mcp.json",
+    "linux": "$HOME/.cursor/mcp.json",
+    "win32": "%USERPROFILE%\\.cursor\\mcp.json"
+  },
+  "configStructure": {
+    "serversPropertyName": "mcpServers",
+    "httpPropertyMapping": {
+      "typeProperty": "type",
+      "urlProperty": "url",
+      "headersProperty": "headers"
+    },
+    "stdioPropertyMapping": {
+      "typeProperty": "type",
+      "commandProperty": "command",
+      "argsProperty": "args",
+      "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": [
+        "http://127.0.0.1:*/callback"
+      ]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>HTTP Configuration</strong></summary>
+
+```json snippet=examples/configs/http/cursor-agent.json
+{
+  "mcpServers": {
+    "example": {
+      "type": "http",
+      "url": "https://api.example.com/mcp"
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>stdio Configuration</strong></summary>
+
+```json snippet=examples/configs/stdio/cursor-agent.json
 {
   "mcpServers": {
     "example": {
@@ -1073,6 +1173,7 @@ Clients that can connect directly to HTTP MCP servers without additional tooling
 - Claude Code
 - Codex
 - Cursor
+- Cursor Agent
 - Gemini CLI
 - Goose
 - JetBrains AI Assistant
