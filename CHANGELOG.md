@@ -8,6 +8,21 @@ All notable changes to this project will be documented in this file.
 
 
 
+
+## v4.1.0 (2026-01-22)
+
+#### :rocket: Enhancement
+* `mcp-config-schema`
+  * [#92](https://github.com/gleanwork/mcp-config/pull/92) feat(clients): Add Cursor Agent ([@david-hamilton-glean](https://github.com/david-hamilton-glean))
+  * [#91](https://github.com/gleanwork/mcp-config/pull/91) feat(api): update clientNeedsMcpRemote ([@david-hamilton-glean](https://github.com/david-hamilton-glean))
+  * [#90](https://github.com/gleanwork/mcp-config/pull/90) feat: Add auth configurations. ([@david-hamilton-glean](https://github.com/david-hamilton-glean))
+
+#### :house: Internal
+* [#89](https://github.com/gleanwork/mcp-config/pull/89) chore: bump node to 24 ([@david-hamilton-glean](https://github.com/david-hamilton-glean))
+
+#### Committers: 1
+- David J. Hamilton ([@david-hamilton-glean](https://github.com/david-hamilton-glean))
+
 ## v4.0.3 (2026-01-14)
 
 #### :bug: Bug Fix
