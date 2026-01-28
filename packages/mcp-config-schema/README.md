@@ -373,101 +373,15 @@ extensions:
 
 ## API Reference
 
-### Types
+For complete API documentation, see the TypeScript definitions in [`src/types.ts`](./src/types.ts) and [`src/registry.ts`](./src/registry.ts). All exports include JSDoc comments.
 
-- `ClientId` - Union of all supported client identifiers
-- `MCPClientConfig` - Full client configuration schema
-- `MCPConnectionOptions` - Connection options for building configurations
-- `RegistryOptions` - Options for configuring the MCPConfigRegistry
-- `Platform` - 'darwin' | 'linux' | 'win32'
-- `Transport` - 'http' | 'stdio'
-- `SupportedAuth` - 'token' | 'oauth:dcr'
-- `CliInstallationStatus` - Result of checking CLI installation support
-- `CLI_INSTALL_REASON` - Constants for CLI installation status reasons
+Key exports:
 
-### Registry Options
-
-When creating an `MCPConfigRegistry`, you can provide options to customize configuration generation:
-
-```typescript
-interface RegistryOptions {
-  serverPackage?: string; // NPM package for stdio server (required for stdio transport)
-  commandBuilder?: CommandBuilder; // Custom CLI command builders for clients without native CLI
-  serverNameBuilder?: ServerNameBuilderCallback; // Custom server name generation (e.g., vendor prefixes)
-  tokenEnvVarName?: string; // Default env var name for bearer token auth (used by native CLI clients)
-}
-
-// CommandBuilder allows generating CLI commands for non-native clients
-interface CommandBuilder {
-  http?: (clientId: string, options: MCPConnectionOptions) => string | null;
-  stdio?: (clientId: string, options: MCPConnectionOptions) => string | null;
-}
-
-// ServerNameBuilderCallback allows custom naming conventions
-type ServerNameBuilderCallback = (options: {
-  transport?: 'stdio' | 'http';
-  serverUrl?: string;
-  serverName?: string;
-}) => string;
-```
-
-### Connection Options
-
-When calling `buildConfiguration()`, you can provide these options:
-
-```typescript
-interface MCPConnectionOptions {
-  transport: 'http' | 'stdio';
-
-  // HTTP transport options
-  serverUrl?: string; // URL or URL template (e.g., 'https://api.example.com/{region}/mcp')
-  urlVariables?: Record<string, string>; // Values for URL template variables
-  headers?: Record<string, string>; // HTTP headers (e.g., { Authorization: 'Bearer token' })
-
-  // stdio transport options
-  env?: Record<string, string>; // Environment variables for the stdio server
-
-  // Common options
-  serverName?: string; // Custom server name (default: extracted from URL or 'local')
-  includeRootObject?: boolean; // Include wrapper object (default: true)
-}
-```
-
-### Registry Methods
-
-- `getConfig(clientId)` - Get configuration for a specific client
-- `getAllConfigs()` - Get all client configurations
-- `getSupportedClients()` - Get clients with local config support
-- `getUnsupportedClients()` - Get non-user-configurable clients
-- `getNativeHttpClients()` - Get HTTP-native clients
-- `getBridgeRequiredClients()` - Get clients needing mcp-remote
-- `getStdioOnlyClients()` - Get clients that only support stdio transport
-- `getClientsWithOneClick()` - Get clients with one-click install URL support
-- `getClientsByPlatform(platform)` - Get platform-specific clients
-- `clientNeedsMcpRemote(clientId, options?)` - Check if client needs mcp-remote (optionally for specific auth)
-- `clientSupportsHttpNatively(clientId)` - Check if client supports HTTP natively
-- `clientSupportsStdio(clientId)` - Check if client supports stdio transport
-- `createBuilder(clientId)` - Create a configuration builder
-
-### Builder Methods
-
-- `buildConfiguration(options)` - Generate configuration object
-- `toString(config)` - Convert configuration object to string (JSON, YAML, or TOML)
-- `writeConfiguration(options)` - Write config to file (Node.js only)
-- `getConfigPath()` - Get the config file path (Node.js only)
-- `buildCommand(options)` - Generate CLI command for configuration
-- `buildOneClickUrl(options)` - Generate one-click install URL (Cursor, VS Code)
-- `supportsCliInstallation()` - Check if CLI installation is available for this client
-
-### Validation Functions
-
-- `validateConnectionOptions(options)` - Validate connection options (throws)
-- `safeValidateConnectionOptions(options)` - Safe validation (returns result)
-- `validateGeneratedConfig(config, clientId)` - Validate generated output
-- `validateMcpServersConfig(config)` - Validate standard MCP servers config
-- `validateVsCodeConfig(config)` - Validate VS Code config format
-- `validateGooseConfig(config)` - Validate Goose config format
-- `validateGeminiConfig(config)` - Validate Gemini CLI config format
+- **`MCPConfigRegistry`** - Main entry point for creating configuration builders
+- **`BaseConfigBuilder`** - Base class for client-specific builders
+- **`MCPConnectionOptions`** - Options for `buildConfiguration()`
+- **`RegistryOptions`** - Options for customizing the registry
+- **`ClientId`** - Union type of all supported client identifiers
 
 ## Development
 
