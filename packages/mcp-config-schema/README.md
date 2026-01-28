@@ -467,7 +467,6 @@ interface MCPConnectionOptions {
 - `validateMcpServersConfig(config)` - Validate standard MCP servers config
 - `validateVsCodeConfig(config)` - Validate VS Code config format
 - `validateGooseConfig(config)` - Validate Goose config format
-- `validateCodexConfig(config)` - Validate Codex config format
 - `validateGeminiConfig(config)` - Validate Gemini CLI config format
 
 ## Development
