@@ -9,6 +9,17 @@ All notable changes to this project will be documented in this file.
 
 
 
+
+## v4.1.1 (2026-01-29)
+
+#### :memo: Documentation
+* `mcp-config-glean`, `mcp-config-schema`
+  * [#93](https://github.com/gleanwork/mcp-config/pull/93) docs: restore README files for both packages ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+#### Committers: 1
+- Steve Calvert ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+
 ## v4.1.0 (2026-01-22)
 
 #### :rocket: Enhancement
