@@ -17,6 +17,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 | **Goose** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **JetBrains AI Assistant** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
 | **Junie (JetBrains)** | User-configurable | stdio only | None | Yes (for HTTP) | macOS, Linux, Windows |
+| **OpenCode** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **Visual Studio Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **Windsurf** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 
@@ -957,6 +958,103 @@ extensions:
 
 ---
 
+### OpenCode
+
+- **Configuration**: User-configurable
+- **Connection Type**: Native HTTP support
+- **Documentation**: [Link](https://opencode.ai/docs/mcp-servers/)
+- **Supported Platforms**: macOS, Linux, Windows
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirect**: `http://127.0.0.1:*`
+- **Configuration Paths**:
+  - **macOS/Linux**: `$HOME/.config/opencode/opencode.json`
+  - **Windows**: `%USERPROFILE%\.config\opencode\opencode.json`
+
+<details>
+<summary><strong>Internal Configuration Schema</strong></summary>
+
+```json snippet=configs/opencode.json
+{
+  "id": "opencode",
+  "name": "opencode",
+  "displayName": "OpenCode",
+  "description": "OpenCode with native HTTP and stdio support",
+  "userConfigurable": true,
+  "documentationUrl": "https://opencode.ai/docs/mcp-servers/",
+  "transports": ["stdio", "http"],
+  "supportedPlatforms": ["darwin", "linux", "win32"],
+  "configFormat": "json",
+  "configPath": {
+    "darwin": "$HOME/.config/opencode/opencode.json",
+    "linux": "$HOME/.config/opencode/opencode.json",
+    "win32": "%USERPROFILE%\\.config\\opencode\\opencode.json"
+  },
+  "configStructure": {
+    "serversPropertyName": "mcp",
+    "httpPropertyMapping": {
+      "typeProperty": "type",
+      "urlProperty": "url",
+      "headersProperty": "headers"
+    },
+    "stdioPropertyMapping": {
+      "typeProperty": "type",
+      "commandProperty": "command",
+      "argsProperty": "command",
+      "envProperty": "environment"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://127.0.0.1:*"]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>HTTP Configuration</strong></summary>
+
+```json snippet=examples/configs/http/opencode.json
+{
+  "mcp": {
+    "example": {
+      "type": "remote",
+      "url": "https://api.example.com/mcp"
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>stdio Configuration</strong></summary>
+
+```json snippet=examples/configs/stdio/opencode.json
+{
+  "mcp": {
+    "example": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@example/mcp-server"
+      ],
+      "environment": {
+        "EXAMPLE_API_KEY": "your-api-key"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+---
+
 ### Visual Studio Code
 
 - **Configuration**: User-configurable
@@ -1177,6 +1275,7 @@ Clients that can connect directly to HTTP MCP servers without additional tooling
 - Gemini CLI
 - Goose
 - JetBrains AI Assistant
+- OpenCode
 - Visual Studio Code
 - Windsurf
 

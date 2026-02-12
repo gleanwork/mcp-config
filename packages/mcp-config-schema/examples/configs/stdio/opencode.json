@@ -1,0 +1,15 @@
+{
+  "mcp": {
+    "example": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@example/mcp-server"
+      ],
+      "environment": {
+        "EXAMPLE_API_KEY": "your-api-key"
+      }
+    }
+  }
+}
