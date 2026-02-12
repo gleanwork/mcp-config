@@ -1,0 +1,36 @@
+{
+  "id": "opencode",
+  "name": "opencode",
+  "displayName": "OpenCode",
+  "description": "OpenCode with native HTTP and stdio support",
+  "userConfigurable": true,
+  "documentationUrl": "https://opencode.ai/docs/mcp-servers/",
+  "transports": ["stdio", "http"],
+  "supportedPlatforms": ["darwin", "linux", "win32"],
+  "configFormat": "json",
+  "configPath": {
+    "darwin": "$HOME/.config/opencode/opencode.json",
+    "linux": "$HOME/.config/opencode/opencode.json",
+    "win32": "%USERPROFILE%\\.config\\opencode\\opencode.json"
+  },
+  "configStructure": {
+    "serversPropertyName": "mcp",
+    "httpPropertyMapping": {
+      "typeProperty": "type",
+      "urlProperty": "url",
+      "headersProperty": "headers"
+    },
+    "stdioPropertyMapping": {
+      "typeProperty": "type",
+      "commandProperty": "command",
+      "argsProperty": "command",
+      "envProperty": "environment"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://127.0.0.1:*"]
+    }
+  }
+}

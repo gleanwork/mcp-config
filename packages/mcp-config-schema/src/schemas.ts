@@ -14,6 +14,7 @@ export const ClientIdSchema = z.enum([
   'junie',
   'jetbrains',
   'gemini',
+  'opencode',
 ]);
 
 export const ServerTypeSchema = z.enum(['http', 'stdio']);
@@ -243,6 +244,27 @@ export const GeminiConfigSchema = z.object({
   mcpServers: z.record(z.string(), GeminiServerConfigSchema),
 });
 
+const OpenCodeStdioServerConfigSchema = z.object({
+  type: z.literal('local'),
+  command: z.array(z.string()),
+  environment: z.record(z.string(), z.string()).optional(),
+});
+
+const OpenCodeHttpServerConfigSchema = z.object({
+  type: z.literal('remote'),
+  url: z.string(),
+  headers: z.record(z.string(), z.string()).optional(),
+});
+
+export const OpenCodeServerConfigSchema = z.union([
+  OpenCodeStdioServerConfigSchema,
+  OpenCodeHttpServerConfigSchema,
+]);
+
+export const OpenCodeConfigSchema = z.object({
+  mcp: z.record(z.string(), OpenCodeServerConfigSchema),
+});
+
 export function validateGeneratedConfig(
   config: unknown,
   clientId: string
@@ -258,6 +280,9 @@ export function validateGeneratedConfig(
       break;
     case 'codex':
       schema = CodexConfigSchema;
+      break;
+    case 'opencode':
+      schema = OpenCodeConfigSchema;
       break;
     case 'gemini':
       schema = GeminiConfigSchema;
@@ -301,3 +326,5 @@ export const safeValidateVsCodeConfig = VsCodeConfigSchema.safeParse;
 export const safeValidateGooseConfig = GooseConfigSchema.safeParse;
 export const safeValidateCodexConfig = CodexConfigSchema.safeParse;
 export const safeValidateGeminiConfig = GeminiConfigSchema.safeParse;
+export const validateOpenCodeConfig = OpenCodeConfigSchema.parse;
+export const safeValidateOpenCodeConfig = OpenCodeConfigSchema.safeParse;
