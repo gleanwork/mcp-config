@@ -1,6 +1,7 @@
 import { z } from 'zod';
 export const PlatformSchema = z.enum(['darwin', 'linux', 'win32']);
 export const ClientIdSchema = z.enum([
+  'antigravity',
   'claude-code',
   'vscode',
   'claude-desktop',
@@ -287,6 +288,7 @@ export function validateGeneratedConfig(
     case 'gemini':
       schema = GeminiConfigSchema;
       break;
+    case 'antigravity':
     case 'claude-code':
     case 'claude-desktop':
     case 'cursor':
