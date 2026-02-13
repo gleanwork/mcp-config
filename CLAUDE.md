@@ -88,6 +88,7 @@ Each MCP client (Cursor, VS Code, Claude Desktop, etc.) has a JSON config in `pa
 2. Add import to `packages/mcp-config-schema/src/registry.ts`
 3. Add to `allConfigs` array
 4. If custom builder logic needed, create class in `src/builders/` extending `BaseConfigBuilder`
+5. Update `packages/mcp-config-schema/CLIENTS.md` to include the new client
 
 ## Release
 
