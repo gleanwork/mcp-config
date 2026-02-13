@@ -17,6 +17,7 @@ import {
   ClaudeCodeConfigBuilder,
   CodexConfigBuilder,
   GeminiConfigBuilder,
+  OpenCodeConfigBuilder,
 } from './builders/index.js';
 import chatgptConfig from '../configs/chatgpt.json';
 import claudeCodeConfig from '../configs/claude-code.json';
@@ -31,6 +32,7 @@ import windsurfConfig from '../configs/windsurf.json';
 import junieConfig from '../configs/junie.json';
 import jetbrainsConfig from '../configs/jetbrains.json';
 import geminiConfig from '../configs/gemini.json';
+import opencodeConfig from '../configs/opencode.json';
 const allConfigs = [
   chatgptConfig,
   claudeCodeConfig,
@@ -45,6 +47,7 @@ const allConfigs = [
   junieConfig,
   jetbrainsConfig,
   geminiConfig,
+  opencodeConfig,
 ];
 
 export class MCPConfigRegistry {
@@ -88,6 +91,10 @@ export class MCPConfigRegistry {
     this.builderFactories.set(
       'gemini' as ClientId,
       GeminiConfigBuilder as new (config: MCPClientConfig) => BaseConfigBuilder
+    );
+    this.builderFactories.set(
+      'opencode' as ClientId,
+      OpenCodeConfigBuilder as new (config: MCPClientConfig) => BaseConfigBuilder
     );
     // Other clients will use GenericConfigBuilder by default
   }

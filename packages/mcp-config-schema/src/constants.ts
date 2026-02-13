@@ -14,6 +14,7 @@ export const CLIENT = {
   JUNIE: 'junie',
   JETBRAINS: 'jetbrains',
   GEMINI: 'gemini',
+  OPENCODE: 'opencode',
 } as const;
 
 /**
@@ -32,6 +33,7 @@ export const CLIENT_DISPLAY_NAME = {
   JUNIE: 'Junie (JetBrains)',
   JETBRAINS: 'JetBrains AI Assistant',
   GEMINI: 'Gemini CLI',
+  OPENCODE: 'OpenCode',
 } as const;
 
 /**
@@ -61,6 +63,7 @@ export function getDisplayName(clientId: ClientIdConstant): ClientDisplayName {
     [CLIENT.JUNIE]: CLIENT_DISPLAY_NAME.JUNIE,
     [CLIENT.JETBRAINS]: CLIENT_DISPLAY_NAME.JETBRAINS,
     [CLIENT.GEMINI]: CLIENT_DISPLAY_NAME.GEMINI,
+    [CLIENT.OPENCODE]: CLIENT_DISPLAY_NAME.OPENCODE,
   };
   return mapping[clientId];
 }

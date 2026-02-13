@@ -28,6 +28,8 @@ import {
   SupportedAuthSchema,
   OAuthDcrSchema,
   OAuthSchema,
+  OpenCodeServerConfigSchema,
+  OpenCodeConfigSchema,
 } from './schemas.js';
 
 /**
@@ -166,9 +168,22 @@ export interface CodexMCPConfig {
 }
 
 /**
+ * OpenCode MCP config format.
+ * Uses 'mcp' instead of 'mcpServers'.
+ */
+export interface OpenCodeMCPConfig {
+  mcp: MCPServersRecord;
+}
+
+/**
  * Union of all config output formats.
  */
-export type MCPConfig = StandardMCPConfig | VSCodeMCPConfig | GooseMCPConfig | CodexMCPConfig;
+export type MCPConfig =
+  | StandardMCPConfig
+  | VSCodeMCPConfig
+  | GooseMCPConfig
+  | CodexMCPConfig
+  | OpenCodeMCPConfig;
 
 /**
  * Maps a ClientId to its corresponding config output type.
@@ -187,7 +202,9 @@ export type ConfigForClient<C extends ClientId> = C extends 'vscode'
     ? GooseMCPConfig
     : C extends 'codex'
       ? CodexMCPConfig
-      : StandardMCPConfig;
+      : C extends 'opencode'
+        ? OpenCodeMCPConfig
+        : StandardMCPConfig;
 
 /**
  * Maps a ClientId to its servers property name.
@@ -199,7 +216,9 @@ export type ServersKeyForClient<C extends ClientId> = C extends 'vscode'
     ? 'extensions'
     : C extends 'codex'
       ? 'mcp_servers'
-      : 'mcpServers';
+      : C extends 'opencode'
+        ? 'mcp'
+        : 'mcpServers';
 
 export type Platform = z.infer<typeof PlatformSchema>;
 export type ClientId = z.infer<typeof ClientIdSchema>;
@@ -228,6 +247,8 @@ export type GeminiHttpServerConfig = z.infer<typeof GeminiHttpServerConfigSchema
 export type GeminiStdioServerConfig = z.infer<typeof GeminiStdioServerConfigSchema>;
 export type GeminiServerConfig = z.infer<typeof GeminiServerConfigSchema>;
 export type GeminiConfig = z.infer<typeof GeminiConfigSchema>;
+export type OpenCodeServerConfig = z.infer<typeof OpenCodeServerConfigSchema>;
+export type OpenCodeConfig = z.infer<typeof OpenCodeConfigSchema>;
 export type SupportedAuth = z.infer<typeof SupportedAuthSchema>;
 export type OAuthDcr = z.infer<typeof OAuthDcrSchema>;
 export type OAuth = z.infer<typeof OAuthSchema>;
@@ -341,6 +362,8 @@ export {
   GeminiStdioServerConfigSchema,
   GeminiServerConfigSchema,
   GeminiConfigSchema,
+  OpenCodeServerConfigSchema,
+  OpenCodeConfigSchema,
   SupportedAuthSchema,
   OAuthDcrSchema,
   OAuthSchema,
@@ -362,4 +385,6 @@ export {
   safeValidateVsCodeConfig,
   safeValidateGooseConfig,
   safeValidateGeminiConfig,
+  validateOpenCodeConfig,
+  safeValidateOpenCodeConfig,
 } from './schemas.js';

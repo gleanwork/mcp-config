@@ -10,3 +10,4 @@ export { GooseConfigBuilder } from './builders/GooseConfigBuilder.js';
 export { CursorConfigBuilder } from './builders/CursorConfigBuilder.js';
 export { ClaudeCodeConfigBuilder } from './builders/ClaudeCodeConfigBuilder.js';
 export { CodexConfigBuilder } from './builders/CodexConfigBuilder.js';
+export { OpenCodeConfigBuilder } from './builders/OpenCodeConfigBuilder.js';

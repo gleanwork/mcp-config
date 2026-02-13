@@ -1,0 +1,8 @@
+{
+  "mcp": {
+    "example": {
+      "type": "remote",
+      "url": "https://api.example.com/mcp"
+    }
+  }
+}
