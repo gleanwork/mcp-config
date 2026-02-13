@@ -1,0 +1,34 @@
+{
+  "id": "antigravity",
+  "name": "antigravity",
+  "displayName": "Antigravity",
+  "description": "Antigravity with native HTTP and stdio support",
+  "userConfigurable": true,
+  "documentationUrl": "https://antigravity.google/docs/get-started",
+  "transports": ["stdio", "http"],
+  "supportedPlatforms": ["darwin", "linux", "win32"],
+  "configFormat": "json",
+  "configPath": {
+    "darwin": "$HOME/.gemini/antigravity/mcp_config.json",
+    "linux": "$HOME/.gemini/antigravity/mcp_config.json",
+    "win32": "%USERPROFILE%\\.gemini\\antigravity\\mcp_config.json"
+  },
+  "configStructure": {
+    "serversPropertyName": "mcpServers",
+    "httpPropertyMapping": {
+      "urlProperty": "serverUrl",
+      "headersProperty": "headers"
+    },
+    "stdioPropertyMapping": {
+      "commandProperty": "command",
+      "argsProperty": "args",
+      "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://localhost:*/oauth/callback"]
+    }
+  }
+}

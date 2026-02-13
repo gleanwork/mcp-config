@@ -2,6 +2,7 @@
  * Canonical client IDs for MCP clients
  */
 export const CLIENT = {
+  ANTIGRAVITY: 'antigravity',
   CLAUDE_CODE: 'claude-code',
   CLAUDE_DESKTOP: 'claude-desktop',
   CLAUDE_TEAMS_ENTERPRISE: 'claude-teams-enterprise',
@@ -21,6 +22,7 @@ export const CLIENT = {
  * Display names for MCP clients
  */
 export const CLIENT_DISPLAY_NAME = {
+  ANTIGRAVITY: 'Antigravity',
   CLAUDE_CODE: 'Claude Code',
   CLAUDE_DESKTOP: 'Claude for Desktop',
   CLAUDE_TEAMS_ENTERPRISE: 'Claude for Teams/Enterprise',
@@ -51,6 +53,7 @@ export type ClientDisplayName = (typeof CLIENT_DISPLAY_NAME)[keyof typeof CLIENT
  */
 export function getDisplayName(clientId: ClientIdConstant): ClientDisplayName {
   const mapping: Record<ClientIdConstant, ClientDisplayName> = {
+    [CLIENT.ANTIGRAVITY]: CLIENT_DISPLAY_NAME.ANTIGRAVITY,
     [CLIENT.CLAUDE_CODE]: CLIENT_DISPLAY_NAME.CLAUDE_CODE,
     [CLIENT.CLAUDE_DESKTOP]: CLIENT_DISPLAY_NAME.CLAUDE_DESKTOP,
     [CLIENT.CLAUDE_TEAMS_ENTERPRISE]: CLIENT_DISPLAY_NAME.CLAUDE_TEAMS_ENTERPRISE,
