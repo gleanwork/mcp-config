@@ -6,6 +6,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 
 | Client | Configuration | Connection Type | Auth Support | Requires mcp-remote? | Platforms |
 |---|---|---|---|---|---|
+| **Antigravity** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **ChatGPT** | Managed | HTTP only | Token, OAuth DCR | No | Web-based |
 | **Claude Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **Claude for Desktop** | User-configurable | stdio only | None | Yes (for HTTP) | macOS, Windows, Linux |
@@ -22,6 +23,99 @@ This document provides a comprehensive overview of all supported MCP clients, th
 | **Windsurf** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 
 ## Detailed Client Information
+
+### Antigravity
+
+- **Configuration**: User-configurable
+- **Connection Type**: Native HTTP support
+- **Documentation**: [Link](https://antigravity.google/docs/get-started)
+- **Supported Platforms**: macOS, Linux, Windows
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirect**: `http://localhost:*/oauth/callback`
+- **Configuration Paths**:
+  - **macOS/Linux**: `$HOME/.gemini/antigravity/mcp_config.json`
+  - **Windows**: `%USERPROFILE%\.gemini\antigravity\mcp_config.json`
+
+<details>
+<summary><strong>Internal Configuration Schema</strong></summary>
+
+```json snippet=configs/antigravity.json
+{
+  "id": "antigravity",
+  "name": "antigravity",
+  "displayName": "Antigravity",
+  "description": "Antigravity with native HTTP and stdio support",
+  "userConfigurable": true,
+  "documentationUrl": "https://antigravity.google/docs/get-started",
+  "transports": ["stdio", "http"],
+  "supportedPlatforms": ["darwin", "linux", "win32"],
+  "configFormat": "json",
+  "configPath": {
+    "darwin": "$HOME/.gemini/antigravity/mcp_config.json",
+    "linux": "$HOME/.gemini/antigravity/mcp_config.json",
+    "win32": "%USERPROFILE%\\.gemini\\antigravity\\mcp_config.json"
+  },
+  "configStructure": {
+    "serversPropertyName": "mcpServers",
+    "httpPropertyMapping": {
+      "urlProperty": "serverUrl",
+      "headersProperty": "headers"
+    },
+    "stdioPropertyMapping": {
+      "commandProperty": "command",
+      "argsProperty": "args",
+      "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://localhost:*/oauth/callback"]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>HTTP Configuration</strong></summary>
+
+```json snippet=examples/configs/http/antigravity.json
+{
+  "mcpServers": {
+    "example": {
+      "serverUrl": "https://api.example.com/mcp"
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>stdio Configuration</strong></summary>
+
+```json snippet=examples/configs/stdio/antigravity.json
+{
+  "mcpServers": {
+    "example": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@example/mcp-server"
+      ],
+      "env": {
+        "EXAMPLE_API_KEY": "your-api-key"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+---
 
 ### ChatGPT
 
@@ -1268,6 +1362,7 @@ extensions:
 
 ### Native HTTP Clients
 Clients that can connect directly to HTTP MCP servers without additional tooling:
+- Antigravity
 - Claude Code
 - Codex
 - Cursor
@@ -1292,7 +1387,7 @@ Clients that don't support local configuration files:
 ## Configuration File Formats
 
 ### JSON Format
-Used by: Claude Code, VS Code, Claude Desktop, Cursor, Windsurf
+Used by: Antigravity, Claude Code, VS Code, Claude Desktop, Cursor, Windsurf
 
 ### YAML Format
 Used by: Goose
