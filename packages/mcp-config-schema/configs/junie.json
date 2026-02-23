@@ -5,7 +5,7 @@
   "description": "JetBrains Junie AI agent - stdio only, requires mcp-remote for HTTP",
   "userConfigurable": true,
   "localConfigNotes": "Requires mcp-remote for remote servers",
-  "documentationUrl": "https://www.jetbrains.com/help/junie/model-context-protocol-mcp.html",
+  "documentationUrl": "https://junie.jetbrains.com/docs/junie-ide-plugin.html",
   "transports": ["stdio"],
   "supportedPlatforms": ["darwin", "linux", "win32"],
   "configFormat": "json",
