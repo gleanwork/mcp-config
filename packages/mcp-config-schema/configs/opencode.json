@@ -17,6 +17,7 @@
     "serversPropertyName": "mcp",
     "httpPropertyMapping": {
       "typeProperty": "type",
+      "typeValue": "remote",
       "urlProperty": "url",
       "headersProperty": "headers"
     },

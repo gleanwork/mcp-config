@@ -33,6 +33,7 @@ export const OAuthSchema = z.object({
 });
 export const HttpConfigStructureSchema = z.object({
   typeProperty: z.string().optional(),
+  typeValue: z.string().optional(),
   urlProperty: z.string(),
   headersProperty: z.string().optional(),
 });
