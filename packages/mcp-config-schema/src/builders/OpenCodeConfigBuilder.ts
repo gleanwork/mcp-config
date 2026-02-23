@@ -65,8 +65,8 @@ export class OpenCodeConfigBuilder extends BaseConfigBuilder<OpenCodeMCPConfig> 
     if (httpPropertyMapping && this.config.transports.includes('http')) {
       const serverConfig: Record<string, unknown> = {};
 
-      if (httpPropertyMapping.typeProperty && httpPropertyMapping.typeValue) {
-        serverConfig[httpPropertyMapping.typeProperty] = httpPropertyMapping.typeValue;
+      if (httpPropertyMapping.typeProperty) {
+        serverConfig[httpPropertyMapping.typeProperty] = httpPropertyMapping.typeValue ?? 'http';
       }
 
       serverConfig[httpPropertyMapping.urlProperty] = resolvedUrl;
