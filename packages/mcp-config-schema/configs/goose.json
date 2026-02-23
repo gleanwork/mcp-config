@@ -17,6 +17,7 @@
     "serversPropertyName": "extensions",
     "httpPropertyMapping": {
       "typeProperty": "type",
+      "typeValue": "streamable_http",
       "urlProperty": "uri"
     },
     "stdioPropertyMapping": {

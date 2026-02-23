@@ -17,6 +17,7 @@
     "serversPropertyName": "mcpServers",
     "httpPropertyMapping": {
       "typeProperty": "type",
+      "typeValue": "http",
       "urlProperty": "url",
       "headersProperty": "headers"
     },

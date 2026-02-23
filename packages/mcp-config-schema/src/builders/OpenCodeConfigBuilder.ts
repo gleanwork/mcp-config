@@ -60,15 +60,20 @@ export class OpenCodeConfigBuilder extends BaseConfigBuilder<OpenCodeMCPConfig> 
       serverName: options.serverName,
     });
 
-    if (this.config.transports.includes('http')) {
-      const serverConfig: Record<string, unknown> = {
-        type: 'remote',
-        url: resolvedUrl,
-      };
+    const { httpPropertyMapping } = this.config.configStructure;
+
+    if (httpPropertyMapping && this.config.transports.includes('http')) {
+      const serverConfig: Record<string, unknown> = {};
+
+      if (httpPropertyMapping.typeProperty && httpPropertyMapping.typeValue) {
+        serverConfig[httpPropertyMapping.typeProperty] = httpPropertyMapping.typeValue;
+      }
+
+      serverConfig[httpPropertyMapping.urlProperty] = resolvedUrl;
 
       const headers = this.buildHeaders(options);
-      if (headers) {
-        serverConfig.headers = headers;
+      if (httpPropertyMapping.headersProperty && headers) {
+        serverConfig[httpPropertyMapping.headersProperty] = headers;
       }
 
       if (!includeRootObject) {

@@ -80,8 +80,8 @@ export class VSCodeConfigBuilder extends BaseConfigBuilder<VSCodeMCPConfig> {
     if (httpPropertyMapping && this.config.transports.includes('http')) {
       const serverConfig: Record<string, unknown> = {};
 
-      if (httpPropertyMapping.typeProperty) {
-        serverConfig[httpPropertyMapping.typeProperty] = 'http';
+      if (httpPropertyMapping.typeProperty && httpPropertyMapping.typeValue) {
+        serverConfig[httpPropertyMapping.typeProperty] = httpPropertyMapping.typeValue;
       }
 
       serverConfig[httpPropertyMapping.urlProperty] = resolvedUrl;
