@@ -4,13 +4,19 @@ All notable changes to this project will be documented in this file.
 
 > **Note:** This monorepo was created by consolidating `@gleanwork/mcp-config-schema` and `@gleanwork/mcp-config` (now `@gleanwork/mcp-config-glean`). Historical entries below v4.0.0 refer to `@gleanwork/mcp-config-schema` only.
 
-
-
-
-
-
-
 ## v4.2.0 (2026-02-23)
+
+* `mcp-config-schema`
+  * [#99](https://github.com/gleanwork/mcp-config/pull/99) fix: update Junie documentation URL to new docs site ([@travis-hoover-glean](https://github.com/travis-hoover-glean))
+  * [#96](https://github.com/gleanwork/mcp-config/pull/96) feat: add Antigravity MCP client configuration ([@travis-hoover-glean](https://github.com/travis-hoover-glean))
+  * [#98](https://github.com/gleanwork/mcp-config/pull/98) feat: expose HTTP type value in client config schema ([@travis-hoover-glean](https://github.com/travis-hoover-glean))
+  * [#95](https://github.com/gleanwork/mcp-config/pull/95) feat: add OpenCode MCP client configuration ([@travis-hoover-glean](https://github.com/travis-hoover-glean))
+
+#### :house: Internal
+* [#97](https://github.com/gleanwork/mcp-config/pull/97) docs: add CLIENTS.md update step to new client checklist ([@travis-hoover-glean](https://github.com/travis-hoover-glean))
+
+#### Committers: 1
+- Travis Hoover ([@travis-hoover-glean](https://github.com/travis-hoover-glean))
 
 ## v4.1.1 (2026-01-29)
 
