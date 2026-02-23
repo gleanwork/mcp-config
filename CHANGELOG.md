@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 
 
 
+## v4.2.0 (2026-02-23)
+
 ## v4.1.1 (2026-01-29)
 
 #### :memo: Documentation
