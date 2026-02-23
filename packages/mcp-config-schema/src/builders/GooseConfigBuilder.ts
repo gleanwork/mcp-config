@@ -86,7 +86,8 @@ export class GooseConfigBuilder extends BaseConfigBuilder<GooseMCPConfig> {
       const serverConfig: Record<string, unknown> = {};
 
       if (httpPropertyMapping.typeProperty) {
-        serverConfig[httpPropertyMapping.typeProperty] = httpPropertyMapping.typeValue ?? 'http';
+        serverConfig[httpPropertyMapping.typeProperty] =
+          httpPropertyMapping.typeValue ?? 'streamable_http';
       }
 
       serverConfig[httpPropertyMapping.urlProperty] = resolvedUrl;
