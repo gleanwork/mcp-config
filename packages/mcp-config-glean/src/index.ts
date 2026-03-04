@@ -12,10 +12,18 @@ export * from '@gleanwork/mcp-config-schema';
  * Glean environment variable names.
  */
 export const GLEAN_ENV = {
-  /** Environment variable for Glean instance name (e.g., 'my-company') */
+  /**
+   * Environment variable for Glean instance name (e.g., 'my-company')
+   * @deprecated Use {@link GLEAN_ENV.SERVER_URL GLEAN_SERVER_URL} instead.
+   */
   INSTANCE: 'GLEAN_INSTANCE',
-  /** Environment variable for full Glean URL (e.g., 'https://my-company.glean.com') */
+  /**
+   * Environment variable for full Glean URL (e.g., 'https://my-company.glean.com')
+   * @deprecated Use {@link GLEAN_ENV.SERVER_URL GLEAN_SERVER_URL} instead.
+   */
   URL: 'GLEAN_URL',
+  /** Environment variable for Glean server URL (e.g., 'https://my-company-be.glean.com') */
+  SERVER_URL: 'GLEAN_SERVER_URL',
   /** Environment variable for Glean API token */
   API_TOKEN: 'GLEAN_API_TOKEN',
 } as const;
@@ -57,17 +65,10 @@ export const GLEAN_REGISTRY_OPTIONS: RegistryOptions = {
 /**
  * Helper to create Glean environment variables for stdio transport.
  *
+ * @deprecated Use {@link createGleanServerUrlEnv} instead.
  * @param instance - Glean instance name (e.g., 'my-company')
  * @param apiToken - Optional API token
  * @returns Environment variables object for use in MCPConnectionOptions.env
- *
- * @example
- * ```typescript
- * const config = builder.buildConfiguration({
- *   transport: 'stdio',
- *   env: createGleanEnv('my-company', 'my-api-token'),
- * });
- * ```
  */
 export function createGleanEnv(instance: string, apiToken?: string): Record<string, string> {
   return {
@@ -79,7 +80,22 @@ export function createGleanEnv(instance: string, apiToken?: string): Record<stri
 /**
  * Helper to create Glean environment variables using a full URL.
  *
+ * @deprecated Use {@link createGleanServerUrlEnv} instead.
  * @param url - Full Glean URL (e.g., 'https://my-company.glean.com')
+ * @param apiToken - Optional API token
+ * @returns Environment variables object for use in MCPConnectionOptions.env
+ */
+export function createGleanUrlEnv(url: string, apiToken?: string): Record<string, string> {
+  return {
+    [GLEAN_ENV.URL]: url,
+    ...(apiToken && { [GLEAN_ENV.API_TOKEN]: apiToken }),
+  };
+}
+
+/**
+ * Helper to create Glean environment variables using a server URL.
+ *
+ * @param serverUrl - Full Glean server URL (e.g., 'https://my-company-be.glean.com')
  * @param apiToken - Optional API token
  * @returns Environment variables object for use in MCPConnectionOptions.env
  *
@@ -87,13 +103,13 @@ export function createGleanEnv(instance: string, apiToken?: string): Record<stri
  * ```typescript
  * const config = builder.buildConfiguration({
  *   transport: 'stdio',
- *   env: createGleanUrlEnv('https://my-company.glean.com', 'my-api-token'),
+ *   env: createGleanServerUrlEnv('https://my-company-be.glean.com', 'my-api-token'),
  * });
  * ```
  */
-export function createGleanUrlEnv(url: string, apiToken?: string): Record<string, string> {
+export function createGleanServerUrlEnv(serverUrl: string, apiToken?: string): Record<string, string> {
   return {
-    [GLEAN_ENV.URL]: url,
+    [GLEAN_ENV.SERVER_URL]: serverUrl,
     ...(apiToken && { [GLEAN_ENV.API_TOKEN]: apiToken }),
   };
 }
@@ -132,13 +148,13 @@ export function createGleanHeaders(apiToken: string): Record<string, string> {
  * // For stdio transport
  * const config = builder.buildConfiguration({
  *   transport: 'stdio',
- *   env: createGleanEnv('my-company', 'my-api-token'),
+ *   env: createGleanServerUrlEnv('https://my-company-be.glean.com', 'my-api-token'),
  * });
  *
  * // For HTTP transport
  * const httpConfig = builder.buildConfiguration({
  *   transport: 'http',
- *   serverUrl: 'https://my-company-be.glean.com/mcp/default',
+ *   serverUrl: buildGleanMcpUrl('https://my-company-be.glean.com'),
  *   headers: createGleanHeaders('my-api-token'),
  * });
  * ```
@@ -148,20 +164,32 @@ export function createGleanRegistry(): MCPConfigRegistry {
 }
 
 /**
- * Build the Glean MCP server URL from an instance name.
+ * Build a Glean MCP endpoint URL from a server URL.
  *
- * @param instance - Glean instance name (e.g., 'my-company')
+ * @param serverUrl - Glean server URL (e.g., 'https://my-company-be.glean.com')
  * @param endpoint - MCP endpoint (default: 'default')
- * @returns Full Glean MCP server URL
+ * @returns Full Glean MCP endpoint URL
  *
  * @example
  * ```typescript
- * const url = buildGleanServerUrl('my-company');
+ * const url = buildGleanMcpUrl('https://my-company-be.glean.com');
  * // Returns: 'https://my-company-be.glean.com/mcp/default'
  *
- * const customUrl = buildGleanServerUrl('my-company', 'custom');
+ * const customUrl = buildGleanMcpUrl('https://my-company-be.glean.com', 'custom');
  * // Returns: 'https://my-company-be.glean.com/mcp/custom'
  * ```
+ */
+export function buildGleanMcpUrl(serverUrl: string, endpoint: string = 'default'): string {
+  return `${serverUrl.replace(/\/+$/, '')}/mcp/${endpoint}`;
+}
+
+/**
+ * Build the Glean MCP server URL from an instance name.
+ *
+ * @deprecated Use {@link buildGleanMcpUrl} with a fully qualified server URL instead.
+ * @param instance - Glean instance name (e.g., 'my-company')
+ * @param endpoint - MCP endpoint (default: 'default')
+ * @returns Full Glean MCP server URL
  */
 export function buildGleanServerUrl(instance: string, endpoint: string = 'default'): string {
   return `https://${instance}-be.glean.com/mcp/${endpoint}`;
@@ -171,6 +199,7 @@ export function buildGleanServerUrl(instance: string, endpoint: string = 'defaul
 export type GleanEnvVars = {
   [GLEAN_ENV.INSTANCE]?: string;
   [GLEAN_ENV.URL]?: string;
+  [GLEAN_ENV.SERVER_URL]?: string;
   [GLEAN_ENV.API_TOKEN]?: string;
 };
 

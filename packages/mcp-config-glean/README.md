@@ -15,9 +15,9 @@ npm install @gleanwork/mcp-config-glean
 ```typescript
 import {
   createGleanRegistry,
-  createGleanEnv,
+  createGleanServerUrlEnv,
   createGleanHeaders,
-  buildGleanServerUrl,
+  buildGleanMcpUrl,
 } from '@gleanwork/mcp-config-glean';
 
 // Create a pre-configured registry
@@ -27,13 +27,13 @@ const builder = registry.createBuilder('cursor');
 // Generate stdio configuration
 const stdioConfig = builder.buildConfiguration({
   transport: 'stdio',
-  env: createGleanEnv('my-company', 'my-api-token'),
+  env: createGleanServerUrlEnv('https://my-company-be.glean.com', 'my-api-token'),
 });
 
 // Generate HTTP configuration
 const httpConfig = builder.buildConfiguration({
   transport: 'http',
-  serverUrl: buildGleanServerUrl('my-company'),
+  serverUrl: buildGleanMcpUrl('https://my-company-be.glean.com'),
   headers: createGleanHeaders('my-api-token'),
 });
 ```
@@ -52,8 +52,7 @@ GLEAN_REGISTRY_OPTIONS.commandBuilder    // Functions to generate CLI commands
 GLEAN_REGISTRY_OPTIONS.serverNameBuilder // Callback that prefixes server names with glean_
 
 // Environment variable names
-GLEAN_ENV.INSTANCE   // 'GLEAN_INSTANCE'
-GLEAN_ENV.URL        // 'GLEAN_URL'
+GLEAN_ENV.SERVER_URL // 'GLEAN_SERVER_URL'
 GLEAN_ENV.API_TOKEN  // 'GLEAN_API_TOKEN'
 ```
 
@@ -62,10 +61,9 @@ GLEAN_ENV.API_TOKEN  // 'GLEAN_API_TOKEN'
 | Function | Description |
 |----------|-------------|
 | `createGleanRegistry()` | Create MCPConfigRegistry with Glean defaults |
-| `createGleanEnv(instance, apiToken?)` | Create env vars using instance name |
-| `createGleanUrlEnv(url, apiToken?)` | Create env vars using full URL |
+| `createGleanServerUrlEnv(serverUrl, apiToken?)` | Create env vars using server URL |
+| `buildGleanMcpUrl(serverUrl, endpoint?)` | Build full MCP endpoint URL from server URL |
 | `createGleanHeaders(apiToken)` | Create Authorization header |
-| `buildGleanServerUrl(instance, endpoint?)` | Build Glean MCP server URL |
 | `normalizeGleanProductName(productName?)` | Normalize product name for white-labeling (defaults to 'glean') |
 | `buildGleanServerName(options)` | Build server name with glean_ prefix |
 | `normalizeGleanServerName(name, productName?)` | Normalize server name to safe config key with prefix |
@@ -115,7 +113,7 @@ This package re-exports everything from `@gleanwork/mcp-config-schema`, so you c
 import {
   // Glean-specific
   createGleanRegistry,
-  createGleanEnv,
+  createGleanServerUrlEnv,
   GLEAN_ENV,
 
   // From mcp-config-schema
