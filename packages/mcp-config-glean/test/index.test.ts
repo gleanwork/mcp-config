@@ -4,8 +4,10 @@ import {
   GLEAN_ENV,
   createGleanEnv,
   createGleanUrlEnv,
+  createGleanServerUrlEnv,
   createGleanHeaders,
   createGleanRegistry,
+  buildGleanMcpUrl,
   buildGleanServerUrl,
   normalizeGleanProductName,
   buildGleanServerName,
@@ -56,6 +58,16 @@ describe('@gleanwork/mcp-config', () => {
       );
     });
 
+    it('commandBuilder stdio works with GLEAN_SERVER_URL env', () => {
+      const command = GLEAN_REGISTRY_OPTIONS.commandBuilder?.stdio?.('cursor', {
+        transport: 'stdio',
+        env: { GLEAN_SERVER_URL: 'https://my-company-be.glean.com', GLEAN_API_TOKEN: 'token' },
+      });
+      expect(command).toBe(
+        'npx -y @gleanwork/configure-mcp-server local --client cursor --env GLEAN_SERVER_URL=https://my-company-be.glean.com --env GLEAN_API_TOKEN=token'
+      );
+    });
+
     it('commandBuilder http returns null when no serverUrl', () => {
       const command = GLEAN_REGISTRY_OPTIONS.commandBuilder?.http?.('cursor', {
         transport: 'http',
@@ -83,6 +95,7 @@ describe('@gleanwork/mcp-config', () => {
     it('has correct environment variable names', () => {
       expect(GLEAN_ENV.INSTANCE).toBe('GLEAN_INSTANCE');
       expect(GLEAN_ENV.URL).toBe('GLEAN_URL');
+      expect(GLEAN_ENV.SERVER_URL).toBe('GLEAN_SERVER_URL');
       expect(GLEAN_ENV.API_TOKEN).toBe('GLEAN_API_TOKEN');
     });
   });
@@ -121,12 +134,46 @@ describe('@gleanwork/mcp-config', () => {
     });
   });
 
+  describe('createGleanServerUrlEnv', () => {
+    it('creates env with server URL only', () => {
+      const env = createGleanServerUrlEnv('https://my-company-be.glean.com');
+      expect(env).toEqual({
+        GLEAN_SERVER_URL: 'https://my-company-be.glean.com',
+      });
+    });
+
+    it('creates env with server URL and token', () => {
+      const env = createGleanServerUrlEnv('https://my-company-be.glean.com', 'my-token');
+      expect(env).toEqual({
+        GLEAN_SERVER_URL: 'https://my-company-be.glean.com',
+        GLEAN_API_TOKEN: 'my-token',
+      });
+    });
+  });
+
   describe('createGleanHeaders', () => {
     it('creates Authorization header', () => {
       const headers = createGleanHeaders('my-token');
       expect(headers).toEqual({
         Authorization: 'Bearer my-token',
       });
+    });
+  });
+
+  describe('buildGleanMcpUrl', () => {
+    it('builds URL with default endpoint', () => {
+      const url = buildGleanMcpUrl('https://my-company-be.glean.com');
+      expect(url).toBe('https://my-company-be.glean.com/mcp/default');
+    });
+
+    it('builds URL with custom endpoint', () => {
+      const url = buildGleanMcpUrl('https://my-company-be.glean.com', 'custom');
+      expect(url).toBe('https://my-company-be.glean.com/mcp/custom');
+    });
+
+    it('strips trailing slash from server URL', () => {
+      const url = buildGleanMcpUrl('https://my-company-be.glean.com/');
+      expect(url).toBe('https://my-company-be.glean.com/mcp/default');
     });
   });
 
