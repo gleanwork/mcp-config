@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 > **Note:** This monorepo was created by consolidating `@gleanwork/mcp-config-schema` and `@gleanwork/mcp-config` (now `@gleanwork/mcp-config-glean`). Historical entries below v4.0.0 refer to `@gleanwork/mcp-config-schema` only.
 
+## v4.3.0 (2026-03-05)
+
 ## v4.2.0 (2026-02-23)
 
 * `mcp-config-schema`
