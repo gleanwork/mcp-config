@@ -169,7 +169,13 @@ describe('MCPConfigRegistry', () => {
     it('returns true for stdio-only client with any auth', () => {
       expect(registry.clientNeedsMcpRemote('claude-desktop', { auth: 'token' })).toBe(true);
       expect(registry.clientNeedsMcpRemote('claude-desktop', { auth: 'oauth:dcr' })).toBe(true);
-      expect(registry.clientNeedsMcpRemote('junie', { auth: 'token' })).toBe(true);
+    });
+
+    it('returns false for junie with token auth (native support)', () => {
+      expect(registry.clientNeedsMcpRemote('junie', { auth: 'token' })).toBe(false);
+    });
+
+    it('returns true for junie with oauth:dcr (not supported)', () => {
       expect(registry.clientNeedsMcpRemote('junie', { auth: 'oauth:dcr' })).toBe(true);
     });
 
@@ -177,7 +183,7 @@ describe('MCPConfigRegistry', () => {
       expect(registry.clientNeedsMcpRemote('cursor')).toBe(false);
       expect(registry.clientNeedsMcpRemote('claude-desktop')).toBe(true);
       expect(registry.clientNeedsMcpRemote('vscode')).toBe(false);
-      expect(registry.clientNeedsMcpRemote('junie')).toBe(true);
+      expect(registry.clientNeedsMcpRemote('junie')).toBe(false);
     });
   });
 });

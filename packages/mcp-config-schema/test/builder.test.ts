@@ -569,7 +569,7 @@ describe('ConfigBuilder', () => {
       `);
     });
 
-    it('should generate correct bridge config for Junie', () => {
+    it('should generate correct HTTP config for Junie', () => {
       const builder = registry.createBuilder(CLIENT.JUNIE);
       const result = builder.buildConfiguration(remoteConfig);
 
@@ -580,13 +580,7 @@ describe('ConfigBuilder', () => {
         {
           "mcpServers": {
             "glean": {
-              "args": [
-                "-y",
-                "mcp-remote",
-                "https://glean-dev-be.glean.com/mcp/default",
-              ],
-              "command": "npx",
-              "type": "stdio",
+              "url": "https://glean-dev-be.glean.com/mcp/default",
             },
           },
         }

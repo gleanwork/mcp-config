@@ -2,11 +2,10 @@
   "id": "junie",
   "name": "junie",
   "displayName": "Junie (JetBrains)",
-  "description": "JetBrains Junie AI agent - stdio only, requires mcp-remote for HTTP",
+  "description": "JetBrains Junie AI agent with native HTTP and stdio support",
   "userConfigurable": true,
-  "localConfigNotes": "Requires mcp-remote for remote servers",
-  "documentationUrl": "https://junie.jetbrains.com/docs/junie-ide-plugin.html",
-  "transports": ["stdio"],
+  "documentationUrl": "https://junie.jetbrains.com/docs/junie-cli-mcp-configuration.html",
+  "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],
   "configFormat": "json",
   "configPath": {
@@ -16,6 +15,10 @@
   },
   "configStructure": {
     "serversPropertyName": "mcpServers",
+    "httpPropertyMapping": {
+      "urlProperty": "url",
+      "headersProperty": "headers"
+    },
     "stdioPropertyMapping": {
       "typeProperty": "type",
       "commandProperty": "command",
@@ -23,5 +26,5 @@
       "envProperty": "env"
     }
   },
-  "supportedAuth": []
+  "supportedAuth": ["token"]
 }

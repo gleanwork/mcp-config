@@ -68,7 +68,7 @@ describe('Client: junie', () => {
       });
     });
 
-    describe('http transport (uses mcp-remote bridge)', () => {
+    describe('http transport (native)', () => {
       it('with token auth', () => {
         const config = builder.buildConfiguration({
           transport: 'http',
@@ -80,15 +80,10 @@ describe('Client: junie', () => {
           {
             "mcpServers": {
               "glean_default": {
-                "args": [
-                  "-y",
-                  "mcp-remote",
-                  "https://my-company-be.glean.com/mcp/default",
-                  "--header",
-                  "Authorization: Bearer my-api-token",
-                ],
-                "command": "npx",
-                "type": "stdio",
+                "headers": {
+                  "Authorization": "Bearer my-api-token",
+                },
+                "url": "https://my-company-be.glean.com/mcp/default",
               },
             },
           }
@@ -105,13 +100,7 @@ describe('Client: junie', () => {
           {
             "mcpServers": {
               "glean_default": {
-                "args": [
-                  "-y",
-                  "mcp-remote",
-                  "https://my-company-be.glean.com/mcp/default",
-                ],
-                "command": "npx",
-                "type": "stdio",
+                "url": "https://my-company-be.glean.com/mcp/default",
               },
             },
           }
