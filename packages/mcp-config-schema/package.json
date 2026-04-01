@@ -55,7 +55,7 @@
     "glob": "^13.0.6",
     "js-yaml": "^4.1.0",
     "mkdirp": "^3.0.1",
-    "smol-toml": "^1.5.2"
+    "smol-toml": "^1.6.1"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
