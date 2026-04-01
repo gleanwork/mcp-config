@@ -132,8 +132,9 @@ export function safeValidateServerConfig(data: unknown) {
 }
 
 export const HttpServerConfigSchema = z.object({
-  type: z.literal('http'),
+  type: z.literal('http').optional(), // Some clients (e.g., Junie) don't include type for HTTP
   url: z.string().url(),
+  headers: z.record(z.string(), z.string()).optional(),
 });
 
 export const HttpServerConfigAltSchema = z.object({

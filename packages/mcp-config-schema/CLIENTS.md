@@ -17,7 +17,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 | **Gemini CLI** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **Goose** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **JetBrains AI Assistant** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
-| **Junie (JetBrains)** | User-configurable | stdio only | None | Yes (for HTTP) | macOS, Linux, Windows |
+| **Junie (JetBrains)** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
 | **OpenCode** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **Visual Studio Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **Windsurf** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
@@ -196,6 +196,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
     "serversPropertyName": "mcpServers",
     "httpPropertyMapping": {
       "typeProperty": "type",
+      "typeValue": "http",
       "urlProperty": "url",
       "headersProperty": "headers"
     },
@@ -514,6 +515,7 @@ EXAMPLE_API_KEY = "your-api-key"
     "serversPropertyName": "mcpServers",
     "httpPropertyMapping": {
       "typeProperty": "type",
+      "typeValue": "http",
       "urlProperty": "url",
       "headersProperty": "headers"
     },
@@ -615,6 +617,7 @@ EXAMPLE_API_KEY = "your-api-key"
     "serversPropertyName": "mcpServers",
     "httpPropertyMapping": {
       "typeProperty": "type",
+      "typeValue": "http",
       "urlProperty": "url",
       "headersProperty": "headers"
     },
@@ -808,6 +811,7 @@ EXAMPLE_API_KEY = "your-api-key"
     "serversPropertyName": "extensions",
     "httpPropertyMapping": {
       "typeProperty": "type",
+      "typeValue": "streamable_http",
       "urlProperty": "uri"
     },
     "stdioPropertyMapping": {
@@ -902,6 +906,7 @@ extensions:
     "serversPropertyName": "mcpServers",
     "httpPropertyMapping": {
       "typeProperty": "type",
+      "typeValue": "http",
       "urlProperty": "url",
       "headersProperty": "headers"
     },
@@ -962,11 +967,10 @@ extensions:
 ### Junie (JetBrains)
 
 - **Configuration**: User-configurable
-- **Connection Type**: stdio only (requires mcp-remote for HTTP servers)
-- **Documentation**: [Link](https://www.jetbrains.com/help/junie/model-context-protocol-mcp.html)
+- **Connection Type**: Native HTTP support
+- **Documentation**: [Link](https://junie.jetbrains.com/docs/junie-cli-mcp-configuration.html)
 - **Supported Platforms**: macOS, Linux, Windows
-- **Auth Support**: None (requires mcp-remote for HTTP auth)
-- **Notes**: Requires mcp-remote bridge for remote servers
+- **Auth Support**: Token
 - **Configuration Paths**:
   - **macOS/Linux**: `$HOME/.junie/mcp/mcp.json`
   - **Windows**: `%USERPROFILE%\.junie\mcp\mcp.json`
@@ -979,11 +983,10 @@ extensions:
   "id": "junie",
   "name": "junie",
   "displayName": "Junie (JetBrains)",
-  "description": "JetBrains Junie AI agent - stdio only, requires mcp-remote for HTTP",
+  "description": "JetBrains Junie AI agent with native HTTP and stdio support",
   "userConfigurable": true,
-  "localConfigNotes": "Requires mcp-remote for remote servers",
-  "documentationUrl": "https://www.jetbrains.com/help/junie/model-context-protocol-mcp.html",
-  "transports": ["stdio"],
+  "documentationUrl": "https://junie.jetbrains.com/docs/junie-cli-mcp-configuration.html",
+  "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],
   "configFormat": "json",
   "configPath": {
@@ -993,6 +996,10 @@ extensions:
   },
   "configStructure": {
     "serversPropertyName": "mcpServers",
+    "httpPropertyMapping": {
+      "urlProperty": "url",
+      "headersProperty": "headers"
+    },
     "stdioPropertyMapping": {
       "typeProperty": "type",
       "commandProperty": "command",
@@ -1000,26 +1007,20 @@ extensions:
       "envProperty": "env"
     }
   },
-  "supportedAuth": []
+  "supportedAuth": ["token"]
 }
 ```
 
 </details>
 
 <details>
-<summary><strong>HTTP Configuration (via mcp-remote bridge)</strong></summary>
+<summary><strong>HTTP Configuration</strong></summary>
 
 ```json snippet=examples/configs/http/junie.json
 {
   "mcpServers": {
     "example": {
-      "type": "stdio",
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote",
-        "https://api.example.com/mcp"
-      ]
+      "url": "https://api.example.com/mcp"
     }
   }
 }
@@ -1087,6 +1088,7 @@ extensions:
     "serversPropertyName": "mcp",
     "httpPropertyMapping": {
       "typeProperty": "type",
+      "typeValue": "remote",
       "urlProperty": "url",
       "headersProperty": "headers"
     },
@@ -1191,6 +1193,7 @@ extensions:
     "serversPropertyName": "servers",
     "httpPropertyMapping": {
       "typeProperty": "type",
+      "typeValue": "http",
       "urlProperty": "url",
       "headersProperty": "headers"
     },
@@ -1370,6 +1373,7 @@ Clients that can connect directly to HTTP MCP servers without additional tooling
 - Gemini CLI
 - Goose
 - JetBrains AI Assistant
+- Junie (JetBrains)
 - OpenCode
 - Visual Studio Code
 - Windsurf
@@ -1377,7 +1381,6 @@ Clients that can connect directly to HTTP MCP servers without additional tooling
 ### stdio-only Clients
 Clients that communicate via stdio and require `mcp-remote` as a bridge for HTTP servers:
 - Claude for Desktop
-- Junie (JetBrains)
 
 ### Web-based/Managed Clients
 Clients that don't support local configuration files:
@@ -1387,7 +1390,7 @@ Clients that don't support local configuration files:
 ## Configuration File Formats
 
 ### JSON Format
-Used by: Antigravity, Claude Code, VS Code, Claude Desktop, Cursor, Windsurf
+Used by: Claude Code, VS Code, Claude Desktop, Cursor, Windsurf
 
 ### YAML Format
 Used by: Goose

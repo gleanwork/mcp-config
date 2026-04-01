@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "example": {
+      "serverUrl": "https://api.example.com/mcp"
+    }
+  }
+}

@@ -107,7 +107,10 @@ export function createGleanUrlEnv(url: string, apiToken?: string): Record<string
  * });
  * ```
  */
-export function createGleanServerUrlEnv(serverUrl: string, apiToken?: string): Record<string, string> {
+export function createGleanServerUrlEnv(
+  serverUrl: string,
+  apiToken?: string
+): Record<string, string> {
   return {
     [GLEAN_ENV.SERVER_URL]: serverUrl,
     ...(apiToken && { [GLEAN_ENV.API_TOKEN]: apiToken }),
