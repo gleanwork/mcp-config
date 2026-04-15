@@ -19,6 +19,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 | <img src="icons/goose.svg" alt="" width="20" height="20" /> **Goose** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/jetbrains.svg" alt="" width="20" height="20" /> **JetBrains AI Assistant** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
 | <img src="icons/junie.svg" alt="" width="20" height="20" /> **Junie (JetBrains)** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
+| <img src="icons/linear.svg" alt="" width="20" height="20" /> **Linear** | Managed | HTTP only | Token, OAuth DCR | No | Web-based |
 | <img src="icons/opencode.svg" alt="" width="20" height="20" /> **OpenCode** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/vscode.svg" alt="" width="20" height="20" /> **VS Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/windsurf.svg" alt="" width="20" height="20" /> **Windsurf** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
@@ -1147,6 +1148,45 @@ extensions:
 
 ---
 
+### <img src="icons/linear.svg" alt="" width="24" height="24" /> Linear
+
+- **Configuration**: Centrally managed
+- **Connection Type**: HTTP only (managed)
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirect**: `https://linear.app/connect/mcp/callback`
+- **Notes**: Linear Agent is web-based and requires adding MCP servers through the Linear settings UI. No local configuration file support.
+
+<details>
+<summary><strong>Internal Configuration Schema</strong></summary>
+
+```json snippet=configs/linear.json
+{
+  "id": "linear",
+  "name": "linear",
+  "displayName": "Linear",
+  "description": "Linear agent - requires adding MCP servers through the Linear settings UI",
+  "userConfigurable": false,
+  "localConfigNotes": "Linear Agent is web-based and requires adding MCP servers through the Linear settings UI. No local configuration file support.",
+  "transports": ["http"],
+  "supportedPlatforms": [],
+  "configFormat": "json",
+  "configPath": {},
+  "configStructure": {
+    "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["https://linear.app/connect/mcp/callback"]
+    }
+  }
+}
+```
+
+</details>
+
+---
+
 ### <img src="icons/opencode.svg" alt="" width="24" height="24" /> OpenCode
 
 - **Configuration**: User-configurable
@@ -1481,6 +1521,7 @@ Clients that communicate via stdio and require `mcp-remote` as a bridge for HTTP
 Clients that don't support local configuration files:
 - ChatGPT (chatgpt is web-based and requires configuring mcp servers through their web ui. no local configuration file support.)
 - Claude for Teams/Enterprise (mcp servers are centrally managed by admins. no local configuration support - servers must be configured at the organization level.)
+- Linear (linear agent is web-based and requires adding mcp servers through the linear settings ui. no local configuration file support.)
 
 ## Configuration File Formats
 
