@@ -1,0 +1,21 @@
+{
+  "id": "linear",
+  "name": "linear",
+  "displayName": "Linear",
+  "description": "Linear agent - requires adding MCP servers through the Linear settings UI",
+  "userConfigurable": false,
+  "localConfigNotes": "Linear Agent is web-based and requires adding MCP servers through the Linear settings UI. No local configuration file support.",
+  "transports": ["http"],
+  "supportedPlatforms": [],
+  "configFormat": "json",
+  "configPath": {},
+  "configStructure": {
+    "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["https://linear.app/connect/mcp/callback"]
+    }
+  }
+}

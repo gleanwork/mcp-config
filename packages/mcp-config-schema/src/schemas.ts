@@ -15,6 +15,7 @@ export const ClientIdSchema = z.enum([
   'junie',
   'jetbrains',
   'gemini',
+  'linear',
   'opencode',
 ]);
 
