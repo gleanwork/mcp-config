@@ -18,8 +18,8 @@ import {
 
 describe('@gleanwork/mcp-config', () => {
   describe('GLEAN_REGISTRY_OPTIONS', () => {
-    it('has correct serverPackage', () => {
-      expect(GLEAN_REGISTRY_OPTIONS.serverPackage).toBe('@gleanwork/local-mcp-server');
+    it('does not define a serverPackage (remote-only registry)', () => {
+      expect(GLEAN_REGISTRY_OPTIONS.serverPackage).toBeUndefined();
     });
 
     it('has commandBuilder for http transport', () => {
@@ -46,26 +46,19 @@ describe('@gleanwork/mcp-config', () => {
       );
     });
 
-    it('has commandBuilder for stdio transport', () => {
-      expect(GLEAN_REGISTRY_OPTIONS.commandBuilder?.stdio).toBeDefined();
-
-      const command = GLEAN_REGISTRY_OPTIONS.commandBuilder?.stdio?.('cursor', {
-        transport: 'stdio',
-        env: { GLEAN_INSTANCE: 'my-company', GLEAN_API_TOKEN: 'token' },
+    it('commandBuilder http pins the CLI version when cliVersion is provided', () => {
+      const command = GLEAN_REGISTRY_OPTIONS.commandBuilder?.http?.('cursor', {
+        transport: 'http',
+        serverUrl: 'https://example.com/mcp/default',
+        cliVersion: '3.1.0',
       });
       expect(command).toBe(
-        'npx -y @gleanwork/configure-mcp-server local --client cursor --env GLEAN_INSTANCE=my-company --env GLEAN_API_TOKEN=token'
+        'npx -y @gleanwork/configure-mcp-server@3.1.0 remote --url https://example.com/mcp/default --client cursor'
       );
     });
 
-    it('commandBuilder stdio works with GLEAN_SERVER_URL env', () => {
-      const command = GLEAN_REGISTRY_OPTIONS.commandBuilder?.stdio?.('cursor', {
-        transport: 'stdio',
-        env: { GLEAN_SERVER_URL: 'https://my-company-be.glean.com', GLEAN_API_TOKEN: 'token' },
-      });
-      expect(command).toBe(
-        'npx -y @gleanwork/configure-mcp-server local --client cursor --env GLEAN_SERVER_URL=https://my-company-be.glean.com --env GLEAN_API_TOKEN=token'
-      );
+    it('does not define a stdio commandBuilder', () => {
+      expect(GLEAN_REGISTRY_OPTIONS.commandBuilder?.stdio).toBeUndefined();
     });
 
     it('commandBuilder http returns null when no serverUrl', () => {
@@ -76,9 +69,6 @@ describe('@gleanwork/mcp-config', () => {
     });
 
     it('serverNameBuilder delegates to buildGleanServerName', () => {
-      expect(GLEAN_REGISTRY_OPTIONS.serverNameBuilder?.({ transport: 'stdio' })).toBe(
-        'glean_local'
-      );
       expect(GLEAN_REGISTRY_OPTIONS.serverNameBuilder?.({ transport: 'http' })).toBe(
         'glean_default'
       );
@@ -199,6 +189,11 @@ describe('@gleanwork/mcp-config', () => {
       const registry = createGleanRegistry();
       const builder = registry.createBuilder('cursor');
       expect(builder).toBeDefined();
+    });
+
+    it('reports no local server (remote-only registry)', () => {
+      const registry = createGleanRegistry();
+      expect(registry.hasLocalServer()).toBe(false);
     });
   });
 

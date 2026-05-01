@@ -1,10 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  createGleanRegistry,
-  createGleanEnv,
-  createGleanHeaders,
-  buildGleanServerUrl,
-} from '../../src/index.js';
+import { createGleanRegistry, createGleanHeaders, buildGleanServerUrl } from '../../src/index.js';
 
 /**
  * Claude Code: native CLI client
@@ -15,59 +10,6 @@ describe('Client: claude-code', () => {
   const builder = registry.createBuilder('claude-code');
 
   describe('buildConfiguration', () => {
-    describe('stdio transport', () => {
-      it('with token auth', () => {
-        const config = builder.buildConfiguration({
-          transport: 'stdio',
-          env: createGleanEnv('my-company', 'my-api-token'),
-        });
-
-        expect(config).toMatchInlineSnapshot(`
-          {
-            "mcpServers": {
-              "glean_local": {
-                "args": [
-                  "-y",
-                  "@gleanwork/local-mcp-server",
-                ],
-                "command": "npx",
-                "env": {
-                  "GLEAN_API_TOKEN": "my-api-token",
-                  "GLEAN_INSTANCE": "my-company",
-                },
-                "type": "stdio",
-              },
-            },
-          }
-        `);
-      });
-
-      it('with OAuth (instance only, no token)', () => {
-        const config = builder.buildConfiguration({
-          transport: 'stdio',
-          env: createGleanEnv('my-company'),
-        });
-
-        expect(config).toMatchInlineSnapshot(`
-          {
-            "mcpServers": {
-              "glean_local": {
-                "args": [
-                  "-y",
-                  "@gleanwork/local-mcp-server",
-                ],
-                "command": "npx",
-                "env": {
-                  "GLEAN_INSTANCE": "my-company",
-                },
-                "type": "stdio",
-              },
-            },
-          }
-        `);
-      });
-    });
-
     describe('http transport', () => {
       it('with token auth', () => {
         const config = builder.buildConfiguration({
@@ -112,30 +54,6 @@ describe('Client: claude-code', () => {
   });
 
   describe('buildCommand (native CLI)', () => {
-    describe('stdio transport', () => {
-      it('with token auth', () => {
-        const command = builder.buildCommand({
-          transport: 'stdio',
-          env: createGleanEnv('my-company', 'my-api-token'),
-        });
-
-        expect(command).toMatchInlineSnapshot(
-          `"claude mcp add glean_local --scope user --env GLEAN_INSTANCE=my-company --env GLEAN_API_TOKEN=my-api-token -- npx -y @gleanwork/local-mcp-server"`
-        );
-      });
-
-      it('with OAuth (instance only, no token)', () => {
-        const command = builder.buildCommand({
-          transport: 'stdio',
-          env: createGleanEnv('my-company'),
-        });
-
-        expect(command).toMatchInlineSnapshot(
-          `"claude mcp add glean_local --scope user --env GLEAN_INSTANCE=my-company -- npx -y @gleanwork/local-mcp-server"`
-        );
-      });
-    });
-
     describe('http transport', () => {
       it('with token auth', () => {
         const command = builder.buildCommand({

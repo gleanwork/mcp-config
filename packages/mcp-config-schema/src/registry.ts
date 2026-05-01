@@ -252,6 +252,20 @@ export class MCPConfigRegistry {
   }
 
   /**
+   * Determines if this registry advertises a local (stdio) server package.
+   *
+   * A registry is "local-capable" when it defines {@link RegistryOptions.serverPackage},
+   * which identifies the npm package the stdio builder spawns. When absent, stdio
+   * config generation will throw. Consumers (e.g., installer CLIs) can use this to
+   * emit a friendly message before attempting stdio installation.
+   *
+   * @returns true if a serverPackage is configured for this registry
+   */
+  hasLocalServer(): boolean {
+    return typeof this.options.serverPackage === 'string' && this.options.serverPackage.length > 0;
+  }
+
+  /**
    * Create a configuration builder for a specific client.
    *
    * The returned builder is typed based on the client ID:

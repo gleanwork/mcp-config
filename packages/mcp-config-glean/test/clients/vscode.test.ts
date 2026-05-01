@@ -1,10 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  createGleanRegistry,
-  createGleanEnv,
-  createGleanHeaders,
-  buildGleanServerUrl,
-} from '../../src/index.js';
+import { createGleanRegistry, createGleanHeaders, buildGleanServerUrl } from '../../src/index.js';
 
 /**
  * VS Code: native CLI client
@@ -15,59 +10,6 @@ describe('Client: vscode', () => {
   const builder = registry.createBuilder('vscode');
 
   describe('buildConfiguration', () => {
-    describe('stdio transport', () => {
-      it('with token auth', () => {
-        const config = builder.buildConfiguration({
-          transport: 'stdio',
-          env: createGleanEnv('my-company', 'my-api-token'),
-        });
-
-        expect(config).toMatchInlineSnapshot(`
-          {
-            "servers": {
-              "glean_local": {
-                "args": [
-                  "-y",
-                  "@gleanwork/local-mcp-server",
-                ],
-                "command": "npx",
-                "env": {
-                  "GLEAN_API_TOKEN": "my-api-token",
-                  "GLEAN_INSTANCE": "my-company",
-                },
-                "type": "stdio",
-              },
-            },
-          }
-        `);
-      });
-
-      it('with OAuth (instance only, no token)', () => {
-        const config = builder.buildConfiguration({
-          transport: 'stdio',
-          env: createGleanEnv('my-company'),
-        });
-
-        expect(config).toMatchInlineSnapshot(`
-          {
-            "servers": {
-              "glean_local": {
-                "args": [
-                  "-y",
-                  "@gleanwork/local-mcp-server",
-                ],
-                "command": "npx",
-                "env": {
-                  "GLEAN_INSTANCE": "my-company",
-                },
-                "type": "stdio",
-              },
-            },
-          }
-        `);
-      });
-    });
-
     describe('http transport', () => {
       it('with token auth', () => {
         const config = builder.buildConfiguration({
@@ -112,30 +54,6 @@ describe('Client: vscode', () => {
   });
 
   describe('buildCommand (native CLI)', () => {
-    describe('stdio transport', () => {
-      it('with token auth', () => {
-        const command = builder.buildCommand({
-          transport: 'stdio',
-          env: createGleanEnv('my-company', 'my-api-token'),
-        });
-
-        expect(command).toMatchInlineSnapshot(
-          `"code --add-mcp '{"name":"glean_local","type":"stdio","command":"npx","args":["-y","@gleanwork/local-mcp-server"],"env":{"GLEAN_INSTANCE":"my-company","GLEAN_API_TOKEN":"my-api-token"}}'"`
-        );
-      });
-
-      it('with OAuth (instance only, no token)', () => {
-        const command = builder.buildCommand({
-          transport: 'stdio',
-          env: createGleanEnv('my-company'),
-        });
-
-        expect(command).toMatchInlineSnapshot(
-          `"code --add-mcp '{"name":"glean_local","type":"stdio","command":"npx","args":["-y","@gleanwork/local-mcp-server"],"env":{"GLEAN_INSTANCE":"my-company"}}'"`
-        );
-      });
-    });
-
     describe('http transport', () => {
       it('with token auth', () => {
         const command = builder.buildCommand({

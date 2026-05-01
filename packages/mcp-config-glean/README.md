@@ -15,20 +15,13 @@ npm install @gleanwork/mcp-config-glean
 ```typescript
 import {
   createGleanRegistry,
-  createGleanServerUrlEnv,
   createGleanHeaders,
   buildGleanMcpUrl,
 } from '@gleanwork/mcp-config-glean';
 
-// Create a pre-configured registry
+// Create a pre-configured registry (remote / HTTP only)
 const registry = createGleanRegistry();
 const builder = registry.createBuilder('cursor');
-
-// Generate stdio configuration
-const stdioConfig = builder.buildConfiguration({
-  transport: 'stdio',
-  env: createGleanServerUrlEnv('https://my-company-be.glean.com', 'my-api-token'),
-});
 
 // Generate HTTP configuration
 const httpConfig = builder.buildConfiguration({
@@ -36,6 +29,15 @@ const httpConfig = builder.buildConfiguration({
   serverUrl: buildGleanMcpUrl('https://my-company-be.glean.com'),
   headers: createGleanHeaders('my-api-token'),
 });
+
+// Pin the CLI version in generated install commands
+const command = builder.buildCommand({
+  transport: 'http',
+  serverUrl: buildGleanMcpUrl('https://my-company-be.glean.com'),
+  headers: createGleanHeaders('my-api-token'),
+  cliVersion: '3.1.0',
+});
+// -> `npx -y @gleanwork/configure-mcp-server@3.1.0 remote --url ... --client cursor --token ...`
 ```
 
 ### Available Exports
@@ -45,8 +47,7 @@ const httpConfig = builder.buildConfiguration({
 ```typescript
 import { GLEAN_REGISTRY_OPTIONS, GLEAN_ENV } from '@gleanwork/mcp-config-glean';
 
-// Registry options for Glean MCP server
-GLEAN_REGISTRY_OPTIONS.serverPackage     // '@gleanwork/local-mcp-server'
+// Registry options for Glean's remote MCP server (HTTP only)
 GLEAN_REGISTRY_OPTIONS.tokenEnvVarName   // 'GLEAN_API_TOKEN'
 GLEAN_REGISTRY_OPTIONS.commandBuilder    // Functions to generate CLI commands
 GLEAN_REGISTRY_OPTIONS.serverNameBuilder // Callback that prefixes server names with glean_
@@ -84,7 +85,6 @@ normalizeGleanProductName();              // 'glean'
 normalizeGleanProductName('Acme Corp');   // 'acme_corp'
 
 // Build server names with glean_ prefix
-buildGleanServerName({ transport: 'stdio' });                              // 'glean_local'
 buildGleanServerName({ transport: 'http' });                               // 'glean_default'
 buildGleanServerName({ transport: 'http', serverUrl: '.../mcp/analytics' }); // 'glean_analytics'
 buildGleanServerName({ serverName: 'custom' });                            // 'glean_custom'
