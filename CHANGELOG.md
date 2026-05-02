@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 > **Note:** This monorepo was created by consolidating `@gleanwork/mcp-config-schema` and `@gleanwork/mcp-config` (now `@gleanwork/mcp-config-glean`). Historical entries below v4.0.0 refer to `@gleanwork/mcp-config-schema` only.
 
+## v5.0.0 (2026-05-02)
+
+#### :boom: Breaking Change
+
+- `mcp-config-glean`, `mcp-config-schema`
+  - [#108](https://github.com/gleanwork/mcp-config/pull/108) feat(glean)!: drop local MCP path; add cliVersion pin support ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+#### Committers: 2
+
+- Steve Calvert ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+- Travis Hoover ([@travis-hoover-glean](https://github.com/travis-hoover-glean))
+
+
+
 ## v4.3.0 (2026-03-05)
 
 ## v4.2.0 (2026-02-23)
