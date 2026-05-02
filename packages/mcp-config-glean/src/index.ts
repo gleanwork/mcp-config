@@ -29,18 +29,24 @@ export const GLEAN_ENV = {
 } as const;
 
 /**
- * Glean-specific registry options for stdio transport.
+ * Glean-specific registry options.
+ *
+ * This registry only supports the remote (HTTP) transport. Local/stdio
+ * installation is intentionally not offered: `serverPackage` is omitted so
+ * that `buildConfiguration({ transport: 'stdio' })` throws, and the stdio
+ * command builder is not registered so `buildCommand` returns null for stdio.
  */
 export const GLEAN_REGISTRY_OPTIONS: RegistryOptions = {
-  serverPackage: '@gleanwork/local-mcp-server',
   tokenEnvVarName: GLEAN_ENV.API_TOKEN,
   commandBuilder: {
     http: (clientId, options) => {
       if (!options.serverUrl) return null;
 
-      let command = `npx -y @gleanwork/configure-mcp-server remote --url ${options.serverUrl} --client ${clientId}`;
+      const pkg = options.cliVersion
+        ? `@gleanwork/configure-mcp-server@${options.cliVersion}`
+        : '@gleanwork/configure-mcp-server';
+      let command = `npx -y ${pkg} remote --url ${options.serverUrl} --client ${clientId}`;
 
-      // Extract token from Authorization header if present
       const authHeader = options.headers?.['Authorization'];
       if (authHeader?.startsWith('Bearer ')) {
         const token = authHeader.slice(7);
@@ -49,15 +55,8 @@ export const GLEAN_REGISTRY_OPTIONS: RegistryOptions = {
 
       return command;
     },
-    stdio: (clientId, options) => {
-      const envFlags = Object.entries(options.env || {})
-        .map(([k, v]) => `--env ${k}=${v}`)
-        .join(' ');
-      return `npx -y @gleanwork/configure-mcp-server local --client ${clientId}${envFlags ? ` ${envFlags}` : ''}`;
-    },
   },
   serverNameBuilder: (options) => {
-    // Lazily call buildGleanServerName defined below
     return buildGleanServerName(options);
   },
 };
@@ -95,17 +94,14 @@ export function createGleanUrlEnv(url: string, apiToken?: string): Record<string
 /**
  * Helper to create Glean environment variables using a server URL.
  *
+ * Populates the env vars consumed by any Glean-aware MCP server or CLI that
+ * reads `GLEAN_SERVER_URL` / `GLEAN_API_TOKEN` (e.g., a self-hosted stdio
+ * server). This package's own registry is remote-only and does not consume
+ * these env vars.
+ *
  * @param serverUrl - Full Glean server URL (e.g., 'https://my-company-be.glean.com')
  * @param apiToken - Optional API token
- * @returns Environment variables object for use in MCPConnectionOptions.env
- *
- * @example
- * ```typescript
- * const config = builder.buildConfiguration({
- *   transport: 'stdio',
- *   env: createGleanServerUrlEnv('https://my-company-be.glean.com', 'my-api-token'),
- * });
- * ```
+ * @returns Env-var object suitable for a child process' environment
  */
 export function createGleanServerUrlEnv(
   serverUrl: string,
@@ -139,22 +135,15 @@ export function createGleanHeaders(apiToken: string): Record<string, string> {
 }
 
 /**
- * Create an MCPConfigRegistry pre-configured with Glean defaults.
+ * Create an MCPConfigRegistry pre-configured with Glean defaults (remote/HTTP only).
  *
- * @returns MCPConfigRegistry configured for Glean stdio transport
+ * @returns MCPConfigRegistry configured for Glean's remote MCP server
  *
  * @example
  * ```typescript
  * const registry = createGleanRegistry();
  * const builder = registry.createBuilder('cursor');
  *
- * // For stdio transport
- * const config = builder.buildConfiguration({
- *   transport: 'stdio',
- *   env: createGleanServerUrlEnv('https://my-company-be.glean.com', 'my-api-token'),
- * });
- *
- * // For HTTP transport
  * const httpConfig = builder.buildConfiguration({
  *   transport: 'http',
  *   serverUrl: buildGleanMcpUrl('https://my-company-be.glean.com'),
@@ -247,22 +236,24 @@ export function normalizeGleanProductName(productName?: string): string {
  * Build a Glean-prefixed server name for MCP configurations.
  * Wraps the vendor-neutral buildMcpServerName with Glean-specific prefixing.
  *
+ * This function keeps the `'stdio' | 'http'` union on `transport` to remain
+ * compatible with {@link ServerNameBuilderCallback}, but the Glean registry
+ * itself no longer emits stdio invocations — stdio callers will still get a
+ * sensible `{product}_local` name if invoked directly.
+ *
  * Rules:
  * - If explicit serverName is provided and already has the product prefix, use it directly
  * - If explicit serverName is provided without prefix, add the product prefix
  * - If agents flag is set, return '{product}_agents'
- * - For stdio transport: '{product}_local'
  * - For http transport with URL: '{product}_{extracted-name}'
  * - Fallback: '{product}'
  *
  * @param options - Server name options
- * @returns Prefixed server name (e.g., 'glean_local', 'acme_analytics')
+ * @returns Prefixed server name (e.g., 'glean_default', 'acme_analytics')
  *
  * @example
  * ```typescript
- * buildGleanServerName({ transport: 'stdio' }); // 'glean_local'
  * buildGleanServerName({ transport: 'http', serverUrl: '.../mcp/analytics' }); // 'glean_analytics'
- * buildGleanServerName({ transport: 'stdio', productName: 'Acme' }); // 'acme_local'
  * buildGleanServerName({ agents: true }); // 'glean_agents'
  * buildGleanServerName({ serverName: 'custom' }); // 'glean_custom'
  * ```
@@ -276,9 +267,7 @@ export function buildGleanServerName(options: {
 }): string {
   const productPrefix = normalizeGleanProductName(options.productName);
 
-  // Handle explicit serverName
   if (options.serverName) {
-    // If it already has the correct prefix, use it directly
     if (
       options.serverName === productPrefix ||
       options.serverName.startsWith(`${productPrefix}_`)
@@ -288,18 +277,15 @@ export function buildGleanServerName(options: {
     return `${productPrefix}_${options.serverName}`;
   }
 
-  // Handle agents mode
   if (options.agents) {
     return `${productPrefix}_agents`;
   }
 
-  // Get base name from vendor-neutral function
   const baseName = buildMcpServerNameBase({
     transport: options.transport,
     serverUrl: options.serverUrl,
   });
 
-  // If baseName is 'default' and we have no specific info, just return the product prefix
   if (baseName === 'default' && !options.transport && !options.serverUrl) {
     return productPrefix;
   }

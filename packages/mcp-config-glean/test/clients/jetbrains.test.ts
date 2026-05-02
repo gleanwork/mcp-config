@@ -1,10 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  createGleanRegistry,
-  createGleanEnv,
-  createGleanHeaders,
-  buildGleanServerUrl,
-} from '../../src/index.js';
+import { createGleanRegistry, createGleanHeaders, buildGleanServerUrl } from '../../src/index.js';
 
 /**
  * JetBrains: IDE-managed client
@@ -16,59 +11,6 @@ describe('Client: jetbrains', () => {
   const builder = registry.createBuilder('jetbrains');
 
   describe('buildConfiguration', () => {
-    describe('stdio transport', () => {
-      it('with token auth', () => {
-        const config = builder.buildConfiguration({
-          transport: 'stdio',
-          env: createGleanEnv('my-company', 'my-api-token'),
-        });
-
-        expect(config).toMatchInlineSnapshot(`
-          {
-            "mcpServers": {
-              "glean_local": {
-                "args": [
-                  "-y",
-                  "@gleanwork/local-mcp-server",
-                ],
-                "command": "npx",
-                "env": {
-                  "GLEAN_API_TOKEN": "my-api-token",
-                  "GLEAN_INSTANCE": "my-company",
-                },
-                "type": "stdio",
-              },
-            },
-          }
-        `);
-      });
-
-      it('with OAuth (instance only, no token)', () => {
-        const config = builder.buildConfiguration({
-          transport: 'stdio',
-          env: createGleanEnv('my-company'),
-        });
-
-        expect(config).toMatchInlineSnapshot(`
-          {
-            "mcpServers": {
-              "glean_local": {
-                "args": [
-                  "-y",
-                  "@gleanwork/local-mcp-server",
-                ],
-                "command": "npx",
-                "env": {
-                  "GLEAN_INSTANCE": "my-company",
-                },
-                "type": "stdio",
-              },
-            },
-          }
-        `);
-      });
-    });
-
     describe('http transport', () => {
       it('with token auth', () => {
         const config = builder.buildConfiguration({
@@ -113,26 +55,6 @@ describe('Client: jetbrains', () => {
   });
 
   describe('buildCommand', () => {
-    describe('stdio transport', () => {
-      it('with token auth returns null', () => {
-        const command = builder.buildCommand({
-          transport: 'stdio',
-          env: createGleanEnv('my-company', 'my-api-token'),
-        });
-
-        expect(command).toMatchInlineSnapshot(`null`);
-      });
-
-      it('with OAuth returns null', () => {
-        const command = builder.buildCommand({
-          transport: 'stdio',
-          env: createGleanEnv('my-company'),
-        });
-
-        expect(command).toMatchInlineSnapshot(`null`);
-      });
-    });
-
     describe('http transport', () => {
       it('with token auth returns null', () => {
         const command = builder.buildCommand({

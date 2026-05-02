@@ -99,6 +99,7 @@ export const MCPConnectionOptionsSchema = z
     env: z.record(z.string(), z.string()).optional(), // Environment variables for stdio server
     // Common options
     serverName: z.string().optional(),
+    cliVersion: z.string().optional(), // Version tag to pin for registry-provided CLI install commands (e.g., '3.1.0')
   })
   .merge(BuildOptionsSchema);
 
