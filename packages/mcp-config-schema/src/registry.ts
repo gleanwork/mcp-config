@@ -32,6 +32,7 @@ import windsurfConfig from '../configs/windsurf.json';
 import junieConfig from '../configs/junie.json';
 import jetbrainsConfig from '../configs/jetbrains.json';
 import geminiConfig from '../configs/gemini.json';
+import linearConfig from '../configs/linear.json';
 import opencodeConfig from '../configs/opencode.json';
 import antigravityConfig from '../configs/antigravity.json';
 const allConfigs = [
@@ -49,6 +50,7 @@ const allConfigs = [
   junieConfig,
   jetbrainsConfig,
   geminiConfig,
+  linearConfig,
   opencodeConfig,
 ];
 
