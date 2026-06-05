@@ -407,6 +407,25 @@ npm run generate:docs
 - **[CLIENTS.md](CLIENTS.md)** - Comprehensive client compatibility matrix with detailed configuration examples
 - **[API Reference](#api-reference)** - Complete API documentation
 
+## Icons
+
+Each client ships an SVG host icon, available as an inline string (no bundler/loader setup) and as a raw file under `icons/`:
+
+```typescript
+import { CLIENT, CLIENT_ICONS, getClientIcon } from '@gleanwork/mcp-config-schema';
+
+getClientIcon(CLIENT.CURSOR); // '<svg …>…</svg>' (or undefined if none)
+
+// React (icons inherit text color via the surrounding `color`)
+<span style={{ color: '#111' }} dangerouslySetInnerHTML={{ __html: getClientIcon(clientId) ?? '' }} />
+```
+
+Icons are optional per client; `getClientIcon` returns `undefined` when one isn't shipped. Internal SVG ids are namespaced per icon, so multiple icons can be inlined on the same page without collisions. See [`icons/README.md`](icons/README.md) to add or update one.
+
+## Trademarks
+
+Product names and the client icons under `icons/` are trademarks of their respective owners. They are included only to identify the MCP host applications this package supports (nominative use); their inclusion does not imply affiliation with or endorsement by those owners. Brand icons are sourced from [svgl](https://svgl.app), [Simple Icons](https://simpleicons.org) (CC0), and official brand assets.
+
 ## License
 
 MIT - See [LICENSE](LICENSE) file for details

@@ -1,0 +1,18 @@
+{
+  "antigravity": "https://svgl.app/library/antigravity.svg",
+  "antigravity-cli": "https://svgl.app/library/antigravity.svg",
+  "chatgpt": "https://svgl.app/library/openai.svg",
+  "claude-code": "https://svgl.app/library/claude-ai-icon.svg",
+  "claude-desktop": "https://svgl.app/library/claude-ai-icon.svg",
+  "claude-teams-enterprise": "https://svgl.app/library/claude-ai-icon.svg",
+  "codex": "https://svgl.app/library/codex_light.svg",
+  "cursor": "https://svgl.app/library/cursor_light.svg",
+  "cursor-agent": "https://svgl.app/library/cursor_light.svg",
+  "gemini": "https://svgl.app/library/gemini.svg",
+  "goose": "https://github.com/block/goose",
+  "jetbrains": "https://svgl.app/library/jetbrains.svg",
+  "junie": "https://www.jetbrains.com/junie/img/junie-icon.svg",
+  "opencode": "https://svgl.app/library/opencode.svg",
+  "vscode": "https://svgl.app/library/vscode.svg",
+  "windsurf": "https://svgl.app/library/windsurf-light.svg"
+}

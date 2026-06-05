@@ -6,26 +6,26 @@ This document provides a comprehensive overview of all supported MCP clients, th
 
 | Client | Configuration | Connection Type | Auth Support | Requires mcp-remote? | Platforms |
 |---|---|---|---|---|---|
-| **Antigravity** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
-| **Antigravity CLI** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
-| **ChatGPT** | Managed | HTTP only | Token, OAuth DCR | No | Web-based |
-| **Claude Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
-| **Claude for Desktop** | User-configurable | stdio only | None | Yes (for HTTP) | macOS, Windows, Linux |
-| **Claude for Teams/Enterprise** | Managed | HTTP only | Token, OAuth DCR | No | Organization-managed |
-| **Codex** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
-| **Cursor** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
-| **Cursor Agent** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
-| **Gemini CLI** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
-| **Goose** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
-| **JetBrains AI Assistant** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
-| **Junie (JetBrains)** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
-| **OpenCode** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
-| **VS Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
-| **Windsurf** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/antigravity.svg" alt="" width="20" height="20" /> **Antigravity** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/antigravity-cli.svg" alt="" width="20" height="20" /> **Antigravity CLI** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/chatgpt.svg" alt="" width="20" height="20" /> **ChatGPT** | Managed | HTTP only | Token, OAuth DCR | No | Web-based |
+| <img src="icons/claude-code.svg" alt="" width="20" height="20" /> **Claude Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/claude-desktop.svg" alt="" width="20" height="20" /> **Claude for Desktop** | User-configurable | stdio only | None | Yes (for HTTP) | macOS, Windows, Linux |
+| <img src="icons/claude-teams-enterprise.svg" alt="" width="20" height="20" /> **Claude for Teams/Enterprise** | Managed | HTTP only | Token, OAuth DCR | No | Organization-managed |
+| <img src="icons/codex.svg" alt="" width="20" height="20" /> **Codex** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/cursor.svg" alt="" width="20" height="20" /> **Cursor** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/cursor-agent.svg" alt="" width="20" height="20" /> **Cursor Agent** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/gemini.svg" alt="" width="20" height="20" /> **Gemini CLI** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/goose.svg" alt="" width="20" height="20" /> **Goose** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/jetbrains.svg" alt="" width="20" height="20" /> **JetBrains AI Assistant** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
+| <img src="icons/junie.svg" alt="" width="20" height="20" /> **Junie (JetBrains)** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
+| <img src="icons/opencode.svg" alt="" width="20" height="20" /> **OpenCode** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/vscode.svg" alt="" width="20" height="20" /> **VS Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/windsurf.svg" alt="" width="20" height="20" /> **Windsurf** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 
 ## Detailed Client Information
 
-### Antigravity
+### <img src="icons/antigravity.svg" alt="" width="24" height="24" /> Antigravity
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -118,7 +118,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 
 ---
 
-### Antigravity CLI
+### <img src="icons/antigravity-cli.svg" alt="" width="24" height="24" /> Antigravity CLI
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -211,7 +211,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 
 ---
 
-### ChatGPT
+### <img src="icons/chatgpt.svg" alt="" width="24" height="24" /> ChatGPT
 
 - **Configuration**: Centrally managed
 - **Connection Type**: HTTP only (managed)
@@ -255,7 +255,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 
 ---
 
-### Claude Code
+### <img src="icons/claude-code.svg" alt="" width="24" height="24" /> Claude Code
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -353,7 +353,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 
 ---
 
-### Claude for Desktop
+### <img src="icons/claude-desktop.svg" alt="" width="24" height="24" /> Claude for Desktop
 
 - **Configuration**: User-configurable
 - **Connection Type**: stdio only (requires mcp-remote for HTTP servers)
@@ -447,7 +447,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 
 ---
 
-### Claude for Teams/Enterprise
+### <img src="icons/claude-teams-enterprise.svg" alt="" width="24" height="24" /> Claude for Teams/Enterprise
 
 - **Configuration**: Centrally managed
 - **Connection Type**: HTTP only (managed)
@@ -488,7 +488,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 
 ---
 
-### Codex
+### <img src="icons/codex.svg" alt="" width="24" height="24" /> Codex
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -568,7 +568,7 @@ EXAMPLE_API_KEY = "your-api-key"
 
 ---
 
-### Cursor
+### <img src="icons/cursor.svg" alt="" width="24" height="24" /> Cursor
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -676,7 +676,7 @@ EXAMPLE_API_KEY = "your-api-key"
 
 ---
 
-### Cursor Agent
+### <img src="icons/cursor-agent.svg" alt="" width="24" height="24" /> Cursor Agent
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -776,7 +776,7 @@ EXAMPLE_API_KEY = "your-api-key"
 
 ---
 
-### Gemini CLI
+### <img src="icons/gemini.svg" alt="" width="24" height="24" /> Gemini CLI
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -869,7 +869,7 @@ EXAMPLE_API_KEY = "your-api-key"
 
 ---
 
-### Goose
+### <img src="icons/goose.svg" alt="" width="24" height="24" /> Goose
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -972,7 +972,7 @@ extensions:
 
 ---
 
-### JetBrains AI Assistant
+### <img src="icons/jetbrains.svg" alt="" width="24" height="24" /> JetBrains AI Assistant
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -1058,7 +1058,7 @@ extensions:
 
 ---
 
-### Junie (JetBrains)
+### <img src="icons/junie.svg" alt="" width="24" height="24" /> Junie (JetBrains)
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -1147,7 +1147,7 @@ extensions:
 
 ---
 
-### OpenCode
+### <img src="icons/opencode.svg" alt="" width="24" height="24" /> OpenCode
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -1245,7 +1245,7 @@ extensions:
 
 ---
 
-### VS Code
+### <img src="icons/vscode.svg" alt="" width="24" height="24" /> VS Code
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -1361,7 +1361,7 @@ extensions:
 
 ---
 
-### Windsurf
+### <img src="icons/windsurf.svg" alt="" width="24" height="24" /> Windsurf
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support

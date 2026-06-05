@@ -17,6 +17,7 @@
   "license": "MIT",
   "author": "Glean",
   "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -27,7 +28,8 @@
       "types": "./dist/browser.d.ts",
       "import": "./dist/browser.js",
       "require": "./dist/browser.cjs"
-    }
+    },
+    "./icons/*.svg": "./icons/*.svg"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -35,6 +37,7 @@
   "files": [
     "dist",
     "configs",
+    "icons",
     "LICENSE"
   ],
   "scripts": {
@@ -49,8 +52,9 @@
     "generate:clients": "tsx scripts/generate-clients.ts && npx prettier --write src/clients.generated.ts",
     "generate:examples": "tsx scripts/generate-examples.ts",
     "generate:clients-md": "tsx scripts/generate-clients-md.ts",
+    "generate:icons": "tsx scripts/generate-icons.ts && npx prettier --write src/icons.generated.ts",
     "generate:docs": "npm run generate:examples && npm run generate:clients-md && npx markdown-code sync CLIENTS.md",
-    "generate": "npm run generate:clients && npm run generate:docs",
+    "generate": "npm run generate:clients && npm run generate:icons && npm run generate:docs",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

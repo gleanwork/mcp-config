@@ -6,6 +6,7 @@
 
 import { MCPConfigRegistry } from '../src/registry.js';
 import { MCPClientConfig } from '../src/types.js';
+import { CLIENT_ICONS } from '../src/icons.generated.js';
 import { writeFileSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -15,6 +16,14 @@ const __dirname = dirname(__filename);
 
 const registry = new MCPConfigRegistry();
 const clients = registry.getAllConfigs().sort((a, b) => a.displayName.localeCompare(b.displayName));
+
+/** Inline `<img>` for a client's host icon (relative to CLIENTS.md), or '' if none. */
+function iconImg(clientId: string, size = 20): string {
+  const hasIcon = Object.prototype.hasOwnProperty.call(CLIENT_ICONS, clientId);
+  return hasIcon
+    ? `<img src="icons/${clientId}.svg" alt="" width="${size}" height="${size}" /> `
+    : '';
+}
 
 // =============================================================================
 // Markdown Helpers
@@ -182,7 +191,7 @@ function generateQuickReference(): string {
     const platforms = getPlatformsDisplay(client);
 
     return [
-      `**${client.displayName}**`,
+      `${iconImg(client.id)}**${client.displayName}**`,
       configuration,
       connectionType,
       authSupport,
@@ -198,7 +207,7 @@ function generateClientSection(client: MCPClientConfig): string {
   const parts: string[] = [];
 
   // Header
-  parts.push(`### ${client.displayName}`);
+  parts.push(`### ${iconImg(client.id, 24)}${client.displayName}`);
   parts.push('');
 
   // Basic info as bullet list
