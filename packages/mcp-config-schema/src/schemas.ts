@@ -1,23 +1,7 @@
 import { z } from 'zod';
+import { CLIENT_IDS } from './clients.generated.js';
 export const PlatformSchema = z.enum(['darwin', 'linux', 'win32']);
-export const ClientIdSchema = z.enum([
-  'antigravity',
-  'antigravity-cli',
-  'claude-code',
-  'vscode',
-  'claude-desktop',
-  'claude-teams-enterprise',
-  'cursor',
-  'cursor-agent',
-  'goose',
-  'windsurf',
-  'chatgpt',
-  'codex',
-  'junie',
-  'jetbrains',
-  'gemini',
-  'opencode',
-]);
+export const ClientIdSchema = z.enum(CLIENT_IDS);
 
 export const ServerTypeSchema = z.enum(['http', 'stdio']);
 

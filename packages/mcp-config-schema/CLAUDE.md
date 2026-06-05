@@ -134,10 +134,11 @@ Configuration files are written to client-specific locations:
 
 ### Adding a New Client
 
-1. Create config JSON in `/configs/`
-2. Add import to `src/registry.ts:3-10`
-3. Add to `allConfigs` array (src/registry.ts:11)
-4. Update TypeScript types if needed
+1. Create config JSON in `/configs/`. **The filename must equal the `id`.**
+2. Run `npm run generate` (regenerates `src/clients.generated.ts`, `examples/`, and `CLIENTS.md`).
+3. If custom builder logic is needed, add a class in `src/builders/` and register it in `registry.ts`.
+
+`CLIENT`, `CLIENT_DISPLAY_NAME`, the `ClientId` enum (`ClientIdSchema`), and the registry's `allClientConfigs` list are **generated from `configs/*.json`** by `scripts/generate-clients.ts` — do not hand-edit `src/clients.generated.ts`. `test/clients-generated.test.ts` fails if it drifts.
 
 ### Testing Configurations
 

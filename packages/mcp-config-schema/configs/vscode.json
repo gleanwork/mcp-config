@@ -1,7 +1,7 @@
 {
   "id": "vscode",
   "name": "vscode",
-  "displayName": "Visual Studio Code",
+  "displayName": "VS Code",
   "description": "VS Code with native HTTP support",
   "userConfigurable": true,
   "documentationUrl": "https://code.visualstudio.com/docs/copilot/customization/mcp-servers",

@@ -19,40 +19,7 @@ import {
   GeminiConfigBuilder,
   OpenCodeConfigBuilder,
 } from './builders/index.js';
-import chatgptConfig from '../configs/chatgpt.json';
-import claudeCodeConfig from '../configs/claude-code.json';
-import claudeDesktopConfig from '../configs/claude-desktop.json';
-import claudeTeamsEnterpriseConfig from '../configs/claude-teams-enterprise.json';
-import codexConfig from '../configs/codex.json';
-import cursorConfig from '../configs/cursor.json';
-import cursorAgentConfig from '../configs/cursor-agent.json';
-import gooseConfig from '../configs/goose.json';
-import vscodeConfig from '../configs/vscode.json';
-import windsurfConfig from '../configs/windsurf.json';
-import junieConfig from '../configs/junie.json';
-import jetbrainsConfig from '../configs/jetbrains.json';
-import geminiConfig from '../configs/gemini.json';
-import opencodeConfig from '../configs/opencode.json';
-import antigravityConfig from '../configs/antigravity.json';
-import antigravityCliConfig from '../configs/antigravity-cli.json';
-const allConfigs = [
-  antigravityConfig,
-  antigravityCliConfig,
-  chatgptConfig,
-  claudeCodeConfig,
-  claudeDesktopConfig,
-  claudeTeamsEnterpriseConfig,
-  codexConfig,
-  cursorConfig,
-  cursorAgentConfig,
-  gooseConfig,
-  vscodeConfig,
-  windsurfConfig,
-  junieConfig,
-  jetbrainsConfig,
-  geminiConfig,
-  opencodeConfig,
-];
+import { allClientConfigs as allConfigs } from './clients.generated.js';
 
 export class MCPConfigRegistry {
   private configs: Map<ClientId, MCPClientConfig> = new Map();

@@ -84,11 +84,11 @@ Each MCP client (Cursor, VS Code, Claude Desktop, etc.) has a JSON config in `pa
 
 ## Adding a New Client
 
-1. Create config JSON in `packages/mcp-config-schema/configs/`
-2. Add import to `packages/mcp-config-schema/src/registry.ts`
-3. Add to `allConfigs` array
-4. If custom builder logic needed, create class in `src/builders/` extending `BaseConfigBuilder`
-5. Update `packages/mcp-config-schema/CLIENTS.md` to include the new client
+1. Create config JSON in `packages/mcp-config-schema/configs/`. **The filename must equal the `id`** (e.g. `cursor.json` → `"id": "cursor"`).
+2. Run `npm run generate -w @gleanwork/mcp-config-schema`. This regenerates `src/clients.generated.ts` (the `CLIENT` constants, `CLIENT_DISPLAY_NAME`, the `ClientId` enum, and the registry's config list) plus `CLIENTS.md` and `examples/`.
+3. If custom builder logic is needed, create a class in `src/builders/` extending `BaseConfigBuilder` and register it in `registry.ts`.
+
+> The client constants, the Zod `ClientIdSchema` enum, and the registry list are **generated from `configs/*.json`** — never hand-edit them. A guard test (`test/clients-generated.test.ts`) fails if the generated file is stale.
 
 ## Release
 

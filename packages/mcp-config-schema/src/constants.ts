@@ -1,44 +1,14 @@
 /**
- * Canonical client IDs for MCP clients
+ * Client id and display-name constants.
+ *
+ * The values are generated from configs/*.json by scripts/generate-clients.ts;
+ * this module layers the public types and the getDisplayName helper on top of
+ * the generated data. To add or rename a client, edit the config file and run
+ * `npm run generate:clients`.
  */
-export const CLIENT = {
-  ANTIGRAVITY: 'antigravity',
-  ANTIGRAVITY_CLI: 'antigravity-cli',
-  CLAUDE_CODE: 'claude-code',
-  CLAUDE_DESKTOP: 'claude-desktop',
-  CLAUDE_TEAMS_ENTERPRISE: 'claude-teams-enterprise',
-  CODEX: 'codex',
-  CURSOR: 'cursor',
-  VSCODE: 'vscode',
-  WINDSURF: 'windsurf',
-  GOOSE: 'goose',
-  CHATGPT: 'chatgpt',
-  JUNIE: 'junie',
-  JETBRAINS: 'jetbrains',
-  GEMINI: 'gemini',
-  OPENCODE: 'opencode',
-} as const;
+import { CLIENT, CLIENT_DISPLAY_NAME, DISPLAY_NAME_BY_ID } from './clients.generated.js';
 
-/**
- * Display names for MCP clients
- */
-export const CLIENT_DISPLAY_NAME = {
-  ANTIGRAVITY: 'Antigravity',
-  ANTIGRAVITY_CLI: 'Antigravity CLI',
-  CLAUDE_CODE: 'Claude Code',
-  CLAUDE_DESKTOP: 'Claude for Desktop',
-  CLAUDE_TEAMS_ENTERPRISE: 'Claude for Teams/Enterprise',
-  CODEX: 'Codex',
-  CURSOR: 'Cursor',
-  VSCODE: 'VS Code',
-  WINDSURF: 'Windsurf',
-  GOOSE: 'Goose',
-  CHATGPT: 'ChatGPT',
-  JUNIE: 'Junie (JetBrains)',
-  JETBRAINS: 'JetBrains AI Assistant',
-  GEMINI: 'Gemini CLI',
-  OPENCODE: 'OpenCode',
-} as const;
+export { CLIENT, CLIENT_DISPLAY_NAME };
 
 /**
  * Type-safe client ID type derived from the constants
@@ -54,22 +24,5 @@ export type ClientDisplayName = (typeof CLIENT_DISPLAY_NAME)[keyof typeof CLIENT
  * Helper to get display name from client ID
  */
 export function getDisplayName(clientId: ClientIdConstant): ClientDisplayName {
-  const mapping: Record<ClientIdConstant, ClientDisplayName> = {
-    [CLIENT.ANTIGRAVITY]: CLIENT_DISPLAY_NAME.ANTIGRAVITY,
-    [CLIENT.ANTIGRAVITY_CLI]: CLIENT_DISPLAY_NAME.ANTIGRAVITY_CLI,
-    [CLIENT.CLAUDE_CODE]: CLIENT_DISPLAY_NAME.CLAUDE_CODE,
-    [CLIENT.CLAUDE_DESKTOP]: CLIENT_DISPLAY_NAME.CLAUDE_DESKTOP,
-    [CLIENT.CLAUDE_TEAMS_ENTERPRISE]: CLIENT_DISPLAY_NAME.CLAUDE_TEAMS_ENTERPRISE,
-    [CLIENT.CODEX]: CLIENT_DISPLAY_NAME.CODEX,
-    [CLIENT.CURSOR]: CLIENT_DISPLAY_NAME.CURSOR,
-    [CLIENT.VSCODE]: CLIENT_DISPLAY_NAME.VSCODE,
-    [CLIENT.WINDSURF]: CLIENT_DISPLAY_NAME.WINDSURF,
-    [CLIENT.GOOSE]: CLIENT_DISPLAY_NAME.GOOSE,
-    [CLIENT.CHATGPT]: CLIENT_DISPLAY_NAME.CHATGPT,
-    [CLIENT.JUNIE]: CLIENT_DISPLAY_NAME.JUNIE,
-    [CLIENT.JETBRAINS]: CLIENT_DISPLAY_NAME.JETBRAINS,
-    [CLIENT.GEMINI]: CLIENT_DISPLAY_NAME.GEMINI,
-    [CLIENT.OPENCODE]: CLIENT_DISPLAY_NAME.OPENCODE,
-  };
-  return mapping[clientId];
+  return DISPLAY_NAME_BY_ID[clientId];
 }

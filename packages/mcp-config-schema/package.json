@@ -46,9 +46,11 @@
     "test:all": "npm run typecheck && npm run test",
     "lint:clients": "npx markdown-code check CLIENTS.md",
     "typecheck": "tsc --noEmit",
+    "generate:clients": "tsx scripts/generate-clients.ts && npx prettier --write src/clients.generated.ts",
     "generate:examples": "tsx scripts/generate-examples.ts",
     "generate:clients-md": "tsx scripts/generate-clients-md.ts",
     "generate:docs": "npm run generate:examples && npm run generate:clients-md && npx markdown-code sync CLIENTS.md",
+    "generate": "npm run generate:clients && npm run generate:docs",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
