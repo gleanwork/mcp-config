@@ -18,3 +18,10 @@ updates:
       # no release-it 20-compatible version yet, so a major bump breaks `npm ci`.
       - dependency-name: "release-it"
         update-types: ["version-update:semver-major"]
+      # TypeScript and ESLint majors require deliberate migrations (tsconfig
+      # deprecations, new lint rules) — adopt them in dedicated PRs, not a
+      # grouped dev-dependency bump.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
