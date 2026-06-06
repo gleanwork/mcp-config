@@ -25,3 +25,7 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "eslint"
         update-types: ["version-update:semver-major"]
+      # @eslint/* packages release in lockstep with eslint; pin the whole family
+      # to one major so a sub-package (e.g. @eslint/js) cannot desync from eslint.
+      - dependency-name: "@eslint/*"
+        update-types: ["version-update:semver-major"]

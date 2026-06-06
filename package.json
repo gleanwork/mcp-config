@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.39.3",
     "@release-it-plugins/lerna-changelog": "^8.0.1",
     "@release-it-plugins/workspaces": "^5.0.3",
     "@types/node": "^25.9.1",
