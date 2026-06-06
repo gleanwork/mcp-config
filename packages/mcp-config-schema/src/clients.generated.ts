@@ -17,6 +17,7 @@ import geminiConfig from '../configs/gemini.json';
 import gooseConfig from '../configs/goose.json';
 import jetbrainsConfig from '../configs/jetbrains.json';
 import junieConfig from '../configs/junie.json';
+import linearConfig from '../configs/linear.json';
 import opencodeConfig from '../configs/opencode.json';
 import vscodeConfig from '../configs/vscode.json';
 import windsurfConfig from '../configs/windsurf.json';
@@ -36,6 +37,7 @@ export const CLIENT = {
   GOOSE: 'goose',
   JETBRAINS: 'jetbrains',
   JUNIE: 'junie',
+  LINEAR: 'linear',
   OPENCODE: 'opencode',
   VSCODE: 'vscode',
   WINDSURF: 'windsurf',
@@ -56,6 +58,7 @@ export const CLIENT_DISPLAY_NAME = {
   GOOSE: 'Goose',
   JETBRAINS: 'JetBrains AI Assistant',
   JUNIE: 'Junie (JetBrains)',
+  LINEAR: 'Linear',
   OPENCODE: 'OpenCode',
   VSCODE: 'VS Code',
   WINDSURF: 'Windsurf',
@@ -76,6 +79,7 @@ export const DISPLAY_NAME_BY_ID = {
   goose: 'Goose',
   jetbrains: 'JetBrains AI Assistant',
   junie: 'Junie (JetBrains)',
+  linear: 'Linear',
   opencode: 'OpenCode',
   vscode: 'VS Code',
   windsurf: 'Windsurf',
@@ -96,6 +100,7 @@ export const CLIENT_IDS = [
   'goose',
   'jetbrains',
   'junie',
+  'linear',
   'opencode',
   'vscode',
   'windsurf',
@@ -116,6 +121,7 @@ export const allClientConfigs = [
   gooseConfig,
   jetbrainsConfig,
   junieConfig,
+  linearConfig,
   opencodeConfig,
   vscodeConfig,
   windsurfConfig,
