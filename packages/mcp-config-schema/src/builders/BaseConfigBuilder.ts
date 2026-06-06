@@ -239,7 +239,7 @@ export abstract class BaseConfigBuilder<TConfig extends MCPConfig = MCPConfig> {
     const validatedOptions = validateConnectionOptions(options);
     const includeRootObject = validatedOptions.includeRootObject !== false;
 
-    let result: Record<string, unknown> = {};
+    let result: Record<string, unknown>;
 
     if (validatedOptions.transport === 'stdio') {
       result = this.buildStdioConfig(validatedOptions, includeRootObject);
