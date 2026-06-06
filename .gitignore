@@ -9,3 +9,5 @@ coverage/
 .vscode/
 .idea/
 .mise.local.toml
+
+!packages/mcp-config-schema/icons/

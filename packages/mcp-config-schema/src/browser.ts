@@ -1,6 +1,7 @@
 export * from './types.js';
 export * from './constants.js';
 export * from './server-name.js';
+export * from './icons.js';
 
 export {
   validateClientConfig,
