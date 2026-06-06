@@ -4,6 +4,7 @@
   "displayName": "OpenCode",
   "description": "OpenCode with native HTTP and stdio support",
   "userConfigurable": true,
+  "types": ["cli"],
   "documentationUrl": "https://opencode.ai/docs/mcp-servers/",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],

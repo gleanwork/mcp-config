@@ -4,6 +4,7 @@
   "displayName": "Linear",
   "description": "Linear agent - requires adding MCP servers through the Linear settings UI",
   "userConfigurable": false,
+  "types": ["web"],
   "localConfigNotes": "Linear Agent is web-based and requires adding MCP servers through the Linear settings UI. No local configuration file support.",
   "transports": ["http"],
   "supportedPlatforms": [],

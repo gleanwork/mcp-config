@@ -338,6 +338,7 @@ export type CliInstallationStatus = CliInstallSupported | CliInstallUnsupported;
 export {
   ClientIdSchema,
   PlatformSchema,
+  ClientTypeSchema,
   SupportedTransportsSchema,
   ServerTypeSchema,
   TransportSchema,

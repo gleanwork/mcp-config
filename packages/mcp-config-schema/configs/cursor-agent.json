@@ -4,6 +4,7 @@
   "displayName": "Cursor Agent",
   "description": "Cursor Agent CLI",
   "userConfigurable": true,
+  "types": ["cli"],
   "documentationUrl": "https://cursor.com/docs/context/mcp",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],

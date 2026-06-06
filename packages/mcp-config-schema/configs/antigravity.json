@@ -4,6 +4,7 @@
   "displayName": "Antigravity",
   "description": "Antigravity with native HTTP and stdio support",
   "userConfigurable": true,
+  "types": ["ide"],
   "documentationUrl": "https://antigravity.google/docs/get-started",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],

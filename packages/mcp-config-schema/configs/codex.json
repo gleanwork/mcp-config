@@ -4,6 +4,7 @@
   "displayName": "Codex",
   "description": "OpenAI Codex with native HTTP and stdio support",
   "userConfigurable": true,
+  "types": ["cli"],
   "documentationUrl": "https://developers.openai.com/codex/mcp",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],

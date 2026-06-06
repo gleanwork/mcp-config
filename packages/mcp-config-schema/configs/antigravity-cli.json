@@ -4,6 +4,7 @@
   "displayName": "Antigravity CLI",
   "description": "Antigravity CLI with native HTTP and stdio support",
   "userConfigurable": true,
+  "types": ["cli"],
   "documentationUrl": "https://antigravity.google/docs/cli-overview",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],

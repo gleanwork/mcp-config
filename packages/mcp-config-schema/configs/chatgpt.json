@@ -4,6 +4,7 @@
   "displayName": "ChatGPT",
   "description": "ChatGPT web interface - requires MCP configuration through web UI",
   "userConfigurable": false,
+  "types": ["web"],
   "localConfigNotes": "ChatGPT is web-based and requires configuring MCP servers through their web UI. No local configuration file support.",
   "transports": ["http"],
   "supportedPlatforms": [],

@@ -4,6 +4,7 @@
   "displayName": "Junie (JetBrains)",
   "description": "JetBrains Junie AI agent with native HTTP and stdio support",
   "userConfigurable": true,
+  "types": ["ide"],
   "documentationUrl": "https://junie.jetbrains.com/docs/junie-cli-mcp-configuration.html",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],

@@ -3,7 +3,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { CLIENT, CLIENT_IDS, DISPLAY_NAME_BY_ID, allClientConfigs } from '../src/clients.generated';
-import { getDisplayName } from '../src/constants';
+import { CLIENT_TYPES, getDisplayName } from '../src/constants';
 import { MCPConfigRegistry } from '../src/registry';
 
 /**
@@ -47,6 +47,21 @@ describe('clients.generated.ts stays in sync with configs/', () => {
       expect(clientValues, `CLIENT missing ${c.id}`).toContain(c.id);
       expect(DISPLAY_NAME_BY_ID[c.id as keyof typeof DISPLAY_NAME_BY_ID]).toBe(c.displayName);
       expect(getDisplayName(c.id as (typeof CLIENT)[keyof typeof CLIENT])).toBe(c.displayName);
+    }
+  });
+
+  it('every config declares a non-empty types array of known client types', () => {
+    const registry = new MCPConfigRegistry();
+    const known = new Set<string>(CLIENT_TYPES);
+    for (const c of configs) {
+      const cfg = registry.getConfig(c.id as (typeof CLIENT_IDS)[number]);
+      expect(cfg, `registry missing ${c.id}`).toBeDefined();
+      expect(Array.isArray(cfg!.types) && cfg!.types.length > 0, `${c.id} types non-empty`).toBe(
+        true
+      );
+      for (const t of cfg!.types) {
+        expect(known.has(t), `${c.id} has unknown type "${t}"`).toBe(true);
+      }
     }
   });
 });
