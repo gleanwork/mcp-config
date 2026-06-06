@@ -13,3 +13,8 @@ updates:
     groups:
       dev-dependencies:
         dependency-type: "development"
+    ignore:
+      # @release-it-plugins/lerna-changelog only peers release-it ^17-19; there is
+      # no release-it 20-compatible version yet, so a major bump breaks `npm ci`.
+      - dependency-name: "release-it"
+        update-types: ["version-update:semver-major"]
