@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 
 > **Note:** This monorepo was created by consolidating `@gleanwork/mcp-config-schema` and `@gleanwork/mcp-config` (now `@gleanwork/mcp-config-glean`). Historical entries below v4.0.0 refer to `@gleanwork/mcp-config-schema` only.
 
+## v5.1.0 (2026-06-06)
+
+#### :rocket: Enhancement
+
+- `mcp-config-glean`, `mcp-config-schema`
+  - [#106](https://github.com/gleanwork/mcp-config/pull/106) feat: add Linear as MCP client configuration ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+- `mcp-config-schema`
+  - [#112](https://github.com/gleanwork/mcp-config/pull/112) feat: add per-client host icons ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+  - [#110](https://github.com/gleanwork/mcp-config/pull/110) feat: add Antigravity CLI MCP client configuration ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+#### :house: Internal
+
+- Other
+  - [#118](https://github.com/gleanwork/mcp-config/pull/118) fix: realign @eslint/js to v9 (restore npm install/publish) ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+- `mcp-config-schema`
+  - [#111](https://github.com/gleanwork/mcp-config/pull/111) refactor: generate client constants from configs (single source of truth) ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+#### Committers: 1
+
+- Steve Calvert ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+
+
 ## v5.0.0 (2026-05-02)
 
 #### :boom: Breaking Change
