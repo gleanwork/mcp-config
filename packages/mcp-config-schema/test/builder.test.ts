@@ -679,6 +679,79 @@ describe('ConfigBuilder', () => {
       `);
     });
 
+    it('should generate correct HTTP config for Antigravity CLI', () => {
+      const builder = registry.createBuilder(CLIENT.ANTIGRAVITY_CLI);
+      const result = builder.buildConfiguration(remoteConfig);
+
+      const validation = validateGeneratedConfig(result, 'antigravity-cli');
+      expect(validation.success).toBe(true);
+
+      // Antigravity CLI uses serverUrl (not url) and no type property
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "mcpServers": {
+            "glean": {
+              "serverUrl": "https://glean-dev-be.glean.com/mcp/default",
+            },
+          },
+        }
+      `);
+    });
+
+    it('should add headers to Antigravity CLI HTTP config', () => {
+      const builder = registry.createBuilder(CLIENT.ANTIGRAVITY_CLI);
+      const result = builder.buildConfiguration({
+        transport: 'http',
+        serverUrl: 'https://glean-dev-be.glean.com/mcp/default',
+        headers: { Authorization: 'Bearer test-token-123' },
+      });
+
+      const validation = validateGeneratedConfig(result, 'antigravity-cli');
+      expect(validation.success).toBe(true);
+
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "mcpServers": {
+            "default": {
+              "headers": {
+                "Authorization": "Bearer test-token-123",
+              },
+              "serverUrl": "https://glean-dev-be.glean.com/mcp/default",
+            },
+          },
+        }
+      `);
+    });
+
+    it('should generate correct stdio config for Antigravity CLI', () => {
+      const builder = registry.createBuilder(CLIENT.ANTIGRAVITY_CLI);
+      const result = builder.buildConfiguration({
+        transport: 'stdio',
+        env: createGleanEnv('test-instance', 'test-token'),
+      });
+
+      const validation = validateGeneratedConfig(result, 'antigravity-cli');
+      expect(validation.success).toBe(true);
+
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "mcpServers": {
+            "local": {
+              "args": [
+                "-y",
+                "@gleanwork/local-mcp-server",
+              ],
+              "command": "npx",
+              "env": {
+                "GLEAN_API_TOKEN": "test-token",
+                "GLEAN_INSTANCE": "test-instance",
+              },
+            },
+          },
+        }
+      `);
+    });
+
     it('should generate correct HTTP config for Gemini CLI', () => {
       const builder = registry.createBuilder(CLIENT.GEMINI);
       const result = builder.buildConfiguration(remoteConfig);

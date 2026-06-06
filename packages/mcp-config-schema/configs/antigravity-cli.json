@@ -1,22 +1,22 @@
 {
-  "id": "gemini",
-  "name": "gemini",
-  "displayName": "Gemini CLI",
-  "description": "Gemini CLI with native HTTP and stdio support",
+  "id": "antigravity-cli",
+  "name": "antigravity-cli",
+  "displayName": "Antigravity CLI",
+  "description": "Antigravity CLI with native HTTP and stdio support",
   "userConfigurable": true,
-  "documentationUrl": "https://github.com/google-gemini/gemini-cli",
+  "documentationUrl": "https://antigravity.google/docs/cli-overview",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],
   "configFormat": "json",
   "configPath": {
-    "darwin": "$HOME/.gemini/settings.json",
-    "linux": "$HOME/.gemini/settings.json",
-    "win32": "%USERPROFILE%\\.gemini\\settings.json"
+    "darwin": "$HOME/.gemini/config/mcp_config.json",
+    "linux": "$HOME/.gemini/config/mcp_config.json",
+    "win32": "%USERPROFILE%\\.gemini\\config\\mcp_config.json"
   },
   "configStructure": {
     "serversPropertyName": "mcpServers",
     "httpPropertyMapping": {
-      "urlProperty": "httpUrl",
+      "urlProperty": "serverUrl",
       "headersProperty": "headers"
     },
     "stdioPropertyMapping": {
