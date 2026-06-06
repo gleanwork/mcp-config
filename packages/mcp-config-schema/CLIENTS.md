@@ -20,7 +20,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 | **JetBrains AI Assistant** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
 | **Junie (JetBrains)** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
 | **OpenCode** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
-| **Visual Studio Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| **VS Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | **Windsurf** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 
 ## Detailed Client Information
@@ -1245,7 +1245,7 @@ extensions:
 
 ---
 
-### Visual Studio Code
+### VS Code
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
@@ -1266,7 +1266,7 @@ extensions:
 {
   "id": "vscode",
   "name": "vscode",
-  "displayName": "Visual Studio Code",
+  "displayName": "VS Code",
   "description": "VS Code with native HTTP support",
   "userConfigurable": true,
   "documentationUrl": "https://code.visualstudio.com/docs/copilot/customization/mcp-servers",
@@ -1470,7 +1470,7 @@ Clients that can connect directly to HTTP MCP servers without additional tooling
 - JetBrains AI Assistant
 - Junie (JetBrains)
 - OpenCode
-- Visual Studio Code
+- VS Code
 - Windsurf
 
 ### stdio-only Clients
@@ -1508,7 +1508,7 @@ Used by: Goose
 
 Some clients support one-click installation via custom protocols:
 - **Cursor**: `cursor://`
-- **Visual Studio Code**: `vscode:`
+- **VS Code**: `vscode:`
 
 ## Additional Resources
 

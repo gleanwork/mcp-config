@@ -33,7 +33,7 @@ describe('MCPConfigRegistry', () => {
     it('should load VS Code config', () => {
       const config = registry.getConfig(CLIENT.VSCODE);
       expect(config).toBeDefined();
-      expect(config?.displayName).toBe('Visual Studio Code');
+      expect(config?.displayName).toBe('VS Code');
       expect(config?.configStructure.serversPropertyName).toBe('servers');
     });
 
