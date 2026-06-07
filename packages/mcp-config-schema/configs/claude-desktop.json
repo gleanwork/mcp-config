@@ -4,6 +4,7 @@
   "displayName": "Claude for Desktop",
   "description": "Claude Desktop only supports stdio, requires mcp-remote for HTTP servers",
   "userConfigurable": true,
+  "types": ["desktop"],
   "localConfigNotes": "Requires mcp-remote for remote servers",
   "documentationUrl": "https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp",
   "transports": ["stdio"],

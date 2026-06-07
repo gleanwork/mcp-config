@@ -4,6 +4,7 @@
   "displayName": "JetBrains AI Assistant",
   "description": "JetBrains AI Assistant for all JetBrains IDEs - supports stdio, Streamable HTTP, and SSE transports (2025.2+), configure via IDE UI",
   "userConfigurable": true,
+  "types": ["ide"],
   "localConfigNotes": "Configuration must be pasted into Settings → Tools → AI Assistant → Model Context Protocol → Add → As JSON. Direct file writing is not supported due to version-specific XML storage.",
   "documentationUrl": "https://www.jetbrains.com/help/ai-assistant/mcp.html",
   "transports": ["stdio", "http"],

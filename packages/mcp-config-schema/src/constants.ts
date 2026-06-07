@@ -26,3 +26,21 @@ export type ClientDisplayName = (typeof CLIENT_DISPLAY_NAME)[keyof typeof CLIENT
 export function getDisplayName(clientId: ClientIdConstant): ClientDisplayName {
   return DISPLAY_NAME_BY_ID[clientId];
 }
+
+/**
+ * The kinds of client an MCP host can be, by where it runs. A client may be
+ * more than one (e.g. Goose ships a desktop app and a CLI). This is the source
+ * for both the `ClientType` type and the `types` field's Zod enum in schemas.ts.
+ */
+export const CLIENT_TYPES = ['cli', 'desktop', 'ide', 'web'] as const;
+
+/** A single client type. See {@link CLIENT_TYPES}. */
+export type ClientType = (typeof CLIENT_TYPES)[number];
+
+/** Human-readable labels for each {@link ClientType} (e.g. for filter chips). */
+export const TYPE_LABELS: Record<ClientType, string> = {
+  cli: 'CLI',
+  desktop: 'Desktop',
+  ide: 'IDE',
+  web: 'Web',
+};

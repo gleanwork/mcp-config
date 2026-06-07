@@ -4,6 +4,7 @@
   "displayName": "Goose",
   "description": "Goose with native HTTP support",
   "userConfigurable": true,
+  "types": ["desktop", "cli"],
   "documentationUrl": "https://github.com/block/goose",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],

@@ -170,12 +170,40 @@ const cursorConfig = registry.getConfig('cursor');
 console.log(cursorConfig.displayName); // "Cursor"
 console.log(cursorConfig.userConfigurable); // true
 console.log(cursorConfig.transports); // ['stdio', 'http']
+console.log(cursorConfig.types); // ['ide']
 
 // Query different client groups
 const httpClients = registry.getNativeHttpClients();
 const bridgeClients = registry.getBridgeRequiredClients();
 const macClients = registry.getClientsByPlatform('darwin');
 ```
+
+### Client Types
+
+Every client declares one or more `types` describing where it runs. A client can be more than one (e.g. Goose ships both a desktop app and a CLI). Use these to group or filter clients by surface — for example, to build a filterable list of supported hosts:
+
+```typescript
+import {
+  MCPConfigRegistry,
+  CLIENT_TYPES, // readonly ['cli', 'desktop', 'ide', 'web']
+  TYPE_LABELS, // { cli: 'CLI', desktop: 'Desktop', ide: 'IDE', web: 'Web' }
+  type ClientType,
+} from '@gleanwork/mcp-config-schema';
+
+const registry = new MCPConfigRegistry();
+const all = registry.getAllConfigs();
+
+// Filter by type
+const cliClients = all.filter((c) => c.types.includes('cli'));
+
+// Group by type, with display labels (a client may appear under several)
+for (const type of CLIENT_TYPES) {
+  const inType = all.filter((c) => c.types.includes(type));
+  console.log(`${TYPE_LABELS[type]}: ${inType.map((c) => c.displayName).join(', ')}`);
+}
+```
+
+Installability is a separate axis (`userConfigurable`): user-installable clients vs. centrally managed ones.
 
 ### Generate Configurations
 

@@ -1,7 +1,9 @@
 import { z } from 'zod';
 import { CLIENT_IDS } from './clients.generated.js';
+import { CLIENT_TYPES } from './constants.js';
 export const PlatformSchema = z.enum(['darwin', 'linux', 'win32']);
 export const ClientIdSchema = z.enum(CLIENT_IDS);
+export const ClientTypeSchema = z.enum(CLIENT_TYPES);
 
 export const ServerTypeSchema = z.enum(['http', 'stdio']);
 
@@ -49,6 +51,7 @@ export const MCPClientConfigSchema = z.object({
   displayName: z.string(),
   description: z.string(),
   userConfigurable: z.boolean(),
+  types: z.array(ClientTypeSchema).nonempty(),
   localConfigNotes: z.string().optional(),
   documentationUrl: z.string().url().optional(),
   transports: SupportedTransportsSchema,

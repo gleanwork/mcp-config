@@ -4,6 +4,7 @@
   "displayName": "VS Code",
   "description": "VS Code with native HTTP support",
   "userConfigurable": true,
+  "types": ["ide"],
   "documentationUrl": "https://code.visualstudio.com/docs/copilot/customization/mcp-servers",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],
