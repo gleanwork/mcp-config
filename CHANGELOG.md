@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 > **Note:** This monorepo was created by consolidating `@gleanwork/mcp-config-schema` and `@gleanwork/mcp-config` (now `@gleanwork/mcp-config-glean`). Historical entries below v4.0.0 refer to `@gleanwork/mcp-config-schema` only.
 
+## v5.2.0 (2026-06-07)
+
+#### :rocket: Enhancement
+
+- `mcp-config-schema`
+  - [#120](https://github.com/gleanwork/mcp-config/pull/120) feat(schema): add client type classification (CLIENT_TYPES, TYPE_LABELS) ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+#### Committers: 1
+
+- Steve Calvert ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+
+
 ## v5.1.0 (2026-06-06)
 
 #### :rocket: Enhancement
