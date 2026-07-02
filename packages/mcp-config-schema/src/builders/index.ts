@@ -6,4 +6,5 @@ export * from './GeminiConfigBuilder';
 export * from './GenericConfigBuilder';
 export * from './GooseConfigBuilder';
 export * from './OpenCodeConfigBuilder';
+export * from './PiConfigBuilder';
 export * from './VSCodeConfigBuilder';

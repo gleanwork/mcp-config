@@ -19,6 +19,7 @@ import jetbrainsConfig from '../configs/jetbrains.json';
 import junieConfig from '../configs/junie.json';
 import linearConfig from '../configs/linear.json';
 import opencodeConfig from '../configs/opencode.json';
+import piConfig from '../configs/pi.json';
 import vscodeConfig from '../configs/vscode.json';
 import windsurfConfig from '../configs/windsurf.json';
 
@@ -39,6 +40,7 @@ export const CLIENT = {
   JUNIE: 'junie',
   LINEAR: 'linear',
   OPENCODE: 'opencode',
+  PI: 'pi',
   VSCODE: 'vscode',
   WINDSURF: 'windsurf',
 } as const;
@@ -60,6 +62,7 @@ export const CLIENT_DISPLAY_NAME = {
   JUNIE: 'Junie (JetBrains)',
   LINEAR: 'Linear',
   OPENCODE: 'OpenCode',
+  PI: 'Pi',
   VSCODE: 'VS Code',
   WINDSURF: 'Windsurf',
 } as const;
@@ -81,6 +84,7 @@ export const DISPLAY_NAME_BY_ID = {
   junie: 'Junie (JetBrains)',
   linear: 'Linear',
   opencode: 'OpenCode',
+  pi: 'Pi',
   vscode: 'VS Code',
   windsurf: 'Windsurf',
 } as const;
@@ -102,6 +106,7 @@ export const CLIENT_IDS = [
   'junie',
   'linear',
   'opencode',
+  'pi',
   'vscode',
   'windsurf',
 ] as const;
@@ -123,6 +128,7 @@ export const allClientConfigs = [
   junieConfig,
   linearConfig,
   opencodeConfig,
+  piConfig,
   vscodeConfig,
   windsurfConfig,
 ];

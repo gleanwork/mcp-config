@@ -18,6 +18,7 @@ import {
   CodexConfigBuilder,
   GeminiConfigBuilder,
   OpenCodeConfigBuilder,
+  PiConfigBuilder,
 } from './builders/index.js';
 import { allClientConfigs as allConfigs } from './clients.generated.js';
 
@@ -66,6 +67,10 @@ export class MCPConfigRegistry {
     this.builderFactories.set(
       'opencode' as ClientId,
       OpenCodeConfigBuilder as new (config: MCPClientConfig) => BaseConfigBuilder
+    );
+    this.builderFactories.set(
+      'pi' as ClientId,
+      PiConfigBuilder as new (config: MCPClientConfig) => BaseConfigBuilder
     );
     // Other clients will use GenericConfigBuilder by default
   }

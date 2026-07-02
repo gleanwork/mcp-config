@@ -1,0 +1,35 @@
+{
+  "id": "pi",
+  "name": "pi",
+  "displayName": "Pi",
+  "description": "Pi coding agent with MCP adapter support",
+  "userConfigurable": true,
+  "types": ["cli"],
+  "documentationUrl": "https://github.com/nicobailon/pi-mcp-adapter",
+  "transports": ["stdio", "http"],
+  "supportedPlatforms": ["darwin", "linux", "win32"],
+  "configFormat": "json",
+  "configPath": {
+    "darwin": "$HOME/.config/mcp/mcp.json",
+    "linux": "$HOME/.config/mcp/mcp.json",
+    "win32": "%USERPROFILE%\\.config\\mcp\\mcp.json"
+  },
+  "configStructure": {
+    "serversPropertyName": "mcpServers",
+    "httpPropertyMapping": {
+      "urlProperty": "url",
+      "headersProperty": "headers"
+    },
+    "stdioPropertyMapping": {
+      "commandProperty": "command",
+      "argsProperty": "args",
+      "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://localhost:*/callback", "http://127.0.0.1:*/callback"]
+    }
+  }
+}
