@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 > **Note:** This monorepo was created by consolidating `@gleanwork/mcp-config-schema` and `@gleanwork/mcp-config` (now `@gleanwork/mcp-config-glean`). Historical entries below v4.0.0 refer to `@gleanwork/mcp-config-schema` only.
 
+## v5.3.0 (2026-07-14)
+
+#### :rocket: Enhancement
+
+- `mcp-config-schema`
+  - [#124](https://github.com/gleanwork/mcp-config/pull/124) feat: add Copilot Studio, Gemini Enterprise, and LibreChat clients ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+#### Committers: 1
+
+- Steve Calvert ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+
+
 ## v5.2.0 (2026-06-07)
 
 #### :rocket: Enhancement
