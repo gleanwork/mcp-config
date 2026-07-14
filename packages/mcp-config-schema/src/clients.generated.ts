@@ -11,12 +11,15 @@ import claudeCodeConfig from '../configs/claude-code.json';
 import claudeDesktopConfig from '../configs/claude-desktop.json';
 import claudeTeamsEnterpriseConfig from '../configs/claude-teams-enterprise.json';
 import codexConfig from '../configs/codex.json';
+import copilotStudioConfig from '../configs/copilot-studio.json';
 import cursorAgentConfig from '../configs/cursor-agent.json';
 import cursorConfig from '../configs/cursor.json';
+import geminiEnterpriseConfig from '../configs/gemini-enterprise.json';
 import geminiConfig from '../configs/gemini.json';
 import gooseConfig from '../configs/goose.json';
 import jetbrainsConfig from '../configs/jetbrains.json';
 import junieConfig from '../configs/junie.json';
+import librechatConfig from '../configs/librechat.json';
 import linearConfig from '../configs/linear.json';
 import opencodeConfig from '../configs/opencode.json';
 import vscodeConfig from '../configs/vscode.json';
@@ -31,12 +34,15 @@ export const CLIENT = {
   CLAUDE_DESKTOP: 'claude-desktop',
   CLAUDE_TEAMS_ENTERPRISE: 'claude-teams-enterprise',
   CODEX: 'codex',
+  COPILOT_STUDIO: 'copilot-studio',
   CURSOR_AGENT: 'cursor-agent',
   CURSOR: 'cursor',
+  GEMINI_ENTERPRISE: 'gemini-enterprise',
   GEMINI: 'gemini',
   GOOSE: 'goose',
   JETBRAINS: 'jetbrains',
   JUNIE: 'junie',
+  LIBRECHAT: 'librechat',
   LINEAR: 'linear',
   OPENCODE: 'opencode',
   VSCODE: 'vscode',
@@ -52,12 +58,15 @@ export const CLIENT_DISPLAY_NAME = {
   CLAUDE_DESKTOP: 'Claude for Desktop',
   CLAUDE_TEAMS_ENTERPRISE: 'Claude for Teams/Enterprise',
   CODEX: 'Codex',
+  COPILOT_STUDIO: 'Microsoft Copilot Studio',
   CURSOR_AGENT: 'Cursor Agent',
   CURSOR: 'Cursor',
+  GEMINI_ENTERPRISE: 'Gemini Enterprise',
   GEMINI: 'Gemini CLI',
   GOOSE: 'Goose',
   JETBRAINS: 'JetBrains AI Assistant',
   JUNIE: 'Junie (JetBrains)',
+  LIBRECHAT: 'LibreChat',
   LINEAR: 'Linear',
   OPENCODE: 'OpenCode',
   VSCODE: 'VS Code',
@@ -73,12 +82,15 @@ export const DISPLAY_NAME_BY_ID = {
   'claude-desktop': 'Claude for Desktop',
   'claude-teams-enterprise': 'Claude for Teams/Enterprise',
   codex: 'Codex',
+  'copilot-studio': 'Microsoft Copilot Studio',
   'cursor-agent': 'Cursor Agent',
   cursor: 'Cursor',
+  'gemini-enterprise': 'Gemini Enterprise',
   gemini: 'Gemini CLI',
   goose: 'Goose',
   jetbrains: 'JetBrains AI Assistant',
   junie: 'Junie (JetBrains)',
+  librechat: 'LibreChat',
   linear: 'Linear',
   opencode: 'OpenCode',
   vscode: 'VS Code',
@@ -94,12 +106,15 @@ export const CLIENT_IDS = [
   'claude-desktop',
   'claude-teams-enterprise',
   'codex',
+  'copilot-studio',
   'cursor-agent',
   'cursor',
+  'gemini-enterprise',
   'gemini',
   'goose',
   'jetbrains',
   'junie',
+  'librechat',
   'linear',
   'opencode',
   'vscode',
@@ -115,12 +130,15 @@ export const allClientConfigs = [
   claudeDesktopConfig,
   claudeTeamsEnterpriseConfig,
   codexConfig,
+  copilotStudioConfig,
   cursorAgentConfig,
   cursorConfig,
+  geminiEnterpriseConfig,
   geminiConfig,
   gooseConfig,
   jetbrainsConfig,
   junieConfig,
+  librechatConfig,
   linearConfig,
   opencodeConfig,
   vscodeConfig,

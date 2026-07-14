@@ -16,10 +16,13 @@ This document provides a comprehensive overview of all supported MCP clients, th
 | <img src="icons/cursor.svg" alt="" width="20" height="20" /> **Cursor** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/cursor-agent.svg" alt="" width="20" height="20" /> **Cursor Agent** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/gemini.svg" alt="" width="20" height="20" /> **Gemini CLI** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/gemini-enterprise.svg" alt="" width="20" height="20" /> **Gemini Enterprise** | Managed | HTTP only | Managed externally | No | All platforms |
 | <img src="icons/goose.svg" alt="" width="20" height="20" /> **Goose** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/jetbrains.svg" alt="" width="20" height="20" /> **JetBrains AI Assistant** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
 | <img src="icons/junie.svg" alt="" width="20" height="20" /> **Junie (JetBrains)** | User-configurable | HTTP native | Token | No | macOS, Linux, Windows |
+| <img src="icons/librechat.svg" alt="" width="20" height="20" /> **LibreChat** | Managed | HTTP only | Token, OAuth DCR | No | All platforms |
 | <img src="icons/linear.svg" alt="" width="20" height="20" /> **Linear** | Managed | HTTP only | Token, OAuth DCR | No | Web-based |
+| <img src="icons/copilot-studio.svg" alt="" width="20" height="20" /> **Microsoft Copilot Studio** | Managed | HTTP only | Token, OAuth DCR | No | Web-based |
 | <img src="icons/opencode.svg" alt="" width="20" height="20" /> **OpenCode** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/vscode.svg" alt="" width="20" height="20" /> **VS Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/windsurf.svg" alt="" width="20" height="20" /> **Windsurf** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
@@ -880,6 +883,42 @@ EXAMPLE_API_KEY = "your-api-key"
 
 ---
 
+### <img src="icons/gemini-enterprise.svg" alt="" width="24" height="24" /> Gemini Enterprise
+
+- **Configuration**: Centrally managed
+- **Connection Type**: HTTP only (managed)
+- **Documentation**: [Link](https://docs.cloud.google.com/gemini/enterprise/docs/connectors/custom-mcp-server/set-up-custom-mcp-server)
+- **Auth Support**: Managed externally
+- **Notes**: A Google Cloud or Gemini Enterprise admin registers the MCP server as a custom MCP server data store in the Gemini Enterprise console. No local configuration file support.
+
+<details>
+<summary><strong>Internal Configuration Schema</strong></summary>
+
+```json snippet=configs/gemini-enterprise.json
+{
+  "id": "gemini-enterprise",
+  "name": "gemini-enterprise",
+  "displayName": "Gemini Enterprise",
+  "description": "Google Gemini Enterprise - MCP servers are registered as custom MCP server data stores by a Gemini Enterprise admin",
+  "userConfigurable": false,
+  "types": ["web"],
+  "localConfigNotes": "A Google Cloud or Gemini Enterprise admin registers the MCP server as a custom MCP server data store in the Gemini Enterprise console. No local configuration file support.",
+  "transports": ["http"],
+  "supportedPlatforms": [],
+  "configFormat": "json",
+  "configPath": {},
+  "documentationUrl": "https://docs.cloud.google.com/gemini/enterprise/docs/connectors/custom-mcp-server/set-up-custom-mcp-server",
+  "configStructure": {
+    "serversPropertyName": ""
+  },
+  "supportedAuth": []
+}
+```
+
+</details>
+
+---
+
 ### <img src="icons/goose.svg" alt="" width="24" height="24" /> Goose
 
 - **Configuration**: User-configurable
@@ -1161,6 +1200,42 @@ extensions:
 
 ---
 
+### <img src="icons/librechat.svg" alt="" width="24" height="24" /> LibreChat
+
+- **Configuration**: Centrally managed
+- **Connection Type**: HTTP only (managed)
+- **Documentation**: [Link](https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/mcp_servers)
+- **Auth Support**: Token, OAuth DCR
+- **Notes**: MCP servers are configured centrally by the LibreChat administrator in the deployment's librechat.yaml. Not configured per-user through this library.
+
+<details>
+<summary><strong>Internal Configuration Schema</strong></summary>
+
+```json snippet=configs/librechat.json
+{
+  "id": "librechat",
+  "name": "librechat",
+  "displayName": "LibreChat",
+  "description": "LibreChat - MCP servers are configured by the LibreChat administrator in librechat.yaml",
+  "userConfigurable": false,
+  "types": ["web"],
+  "localConfigNotes": "MCP servers are configured centrally by the LibreChat administrator in the deployment's librechat.yaml. Not configured per-user through this library.",
+  "transports": ["http"],
+  "supportedPlatforms": [],
+  "configFormat": "json",
+  "configPath": {},
+  "documentationUrl": "https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/mcp_servers",
+  "configStructure": {
+    "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"]
+}
+```
+
+</details>
+
+---
+
 ### <img src="icons/linear.svg" alt="" width="24" height="24" /> Linear
 
 - **Configuration**: Centrally managed
@@ -1194,6 +1269,42 @@ extensions:
       "redirect_uri_patterns": ["https://linear.app/connect/mcp/callback"]
     }
   }
+}
+```
+
+</details>
+
+---
+
+### <img src="icons/copilot-studio.svg" alt="" width="24" height="24" /> Microsoft Copilot Studio
+
+- **Configuration**: Centrally managed
+- **Connection Type**: HTTP only (managed)
+- **Documentation**: [Link](https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent)
+- **Auth Support**: Token, OAuth DCR
+- **Notes**: MCP servers are added to Copilot Studio agents through the Copilot Studio web UI. No local configuration file support.
+
+<details>
+<summary><strong>Internal Configuration Schema</strong></summary>
+
+```json snippet=configs/copilot-studio.json
+{
+  "id": "copilot-studio",
+  "name": "copilot-studio",
+  "displayName": "Microsoft Copilot Studio",
+  "description": "Microsoft Copilot Studio - MCP servers are added to agents through the Copilot Studio UI",
+  "userConfigurable": false,
+  "types": ["web"],
+  "localConfigNotes": "MCP servers are added to Copilot Studio agents through the Copilot Studio web UI. No local configuration file support.",
+  "transports": ["http"],
+  "supportedPlatforms": [],
+  "configFormat": "json",
+  "configPath": {},
+  "documentationUrl": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent",
+  "configStructure": {
+    "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"]
 }
 ```
 
@@ -1538,7 +1649,10 @@ Clients that communicate via stdio and require `mcp-remote` as a bridge for HTTP
 Clients that don't support local configuration files:
 - ChatGPT (chatgpt is web-based and requires configuring mcp servers through their web ui. no local configuration file support.)
 - Claude for Teams/Enterprise (mcp servers are centrally managed by admins. no local configuration support - servers must be configured at the organization level.)
+- Gemini Enterprise (a google cloud or gemini enterprise admin registers the mcp server as a custom mcp server data store in the gemini enterprise console. no local configuration file support.)
+- LibreChat (mcp servers are configured centrally by the librechat administrator in the deployment's librechat.yaml. not configured per-user through this library.)
 - Linear (linear agent is web-based and requires adding mcp servers through the linear settings ui. no local configuration file support.)
+- Microsoft Copilot Studio (mcp servers are added to copilot studio agents through the copilot studio web ui. no local configuration file support.)
 
 ## Configuration File Formats
 

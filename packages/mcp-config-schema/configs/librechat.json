@@ -1,0 +1,18 @@
+{
+  "id": "librechat",
+  "name": "librechat",
+  "displayName": "LibreChat",
+  "description": "LibreChat - MCP servers are configured by the LibreChat administrator in librechat.yaml",
+  "userConfigurable": false,
+  "types": ["web"],
+  "localConfigNotes": "MCP servers are configured centrally by the LibreChat administrator in the deployment's librechat.yaml. Not configured per-user through this library.",
+  "transports": ["http"],
+  "supportedPlatforms": [],
+  "configFormat": "json",
+  "configPath": {},
+  "documentationUrl": "https://www.librechat.ai/docs/configuration/librechat_yaml/object_structure/mcp_servers",
+  "configStructure": {
+    "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"]
+}
