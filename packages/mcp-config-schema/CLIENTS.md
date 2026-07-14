@@ -15,6 +15,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 | <img src="icons/codex.svg" alt="" width="20" height="20" /> **Codex** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/cursor.svg" alt="" width="20" height="20" /> **Cursor** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/cursor-agent.svg" alt="" width="20" height="20" /> **Cursor Agent** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/cursor-team.svg" alt="" width="20" height="20" /> **Cursor Team MCP Servers** | Managed | HTTP only | Token, OAuth DCR | No | Web-based |
 | <img src="icons/gemini.svg" alt="" width="20" height="20" /> **Gemini CLI** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/gemini-enterprise.svg" alt="" width="20" height="20" /> **Gemini Enterprise** | Managed | HTTP only | Managed externally | No | All platforms |
 | <img src="icons/goose.svg" alt="" width="20" height="20" /> **Goose** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
@@ -782,6 +783,42 @@ EXAMPLE_API_KEY = "your-api-key"
       }
     }
   }
+}
+```
+
+</details>
+
+---
+
+### <img src="icons/cursor-team.svg" alt="" width="24" height="24" /> Cursor Team MCP Servers
+
+- **Configuration**: Centrally managed
+- **Connection Type**: HTTP only (managed)
+- **Documentation**: [Link](https://cursor.com/dashboard/integrations)
+- **Auth Support**: Token, OAuth DCR
+- **Notes**: Cursor Team MCP servers are centrally managed by team admins through the Cursor dashboard web UI. This setup path does not use a user's local Cursor configuration file.
+
+<details>
+<summary><strong>Internal Configuration Schema</strong></summary>
+
+```json snippet=configs/cursor-team.json
+{
+  "id": "cursor-team",
+  "name": "cursor-team",
+  "displayName": "Cursor Team MCP Servers",
+  "description": "Cursor Team MCP Servers - MCP servers are configured centrally by team admins through the Cursor dashboard",
+  "userConfigurable": false,
+  "types": ["web"],
+  "localConfigNotes": "Cursor Team MCP servers are centrally managed by team admins through the Cursor dashboard web UI. This setup path does not use a user's local Cursor configuration file.",
+  "transports": ["http"],
+  "supportedPlatforms": [],
+  "configFormat": "json",
+  "configPath": {},
+  "documentationUrl": "https://cursor.com/dashboard/integrations",
+  "configStructure": {
+    "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"]
 }
 ```
 
@@ -1649,6 +1686,7 @@ Clients that communicate via stdio and require `mcp-remote` as a bridge for HTTP
 Clients that don't support local configuration files:
 - ChatGPT (chatgpt is web-based and requires configuring mcp servers through their web ui. no local configuration file support.)
 - Claude for Teams/Enterprise (mcp servers are centrally managed by admins. no local configuration support - servers must be configured at the organization level.)
+- Cursor Team MCP Servers (cursor team mcp servers are centrally managed by team admins through the cursor dashboard web ui. this setup path does not use a user's local cursor configuration file.)
 - Gemini Enterprise (a google cloud or gemini enterprise admin registers the mcp server as a custom mcp server data store in the gemini enterprise console. no local configuration file support.)
 - LibreChat (mcp servers are configured centrally by the librechat administrator in the deployment's librechat.yaml. not configured per-user through this library.)
 - Linear (linear agent is web-based and requires adding mcp servers through the linear settings ui. no local configuration file support.)

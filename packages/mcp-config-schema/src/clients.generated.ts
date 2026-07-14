@@ -13,6 +13,7 @@ import claudeTeamsEnterpriseConfig from '../configs/claude-teams-enterprise.json
 import codexConfig from '../configs/codex.json';
 import copilotStudioConfig from '../configs/copilot-studio.json';
 import cursorAgentConfig from '../configs/cursor-agent.json';
+import cursorTeamConfig from '../configs/cursor-team.json';
 import cursorConfig from '../configs/cursor.json';
 import geminiEnterpriseConfig from '../configs/gemini-enterprise.json';
 import geminiConfig from '../configs/gemini.json';
@@ -36,6 +37,7 @@ export const CLIENT = {
   CODEX: 'codex',
   COPILOT_STUDIO: 'copilot-studio',
   CURSOR_AGENT: 'cursor-agent',
+  CURSOR_TEAM: 'cursor-team',
   CURSOR: 'cursor',
   GEMINI_ENTERPRISE: 'gemini-enterprise',
   GEMINI: 'gemini',
@@ -60,6 +62,7 @@ export const CLIENT_DISPLAY_NAME = {
   CODEX: 'Codex',
   COPILOT_STUDIO: 'Microsoft Copilot Studio',
   CURSOR_AGENT: 'Cursor Agent',
+  CURSOR_TEAM: 'Cursor Team MCP Servers',
   CURSOR: 'Cursor',
   GEMINI_ENTERPRISE: 'Gemini Enterprise',
   GEMINI: 'Gemini CLI',
@@ -84,6 +87,7 @@ export const DISPLAY_NAME_BY_ID = {
   codex: 'Codex',
   'copilot-studio': 'Microsoft Copilot Studio',
   'cursor-agent': 'Cursor Agent',
+  'cursor-team': 'Cursor Team MCP Servers',
   cursor: 'Cursor',
   'gemini-enterprise': 'Gemini Enterprise',
   gemini: 'Gemini CLI',
@@ -108,6 +112,7 @@ export const CLIENT_IDS = [
   'codex',
   'copilot-studio',
   'cursor-agent',
+  'cursor-team',
   'cursor',
   'gemini-enterprise',
   'gemini',
@@ -132,6 +137,7 @@ export const allClientConfigs = [
   codexConfig,
   copilotStudioConfig,
   cursorAgentConfig,
+  cursorTeamConfig,
   cursorConfig,
   geminiEnterpriseConfig,
   geminiConfig,
