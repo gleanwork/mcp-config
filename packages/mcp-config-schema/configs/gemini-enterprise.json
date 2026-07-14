@@ -1,0 +1,18 @@
+{
+  "id": "gemini-enterprise",
+  "name": "gemini-enterprise",
+  "displayName": "Gemini Enterprise",
+  "description": "Google Gemini Enterprise - MCP servers are registered as custom MCP server data stores by a Gemini Enterprise admin",
+  "userConfigurable": false,
+  "types": ["web"],
+  "localConfigNotes": "A Google Cloud or Gemini Enterprise admin registers the MCP server as a custom MCP server data store in the Gemini Enterprise console. No local configuration file support.",
+  "transports": ["http"],
+  "supportedPlatforms": [],
+  "configFormat": "json",
+  "configPath": {},
+  "documentationUrl": "https://docs.cloud.google.com/gemini/enterprise/docs/connectors/custom-mcp-server/set-up-custom-mcp-server",
+  "configStructure": {
+    "serversPropertyName": ""
+  },
+  "supportedAuth": []
+}

@@ -153,7 +153,7 @@ function getPlatformsDisplay(client: MCPClientConfig): string {
 function getAuthSupportDisplay(client: MCPClientConfig): string {
   const supportedAuth = client.supportedAuth || [];
   if (supportedAuth.length === 0) {
-    return 'None';
+    return client.userConfigurable ? 'None' : 'Managed externally';
   }
   const parts: string[] = [];
   if (supportedAuth.includes('token')) {
@@ -258,7 +258,10 @@ function generateClientSection(client: MCPClientConfig): string {
       }
     }
   } else if (client.supportedAuth?.length === 0) {
-    info.push('**Auth Support**: None (requires mcp-remote for HTTP auth)');
+    const authSupport = client.userConfigurable
+      ? 'None (requires mcp-remote for HTTP auth)'
+      : 'Managed externally';
+    info.push(`**Auth Support**: ${authSupport}`);
   }
 
   if (client.configFormat === 'yaml') {

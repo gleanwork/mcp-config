@@ -1,0 +1,18 @@
+{
+  "id": "copilot-studio",
+  "name": "copilot-studio",
+  "displayName": "Microsoft Copilot Studio",
+  "description": "Microsoft Copilot Studio - MCP servers are added to agents through the Copilot Studio UI",
+  "userConfigurable": false,
+  "types": ["web"],
+  "localConfigNotes": "MCP servers are added to Copilot Studio agents through the Copilot Studio web UI. No local configuration file support.",
+  "transports": ["http"],
+  "supportedPlatforms": [],
+  "configFormat": "json",
+  "configPath": {},
+  "documentationUrl": "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-add-existing-server-to-agent",
+  "configStructure": {
+    "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"]
+}

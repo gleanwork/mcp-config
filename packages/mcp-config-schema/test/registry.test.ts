@@ -81,12 +81,21 @@ describe('MCPConfigRegistry', () => {
       const clients = registry.getUnsupportedClients();
       const chatgpt = clients.find((c) => c.id === CLIENT.CHATGPT);
       const claudeTeamsEnterprise = clients.find((c) => c.id === CLIENT.CLAUDE_TEAMS_ENTERPRISE);
+      const copilotStudio = clients.find((c) => c.id === CLIENT.COPILOT_STUDIO);
+      const geminiEnterprise = clients.find((c) => c.id === CLIENT.GEMINI_ENTERPRISE);
+      const librechat = clients.find((c) => c.id === CLIENT.LIBRECHAT);
       const linear = clients.find((c) => c.id === CLIENT.LINEAR);
       expect(chatgpt).toBeDefined();
       expect(claudeTeamsEnterprise).toBeDefined();
+      expect(copilotStudio).toBeDefined();
+      expect(geminiEnterprise).toBeDefined();
+      expect(librechat).toBeDefined();
       expect(linear).toBeDefined();
       expect(chatgpt?.userConfigurable).toBe(false);
       expect(claudeTeamsEnterprise?.userConfigurable).toBe(false);
+      expect(copilotStudio?.userConfigurable).toBe(false);
+      expect(geminiEnterprise?.userConfigurable).toBe(false);
+      expect(librechat?.userConfigurable).toBe(false);
       expect(linear?.userConfigurable).toBe(false);
     });
 
