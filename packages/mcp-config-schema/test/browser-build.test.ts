@@ -66,6 +66,17 @@ describe('Browser Build', () => {
     expect(cursorConfig?.displayName).toBe('Cursor');
   });
 
+  it('MCPConfigRegistry exposes consumer-provided managed setup URLs', () => {
+    const registry = new browserExports.MCPConfigRegistry({
+      managedSetupUrls: {
+        'cursor-team': 'https://example.com/admin/mcp',
+      },
+    });
+
+    expect(registry.getManagedSetupUrl('cursor-team')).toBe('https://example.com/admin/mcp');
+    expect(registry.getManagedSetupUrl('chatgpt')).toBeUndefined();
+  });
+
   it('Registry builders can generate configurations in browser', () => {
     const registry = new browserExports.MCPConfigRegistry();
     const builder = registry.createBuilder('cursor');

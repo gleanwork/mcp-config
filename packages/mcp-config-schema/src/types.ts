@@ -76,6 +76,23 @@ export interface RegistryOptions {
   /** NPM package for stdio server (e.g., '@my-org/mcp-server') */
   serverPackage?: string;
   /**
+   * Consumer-specific setup URLs for centrally managed clients.
+   *
+   * Use this for web destinations where an administrator configures an MCP
+   * server. These URLs are separate from client documentation and native
+   * one-click protocol handlers.
+   *
+   * @example
+   * ```typescript
+   * const registry = new MCPConfigRegistry({
+   *   managedSetupUrls: {
+   *     'cursor-team': 'https://example.com/admin/mcp',
+   *   },
+   * });
+   * ```
+   */
+  managedSetupUrls?: Partial<Record<ClientId, string>>;
+  /**
    * Custom command builders for clients without native CLI support.
    * Native CLI clients (VS Code, Claude Code, Codex) use their built-in commands.
    * For other clients, provide custom callbacks to generate installation commands.

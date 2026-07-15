@@ -43,10 +43,47 @@ describe('MCPConfigRegistry', () => {
       expect(config?.transports).toEqual(['stdio', 'http']);
     });
 
+    it('should load Cursor Team with its public documentation URL', () => {
+      const config = registry.getConfig(CLIENT.CURSOR_TEAM);
+      expect(config?.documentationUrl).toBe('https://cursor.com/docs/mcp#team-mcp-distribution');
+    });
+
     it('should load Goose config with YAML format', () => {
       const config = registry.getConfig(CLIENT.GOOSE);
       expect(config).toBeDefined();
       expect(config?.configFormat).toBe('yaml');
+    });
+  });
+
+  describe('managed setup URLs', () => {
+    it('does not define vendor-specific setup URLs by default', () => {
+      expect(registry.getManagedSetupUrl(CLIENT.CHATGPT)).toBeUndefined();
+      expect(registry.getManagedSetupUrl(CLIENT.CLAUDE_TEAMS_ENTERPRISE)).toBeUndefined();
+      expect(registry.getManagedSetupUrl(CLIENT.CURSOR_TEAM)).toBeUndefined();
+    });
+
+    it('returns consumer-provided setup URLs', () => {
+      const registryWithManagedSetup = new MCPConfigRegistry({
+        managedSetupUrls: {
+          [CLIENT.CURSOR_TEAM]: 'https://example.com/admin/mcp',
+        },
+      });
+
+      expect(registryWithManagedSetup.getManagedSetupUrl(CLIENT.CURSOR_TEAM)).toBe(
+        'https://example.com/admin/mcp'
+      );
+      expect(registryWithManagedSetup.getManagedSetupUrl(CLIENT.CHATGPT)).toBeUndefined();
+    });
+
+    it('returns undefined for an unknown client', () => {
+      const invalidClient = 'unknown' as unknown as ClientId;
+      const registryWithManagedSetup = new MCPConfigRegistry({
+        managedSetupUrls: {
+          [CLIENT.CURSOR_TEAM]: 'https://example.com/admin/mcp',
+        },
+      });
+
+      expect(registryWithManagedSetup.getManagedSetupUrl(invalidClient)).toBeUndefined();
     });
   });
 

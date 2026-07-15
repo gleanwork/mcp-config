@@ -118,6 +118,23 @@ export class MCPConfigRegistry {
     return this.configs.get(clientId);
   }
 
+  /**
+   * Get the consumer-provided setup URL for a centrally managed client.
+   *
+   * Managed setup URLs are supplied through {@link RegistryOptions} rather
+   * than static client metadata so vendor-specific destinations remain out of
+   * the shared client configuration schema.
+   *
+   * @param clientId - The client to get a managed setup URL for
+   * @returns The setup URL, or undefined when none is configured
+   */
+  getManagedSetupUrl(clientId: ClientId): string | undefined {
+    if (!this.configs.has(clientId)) {
+      return undefined;
+    }
+    return this.options.managedSetupUrls?.[clientId];
+  }
+
   getAllConfigs(): MCPClientConfig[] {
     return Array.from(this.configs.values());
   }

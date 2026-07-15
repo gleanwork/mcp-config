@@ -794,7 +794,7 @@ EXAMPLE_API_KEY = "your-api-key"
 
 - **Configuration**: Centrally managed
 - **Connection Type**: HTTP only (managed)
-- **Documentation**: [Link](https://cursor.com/dashboard/integrations)
+- **Documentation**: [Link](https://cursor.com/docs/mcp#team-mcp-distribution)
 - **Auth Support**: Token, OAuth DCR
 - **Notes**: Cursor Team MCP servers are centrally managed by team admins through the Cursor dashboard web UI. This setup path does not use a user's local Cursor configuration file.
 
@@ -814,7 +814,7 @@ EXAMPLE_API_KEY = "your-api-key"
   "supportedPlatforms": [],
   "configFormat": "json",
   "configPath": {},
-  "documentationUrl": "https://cursor.com/dashboard/integrations",
+  "documentationUrl": "https://cursor.com/docs/mcp#team-mcp-distribution",
   "configStructure": {
     "serversPropertyName": ""
   },

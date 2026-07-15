@@ -10,7 +10,7 @@
   "supportedPlatforms": [],
   "configFormat": "json",
   "configPath": {},
-  "documentationUrl": "https://cursor.com/dashboard/integrations",
+  "documentationUrl": "https://cursor.com/docs/mcp#team-mcp-distribution",
   "configStructure": {
     "serversPropertyName": ""
   },

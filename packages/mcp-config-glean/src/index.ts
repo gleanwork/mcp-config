@@ -38,6 +38,11 @@ export const GLEAN_ENV = {
  */
 export const GLEAN_REGISTRY_OPTIONS: RegistryOptions = {
   tokenEnvVarName: GLEAN_ENV.API_TOKEN,
+  managedSetupUrls: {
+    chatgpt: 'https://chatgpt.com/admin/apps?tab=available&q=glean',
+    'claude-teams-enterprise': 'https://claude.ai/directory/connectors/glean',
+    'cursor-team': 'https://cursor.com/dashboard/integrations',
+  },
   commandBuilder: {
     http: (clientId, options) => {
       if (!options.serverUrl) return null;

@@ -205,6 +205,19 @@ for (const type of CLIENT_TYPES) {
 
 Installability is a separate axis (`userConfigurable`): user-installable clients vs. centrally managed ones.
 
+Consumers can provide setup destinations for centrally managed clients without
+adding vendor-specific URLs to the shared client metadata:
+
+```typescript
+const registry = new MCPConfigRegistry({
+  managedSetupUrls: {
+    'cursor-team': 'https://example.com/admin/mcp',
+  },
+});
+
+registry.getManagedSetupUrl('cursor-team'); // https://example.com/admin/mcp
+```
+
 ### Generate Configurations
 
 ```typescript

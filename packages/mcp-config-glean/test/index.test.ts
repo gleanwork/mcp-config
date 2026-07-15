@@ -79,6 +79,27 @@ describe('@gleanwork/mcp-config', () => {
         })
       ).toBe('glean_analytics');
     });
+
+    it('defines managed setup URLs for supported web clients', () => {
+      const registry = createGleanRegistry();
+
+      expect(GLEAN_REGISTRY_OPTIONS.managedSetupUrls).toEqual({
+        chatgpt: 'https://chatgpt.com/admin/apps?tab=available&q=glean',
+        'claude-teams-enterprise': 'https://claude.ai/directory/connectors/glean',
+        'cursor-team': 'https://cursor.com/dashboard/integrations',
+      });
+
+      expect(registry.getManagedSetupUrl('chatgpt')).toBe(
+        'https://chatgpt.com/admin/apps?tab=available&q=glean'
+      );
+      expect(registry.getManagedSetupUrl('claude-teams-enterprise')).toBe(
+        'https://claude.ai/directory/connectors/glean'
+      );
+      expect(registry.getManagedSetupUrl('cursor-team')).toBe(
+        'https://cursor.com/dashboard/integrations'
+      );
+      expect(registry.getManagedSetupUrl('copilot-studio')).toBeUndefined();
+    });
   });
 
   describe('GLEAN_ENV', () => {
