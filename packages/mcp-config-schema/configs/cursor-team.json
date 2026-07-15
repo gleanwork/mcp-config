@@ -1,0 +1,18 @@
+{
+  "id": "cursor-team",
+  "name": "cursor-team",
+  "displayName": "Cursor Team MCP Servers",
+  "description": "Cursor Team MCP Servers - MCP servers are configured centrally by team admins through the Cursor dashboard",
+  "userConfigurable": false,
+  "types": ["web"],
+  "localConfigNotes": "Cursor Team MCP servers are centrally managed by team admins through the Cursor dashboard web UI. This setup path does not use a user's local Cursor configuration file.",
+  "transports": ["http"],
+  "supportedPlatforms": [],
+  "configFormat": "json",
+  "configPath": {},
+  "documentationUrl": "https://cursor.com/dashboard/integrations",
+  "configStructure": {
+    "serversPropertyName": ""
+  },
+  "supportedAuth": ["token", "oauth:dcr"]
+}
