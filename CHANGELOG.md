@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 > **Note:** This monorepo was created by consolidating `@gleanwork/mcp-config-schema` and `@gleanwork/mcp-config` (now `@gleanwork/mcp-config-glean`). Historical entries below v4.0.0 refer to `@gleanwork/mcp-config-schema` only.
 
+## v5.4.0 (2026-07-15)
+
+#### :rocket: Enhancement
+
+- `mcp-config-glean`, `mcp-config-schema`
+  - [#126](https://github.com/gleanwork/mcp-config/pull/126) feat: add managed setup URLs ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+- `mcp-config-schema`
+  - [#125](https://github.com/gleanwork/mcp-config/pull/125) feat: add Cursor Team MCP Servers client ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+#### Committers: 1
+
+- Steve Calvert ([@steve-calvert-glean](https://github.com/steve-calvert-glean))
+
+
+
 ## v5.3.0 (2026-07-14)
 
 #### :rocket: Enhancement
