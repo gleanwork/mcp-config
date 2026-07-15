@@ -51,10 +51,27 @@ import { GLEAN_REGISTRY_OPTIONS, GLEAN_ENV } from '@gleanwork/mcp-config-glean';
 GLEAN_REGISTRY_OPTIONS.tokenEnvVarName   // 'GLEAN_API_TOKEN'
 GLEAN_REGISTRY_OPTIONS.commandBuilder    // Functions to generate CLI commands
 GLEAN_REGISTRY_OPTIONS.serverNameBuilder // Callback that prefixes server names with glean_
+GLEAN_REGISTRY_OPTIONS.managedSetupUrls  // Admin setup destinations for managed clients
 
 // Environment variable names
 GLEAN_ENV.SERVER_URL // 'GLEAN_SERVER_URL'
 GLEAN_ENV.API_TOKEN  // 'GLEAN_API_TOKEN'
+```
+
+The Glean registry provides managed setup destinations for ChatGPT,
+Claude Teams/Enterprise, and Cursor Team:
+
+```typescript
+const registry = createGleanRegistry();
+
+registry.getManagedSetupUrl('chatgpt');
+// https://chatgpt.com/admin/apps?tab=available&q=glean
+
+registry.getManagedSetupUrl('claude-teams-enterprise');
+// https://claude.ai/directory/connectors/glean
+
+registry.getManagedSetupUrl('cursor-team');
+// https://cursor.com/dashboard/integrations
 ```
 
 #### Helper Functions
