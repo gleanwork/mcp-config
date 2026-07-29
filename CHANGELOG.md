@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 > **Note:** This monorepo was created by consolidating `@gleanwork/mcp-config-schema` and `@gleanwork/mcp-config` (now `@gleanwork/mcp-config-glean`). Historical entries below v4.0.0 refer to `@gleanwork/mcp-config-schema` only.
 
+## v5.4.1 (2026-07-29)
+
+#### :bug: Bug Fix
+
+- `mcp-config-schema`
+  - [#129](https://github.com/gleanwork/mcp-config/pull/129) fix: update documentation URLs for Antigravity, Gemini CLI, Goose, and Linear ([@glean-github-app-oauth[bot]](https://github.com/apps/glean-github-app-oauth))
+
+#### Committers: 1
+
+- [@glean-github-app-oauth[bot]](https://github.com/apps/glean-github-app-oauth)
+
+
+
 ## v5.4.0 (2026-07-15)
 
 #### :rocket: Enhancement

@@ -14,15 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up mise
-        uses: jdx/mise-action@v2
+        uses: jdx/mise-action@v4
         with:
           cache: true
-          mise_toml: |
-            [tools]
-            node = "22"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
