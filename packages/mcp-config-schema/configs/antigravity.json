@@ -5,7 +5,7 @@
   "description": "Antigravity with native HTTP and stdio support",
   "userConfigurable": true,
   "types": ["ide"],
-  "documentationUrl": "https://antigravity.google/docs/get-started",
+  "documentationUrl": "https://antigravity.google/docs/ide/mcp#antigravity-ide",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],
   "configFormat": "json",

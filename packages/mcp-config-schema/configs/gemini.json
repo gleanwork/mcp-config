@@ -5,7 +5,7 @@
   "description": "Gemini CLI with native HTTP and stdio support",
   "userConfigurable": true,
   "types": ["cli"],
-  "documentationUrl": "https://github.com/google-gemini/gemini-cli",
+  "documentationUrl": "https://geminicli.com/docs/tools/mcp-server/",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],
   "configFormat": "json",
