@@ -55,6 +55,7 @@
     "generate:icons": "tsx scripts/generate-icons.ts && npx prettier --write src/icons.generated.ts",
     "generate:docs": "npm run generate:examples && npm run generate:clients-md && npx markdown-code sync CLIENTS.md",
     "generate": "npm run generate:clients && npm run generate:icons && npm run generate:docs",
+    "check:urls": "tsx scripts/check-urls.ts",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {

@@ -20,7 +20,8 @@
     "lint": "eslint packages --fix",
     "lint:package-json": "sort-package-json package.json packages/*/package.json",
     "typecheck": "npm run typecheck --workspaces",
-    "format": "prettier --write 'packages/**/*.ts'"
+    "format": "prettier --write 'packages/**/*.ts'",
+    "check:urls": "npm run check:urls -w @gleanwork/mcp-config-schema"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.5",

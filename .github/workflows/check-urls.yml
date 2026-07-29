@@ -1,0 +1,33 @@
+name: Check Documentation URLs
+
+on:
+  pull_request:
+    paths:
+      - 'packages/mcp-config-schema/configs/**'
+  schedule:
+    - cron: '0 6 * * 1' # weekly, catches link rot even with no config changes
+  workflow_dispatch:
+
+jobs:
+  check-urls:
+    name: Check URLs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up mise
+        uses: jdx/mise-action@v2
+        with:
+          cache: true
+          mise_toml: |
+            [tools]
+            node = "22"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check documentation URLs
+        run: npm run check:urls
