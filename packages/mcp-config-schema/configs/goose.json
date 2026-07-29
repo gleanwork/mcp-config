@@ -5,7 +5,7 @@
   "description": "Goose with native HTTP support",
   "userConfigurable": true,
   "types": ["desktop", "cli"],
-  "documentationUrl": "https://github.com/block/goose",
+  "documentationUrl": "https://goose-docs.ai/docs/category/mcp-servers",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],
   "configFormat": "yaml",

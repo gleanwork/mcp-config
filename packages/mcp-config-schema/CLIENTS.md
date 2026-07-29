@@ -34,7 +34,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
-- **Documentation**: [Link](https://antigravity.google/docs/get-started)
+- **Documentation**: [Link](https://antigravity.google/docs/ide/mcp#antigravity-ide)
 - **Supported Platforms**: macOS, Linux, Windows
 - **Auth Support**: Token, OAuth DCR
 - **OAuth Redirect**: `http://localhost:*/oauth/callback`
@@ -53,7 +53,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
   "description": "Antigravity with native HTTP and stdio support",
   "userConfigurable": true,
   "types": ["ide"],
-  "documentationUrl": "https://antigravity.google/docs/get-started",
+  "documentationUrl": "https://antigravity.google/docs/ide/mcp#antigravity-ide",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],
   "configFormat": "json",
@@ -830,7 +830,7 @@ EXAMPLE_API_KEY = "your-api-key"
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
-- **Documentation**: [Link](https://github.com/google-gemini/gemini-cli)
+- **Documentation**: [Link](https://geminicli.com/docs/tools/mcp-server/)
 - **Supported Platforms**: macOS, Linux, Windows
 - **Auth Support**: Token, OAuth DCR
 - **OAuth Redirect**: `http://localhost:*/oauth/callback`
@@ -849,7 +849,7 @@ EXAMPLE_API_KEY = "your-api-key"
   "description": "Gemini CLI with native HTTP and stdio support",
   "userConfigurable": true,
   "types": ["cli"],
-  "documentationUrl": "https://github.com/google-gemini/gemini-cli",
+  "documentationUrl": "https://geminicli.com/docs/tools/mcp-server/",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],
   "configFormat": "json",
@@ -960,7 +960,7 @@ EXAMPLE_API_KEY = "your-api-key"
 
 - **Configuration**: User-configurable
 - **Connection Type**: Native HTTP support
-- **Documentation**: [Link](https://github.com/block/goose)
+- **Documentation**: [Link](https://goose-docs.ai/docs/category/mcp-servers)
 - **Supported Platforms**: macOS, Linux, Windows
 - **Auth Support**: Token, OAuth DCR
 - **OAuth Redirect**: `http://localhost:*/oauth_callback`
@@ -980,7 +980,7 @@ EXAMPLE_API_KEY = "your-api-key"
   "description": "Goose with native HTTP support",
   "userConfigurable": true,
   "types": ["desktop", "cli"],
-  "documentationUrl": "https://github.com/block/goose",
+  "documentationUrl": "https://goose-docs.ai/docs/category/mcp-servers",
   "transports": ["stdio", "http"],
   "supportedPlatforms": ["darwin", "linux", "win32"],
   "configFormat": "yaml",
@@ -1277,6 +1277,7 @@ extensions:
 
 - **Configuration**: Centrally managed
 - **Connection Type**: HTTP only (managed)
+- **Documentation**: [Link](https://linear.app/docs/mcp)
 - **Auth Support**: Token, OAuth DCR
 - **OAuth Redirect**: `https://linear.app/connect/mcp/callback`
 - **Notes**: Linear Agent is web-based and requires adding MCP servers through the Linear settings UI. No local configuration file support.
@@ -1292,6 +1293,7 @@ extensions:
   "description": "Linear agent - requires adding MCP servers through the Linear settings UI",
   "userConfigurable": false,
   "types": ["web"],
+  "documentationUrl": "https://linear.app/docs/mcp",
   "localConfigNotes": "Linear Agent is web-based and requires adding MCP servers through the Linear settings UI. No local configuration file support.",
   "transports": ["http"],
   "supportedPlatforms": [],
