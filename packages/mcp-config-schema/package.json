@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "glob": "^13.0.6",
-    "js-yaml": "^4.2.0",
+    "js-yaml": "^5.2.1",
     "mkdirp": "^3.0.1",
     "smol-toml": "^1.7.0"
   },
