@@ -121,6 +121,12 @@ export const CLIENT_ICONS = {
     source: 'https://svgl.app/library/opencode.svg',
     svg: '<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">\n<rect width="512" height="512" fill="#FDFCFC"/>\n<path d="M320 224V352H192V224H320Z" fill="#E6E5E6"/>\n<path fill-rule="evenodd" clip-rule="evenodd" d="M384 416H128V96H384V416ZM320 160H192V352H320V160Z" fill="#17181C"/>\n</svg>',
   },
+  pi: {
+    fileName: 'pi.svg',
+    title: 'Pi',
+    source: 'https://pi.dev/favicon.svg',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 560 560">\n  <style>\n    .mark {\n      fill: #111111;\n    }\n\n    @media (prefers-color-scheme: dark) {\n      .mark {\n        fill: #f6f6f6;\n      }\n    }\n  </style>\n  <path class="mark" d="M420 280H280V140H0V0H420V280Z"/>\n  <path class="mark" d="M560 560H420V280H560V560Z"/>\n  <path class="mark" d="M140 560H0V140H140V280H280V420H140V560Z"/>\n</svg>',
+  },
   vscode: {
     fileName: 'vscode.svg',
     title: 'VS Code',

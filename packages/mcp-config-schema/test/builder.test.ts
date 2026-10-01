@@ -277,6 +277,46 @@ describe('ConfigBuilder', () => {
       );
     });
 
+    it('generates Pi command with remote server', () => {
+      const piBuilder = registry.createBuilder(CLIENT.PI);
+      const command = piBuilder.buildCommand({
+        transport: 'http',
+        serverUrl: 'https://example.com/mcp/default',
+        serverName: 'test-server',
+      });
+
+      expect(command).toMatchInlineSnapshot(
+        `"pi mcp add test-server --url https://example.com/mcp/default"`
+      );
+    });
+
+    it('generates Pi command with remote server and headers', () => {
+      const piBuilder = registry.createBuilder(CLIENT.PI);
+      const command = piBuilder.buildCommand({
+        transport: 'http',
+        serverUrl: 'https://example.com/mcp/default',
+        serverName: 'test-server',
+        headers: { Authorization: 'Bearer test-token' },
+      });
+
+      expect(command).toMatchInlineSnapshot(
+        `"pi mcp add test-server --url https://example.com/mcp/default --header "Authorization=Bearer test-token""`
+      );
+    });
+
+    it('generates Pi command with local server', () => {
+      const piBuilder = registry.createBuilder(CLIENT.PI);
+      const command = piBuilder.buildCommand({
+        transport: 'stdio',
+        serverName: 'local-test',
+        env: createGleanEnv('test-instance', 'test-token'),
+      });
+
+      expect(command).toMatchInlineSnapshot(
+        `"pi mcp add local-test --env GLEAN_INSTANCE=test-instance --env GLEAN_API_TOKEN=test-token -- npx -y @gleanwork/local-mcp-server"`
+      );
+    });
+
     it('generates Gemini command with local server', () => {
       const geminiBuilder = registry.createBuilder(CLIENT.GEMINI);
       const command = geminiBuilder.buildCommand({
@@ -731,6 +771,79 @@ describe('ConfigBuilder', () => {
       });
 
       const validation = validateGeneratedConfig(result, 'antigravity-cli');
+      expect(validation.success).toBe(true);
+
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "mcpServers": {
+            "local": {
+              "args": [
+                "-y",
+                "@gleanwork/local-mcp-server",
+              ],
+              "command": "npx",
+              "env": {
+                "GLEAN_API_TOKEN": "test-token",
+                "GLEAN_INSTANCE": "test-instance",
+              },
+            },
+          },
+        }
+      `);
+    });
+
+    it('should generate correct HTTP config for Pi', () => {
+      const builder = registry.createBuilder(CLIENT.PI);
+      const result = builder.buildConfiguration(remoteConfig);
+
+      const validation = validateGeneratedConfig(result, 'pi');
+      expect(validation.success).toBe(true);
+
+      // Pi infers streamable HTTP from `url`, so no type property is written
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "mcpServers": {
+            "glean": {
+              "url": "https://glean-dev-be.glean.com/mcp/default",
+            },
+          },
+        }
+      `);
+    });
+
+    it('should add headers to Pi HTTP config', () => {
+      const builder = registry.createBuilder(CLIENT.PI);
+      const result = builder.buildConfiguration({
+        transport: 'http',
+        serverUrl: 'https://glean-dev-be.glean.com/mcp/default',
+        headers: { Authorization: 'Bearer test-token-123' },
+      });
+
+      const validation = validateGeneratedConfig(result, 'pi');
+      expect(validation.success).toBe(true);
+
+      expect(result).toMatchInlineSnapshot(`
+        {
+          "mcpServers": {
+            "default": {
+              "headers": {
+                "Authorization": "Bearer test-token-123",
+              },
+              "url": "https://glean-dev-be.glean.com/mcp/default",
+            },
+          },
+        }
+      `);
+    });
+
+    it('should generate correct stdio config for Pi', () => {
+      const builder = registry.createBuilder(CLIENT.PI);
+      const result = builder.buildConfiguration({
+        transport: 'stdio',
+        env: createGleanEnv('test-instance', 'test-token'),
+      });
+
+      const validation = validateGeneratedConfig(result, 'pi');
       expect(validation.success).toBe(true);
 
       expect(result).toMatchInlineSnapshot(`
@@ -1753,6 +1866,14 @@ describe('ConfigBuilder', () => {
 
       it('returns supported with native_cli reason for Codex', () => {
         const builder = registry.createBuilder(CLIENT.CODEX);
+        const status = builder.supportsCliInstallation();
+
+        expect(status.supported).toBe(true);
+        expect(status.reason).toBe(CLI_INSTALL_REASON.NATIVE_CLI);
+      });
+
+      it('returns supported with native_cli reason for Pi', () => {
+        const builder = registry.createBuilder(CLIENT.PI);
         const status = builder.supportsCliInstallation();
 
         expect(status.supported).toBe(true);

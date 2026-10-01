@@ -287,6 +287,7 @@ export function validateGeneratedConfig(
     case 'windsurf':
     case 'junie':
     case 'jetbrains':
+    case 'pi':
       schema = McpServersConfigSchema;
       break;
     default:
