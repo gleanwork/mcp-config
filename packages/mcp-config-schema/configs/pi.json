@@ -1,0 +1,35 @@
+{
+  "id": "pi",
+  "name": "pi",
+  "displayName": "Pi",
+  "description": "Pi coding agent with native HTTP and stdio support",
+  "userConfigurable": true,
+  "types": ["cli"],
+  "documentationUrl": "https://pi.dev/docs/latest/mcp",
+  "transports": ["stdio", "http"],
+  "supportedPlatforms": ["darwin", "linux", "win32"],
+  "configFormat": "json",
+  "configPath": {
+    "darwin": "$HOME/.pi/agent/mcp.json",
+    "linux": "$HOME/.pi/agent/mcp.json",
+    "win32": "%USERPROFILE%\\.pi\\agent\\mcp.json"
+  },
+  "configStructure": {
+    "serversPropertyName": "mcpServers",
+    "httpPropertyMapping": {
+      "urlProperty": "url",
+      "headersProperty": "headers"
+    },
+    "stdioPropertyMapping": {
+      "commandProperty": "command",
+      "argsProperty": "args",
+      "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://127.0.0.1:*/callback"]
+    }
+  }
+}

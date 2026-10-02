@@ -25,6 +25,7 @@ This document provides a comprehensive overview of all supported MCP clients, th
 | <img src="icons/linear.svg" alt="" width="20" height="20" /> **Linear** | Managed | HTTP only | Token, OAuth DCR | No | Web-based |
 | <img src="icons/copilot-studio.svg" alt="" width="20" height="20" /> **Microsoft Copilot Studio** | Managed | HTTP only | Token, OAuth DCR | No | Web-based |
 | <img src="icons/opencode.svg" alt="" width="20" height="20" /> **OpenCode** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
+| <img src="icons/pi.svg" alt="" width="20" height="20" /> **Pi** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/vscode.svg" alt="" width="20" height="20" /> **VS Code** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 | <img src="icons/windsurf.svg" alt="" width="20" height="20" /> **Windsurf** | User-configurable | HTTP native | Token, OAuth DCR | No | macOS, Linux, Windows |
 
@@ -1450,6 +1451,100 @@ extensions:
 
 ---
 
+### <img src="icons/pi.svg" alt="" width="24" height="24" /> Pi
+
+- **Configuration**: User-configurable
+- **Connection Type**: Native HTTP support
+- **Documentation**: [Link](https://pi.dev/docs/latest/mcp)
+- **Supported Platforms**: macOS, Linux, Windows
+- **Auth Support**: Token, OAuth DCR
+- **OAuth Redirect**: `http://127.0.0.1:*/callback`
+- **Configuration Paths**:
+  - **macOS/Linux**: `$HOME/.pi/agent/mcp.json`
+  - **Windows**: `%USERPROFILE%\.pi\agent\mcp.json`
+
+<details>
+<summary><strong>Internal Configuration Schema</strong></summary>
+
+```json snippet=configs/pi.json
+{
+  "id": "pi",
+  "name": "pi",
+  "displayName": "Pi",
+  "description": "Pi coding agent with native HTTP and stdio support",
+  "userConfigurable": true,
+  "types": ["cli"],
+  "documentationUrl": "https://pi.dev/docs/latest/mcp",
+  "transports": ["stdio", "http"],
+  "supportedPlatforms": ["darwin", "linux", "win32"],
+  "configFormat": "json",
+  "configPath": {
+    "darwin": "$HOME/.pi/agent/mcp.json",
+    "linux": "$HOME/.pi/agent/mcp.json",
+    "win32": "%USERPROFILE%\\.pi\\agent\\mcp.json"
+  },
+  "configStructure": {
+    "serversPropertyName": "mcpServers",
+    "httpPropertyMapping": {
+      "urlProperty": "url",
+      "headersProperty": "headers"
+    },
+    "stdioPropertyMapping": {
+      "commandProperty": "command",
+      "argsProperty": "args",
+      "envProperty": "env"
+    }
+  },
+  "supportedAuth": ["token", "oauth:dcr"],
+  "oauth": {
+    "dcr": {
+      "redirect_uri_patterns": ["http://127.0.0.1:*/callback"]
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>HTTP Configuration</strong></summary>
+
+```json snippet=examples/configs/http/pi.json
+{
+  "mcpServers": {
+    "example": {
+      "url": "https://api.example.com/mcp"
+    }
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><strong>stdio Configuration</strong></summary>
+
+```json snippet=examples/configs/stdio/pi.json
+{
+  "mcpServers": {
+    "example": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@example/mcp-server"
+      ],
+      "env": {
+        "EXAMPLE_API_KEY": "your-api-key"
+      }
+    }
+  }
+}
+```
+
+</details>
+
+---
+
 ### <img src="icons/vscode.svg" alt="" width="24" height="24" /> VS Code
 
 - **Configuration**: User-configurable
@@ -1677,6 +1772,7 @@ Clients that can connect directly to HTTP MCP servers without additional tooling
 - JetBrains AI Assistant
 - Junie (JetBrains)
 - OpenCode
+- Pi
 - VS Code
 - Windsurf
 
