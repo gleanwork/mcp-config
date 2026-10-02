@@ -300,7 +300,7 @@ describe('ConfigBuilder', () => {
       });
 
       expect(command).toMatchInlineSnapshot(
-        `"pi mcp add test-server --url https://example.com/mcp/default --header "Authorization=Bearer test-token""`
+        `"pi mcp add test-server --url https://example.com/mcp/default --header 'Authorization=Bearer test-token'"`
       );
     });
 
@@ -314,6 +314,36 @@ describe('ConfigBuilder', () => {
 
       expect(command).toMatchInlineSnapshot(
         `"pi mcp add local-test --env GLEAN_INSTANCE=test-instance --env GLEAN_API_TOKEN=test-token -- npx -y @gleanwork/local-mcp-server"`
+      );
+    });
+
+    it('quotes Pi command values that contain shell metacharacters', () => {
+      const piBuilder = registry.createBuilder(CLIENT.PI);
+
+      const stdioCommand = piBuilder.buildCommand({
+        transport: 'stdio',
+        serverName: 'local-test',
+        env: {
+          PLAIN: 'simple-value',
+          SPACES: 'token with spaces',
+          REFERENCE: '${TOOLS_KEY}',
+          QUOTE: "it's",
+        },
+      });
+
+      expect(stdioCommand).toMatchInlineSnapshot(
+        `"pi mcp add local-test --env PLAIN=simple-value --env 'SPACES=token with spaces' --env 'REFERENCE=\${TOOLS_KEY}' --env 'QUOTE=it'\\''s' -- npx -y @gleanwork/local-mcp-server"`
+      );
+
+      const httpCommand = piBuilder.buildCommand({
+        transport: 'http',
+        serverUrl: 'https://example.com/mcp?team=a&mode=b',
+        serverName: 'test-server',
+        headers: { Authorization: 'Bearer $TOKEN' },
+      });
+
+      expect(httpCommand).toMatchInlineSnapshot(
+        `"pi mcp add test-server --url 'https://example.com/mcp?team=a&mode=b' --header 'Authorization=Bearer $TOKEN'"`
       );
     });
 

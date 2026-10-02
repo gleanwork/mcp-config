@@ -61,7 +61,7 @@ describe('Client: pi', () => {
         });
 
         expect(command).toMatchInlineSnapshot(
-          `"pi mcp add glean_default --url https://my-company-be.glean.com/mcp/default --header "Authorization=Bearer my-api-token""`
+          `"pi mcp add glean_default --url https://my-company-be.glean.com/mcp/default --header 'Authorization=Bearer my-api-token'"`
         );
       });
 

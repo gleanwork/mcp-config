@@ -2,6 +2,23 @@ import { GenericConfigBuilder } from './GenericConfigBuilder.js';
 import { MCPConnectionOptions } from '../types.js';
 
 /**
+ * Quote a command argument for POSIX shells, like Python's `shlex.quote`.
+ * Arguments that contain only safe characters are returned unchanged.
+ *
+ * Single quotes also keep `${VAR}` references literal, so Pi stores the
+ * reference and resolves it at runtime instead of the shell expanding it.
+ */
+function shellQuote(value: string): string {
+  if (value === '') {
+    return "''";
+  }
+  if (/^[\w@%+=:,./-]+$/.test(value)) {
+    return value;
+  }
+  return `'${value.replace(/'/g, `'\\''`)}'`;
+}
+
+/**
  * Config builder for Pi, which uses the standard { mcpServers: {...} } format
  * and installs servers with its native `pi mcp add` command.
  *
@@ -26,12 +43,12 @@ export class PiConfigBuilder extends GenericConfigBuilder {
     });
 
     // Format: pi mcp add <server> --url <url> --header KEY=VALUE
-    let command = `pi mcp add ${serverName} --url ${resolvedUrl}`;
+    let command = `pi mcp add ${serverName} --url ${shellQuote(resolvedUrl)}`;
 
     const headers = this.buildHeaders(options);
     if (headers) {
       for (const [key, value] of Object.entries(headers)) {
-        command += ` --header "${key}=${value}"`;
+        command += ` --header ${shellQuote(`${key}=${value}`)}`;
       }
     }
 
@@ -50,7 +67,7 @@ export class PiConfigBuilder extends GenericConfigBuilder {
     const env = this.getEnvVars(options);
     if (env) {
       for (const [key, value] of Object.entries(env)) {
-        command += ` --env ${key}=${value}`;
+        command += ` --env ${shellQuote(`${key}=${value}`)}`;
       }
     }
 
