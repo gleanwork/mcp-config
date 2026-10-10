@@ -67,9 +67,9 @@
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "@vitest/coverage-v8": "^4.0.18",
-    "markdown-code": "^1.1.0",
-    "tsx": "^4.22.4",
-    "zod": "^4.4.3"
+    "markdown-code": "^1.2.0",
+    "tsx": "^4.23.15",
+    "zod": "^4.6.5"
   },
   "peerDependencies": {
     "zod": "^3.25.0 || ^4.0.0"
